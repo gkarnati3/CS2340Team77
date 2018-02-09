@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.homefullshelter.Model;
+package edu.gatech.cs2340.homefullshelter.model;
 
 /**
  * Created by AlexanderHammond on 2/8/18.
@@ -8,14 +8,14 @@ public class User {
     private final String username = "user";
     private final String password = "pass";
 
-    public static boolean checkUsername(String username) {
+    public boolean checkUsername(String username) {
         if (this.username.equals(username)) {
             return true;
         }
         return false;
     }
 
-    public static boolean checkPassword(String password) {
+    public boolean checkPassword(String password) {
         if (this.password.equals(password)) {
             return true;
         }
