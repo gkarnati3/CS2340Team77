@@ -8,14 +8,14 @@ public class User {
     private final String username = "user";
     private final String password = "pass";
 
-    public boolean checkUsername(String username) {
+    public static boolean checkUsername(String username) {
         if (this.username.equals(username)) {
             return true;
         }
         return false;
     }
 
-    public boolean checkPassword(String password) {
+    public static boolean checkPassword(String password) {
         if (this.password.equals(password)) {
             return true;
         }
