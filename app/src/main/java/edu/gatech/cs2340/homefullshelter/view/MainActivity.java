@@ -9,8 +9,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.content.Intent;
 
+import edu.gatech.cs2340.homefullshelter.Logout;
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -18,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final TextView failed = findViewById(R.id.textView_failed);
         Button loginButton = findViewById(R.id.button_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,11 +35,25 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
+                                Log.d("myTag", "ok clicked");
+
+                                EditText username = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
+                                EditText password = ((AlertDialog) dialog).findViewById(R.id.editText_password);
+
+                                if (User.checkUsername(username.getText().toString())
+                                        && User.checkPassword(password.getText().toString())) {
+                                    Intent myIntent = new Intent(getApplicationContext(), Logout.class);
+                                    startActivity(myIntent);
+                                } else {
+                                    failed.setText("Your username or password is incorrect.");
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
+                                Log.d("myTag", "cancel clicked");
+
                             }
                         })
                         .setView(mInflater.inflate(R.layout.alertdialog_login, null))

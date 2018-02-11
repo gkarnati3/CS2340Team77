@@ -56,4 +56,11 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.376" />
 
+    <TextView
+        android:id="@+id/textView_failed"
+        android:layout_width="307dp"
+        android:layout_height="34dp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="323dp" />
+
 </android.support.constraint.ConstraintLayout>
