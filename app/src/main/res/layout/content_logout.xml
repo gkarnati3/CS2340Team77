@@ -5,11 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="edu.gatech.cs2340.homefullshelter.Logout"
+    tools:context="edu.gatech.cs2340.homefullshelter.view.Logout"
     tools:showIn="@layout/activity_logout">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
