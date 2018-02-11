@@ -5,8 +5,8 @@ package edu.gatech.cs2340.homefullshelter.model;
  */
 
 public class User {
-    private final String username = "user";
-    private final String password = "pass";
+    private static final String username = "user";
+    private static final String password = "pass";
 
     public boolean checkUsername(String username) {
         if (this.username.equals(username)) {
