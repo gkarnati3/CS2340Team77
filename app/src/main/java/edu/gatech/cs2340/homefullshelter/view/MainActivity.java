@@ -13,7 +13,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
 
-import edu.gatech.cs2340.homefullshelter.Logout;
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.User;
 
