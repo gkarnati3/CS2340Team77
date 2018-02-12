@@ -2,6 +2,7 @@ package edu.gatech.cs2340.homefullshelter.view;
 
 import android.content.DialogInterface;
 import android.os.Build;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        final TextView failed = findViewById(R.id.textView_failed);
         Button loginButton = findViewById(R.id.button_login);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
                                     Intent myIntent = new Intent(getApplicationContext(), Logout.class);
                                     startActivity(myIntent);
                                 } else {
-                                    failed.setText("Your username or password is incorrect.");
+                                    Snackbar snackbar = Snackbar
+                                            .make(getWindow().getDecorView(), "Your username or password is incorrect.", Snackbar.LENGTH_LONG);
+
+                                    snackbar.show();
                                 }
                             }
                         })
