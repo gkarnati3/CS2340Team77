@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button loginButton = findViewById(R.id.button_login);
+        final View view = findViewById(R.id.content);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
-                                Log.d("myTag", "ok clicked");
 
                                 EditText username = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
                                 EditText password = ((AlertDialog) dialog).findViewById(R.id.editText_password);
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                                     startActivity(myIntent);
                                 } else {
                                     Snackbar snackbar = Snackbar
-                                            .make(getWindow().getDecorView(), "Your username or password is incorrect.", Snackbar.LENGTH_LONG);
+                                            .make(view, "Your username or password is incorrect.", Snackbar.LENGTH_LONG);
 
                                     snackbar.show();
                                 }
@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
-                                Log.d("myTag", "cancel clicked");
 
                             }
                         })
