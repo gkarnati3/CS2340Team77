@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.content.Intent;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,11 +38,21 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // continue with delete
 
-                                EditText username = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
-                                EditText password = ((AlertDialog) dialog).findViewById(R.id.editText_password);
+                                EditText usernameText = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
+                                EditText passwordText = ((AlertDialog) dialog).findViewById(R.id.editText_password);
+                                Editable usernameEditable = usernameText.getText();
+                                Editable passwordEditable = passwordText.getText();
+                                String username = "";
+                                String password = "";
+                                if (usernameEditable != null) {
+                                    username = usernameEditable.toString();
+                                }
+                                if (passwordEditable != null) {
+                                    password = passwordEditable.toString();
+                                }
 
-                                if (User.checkUsername(username.getText().toString())
-                                        && User.checkPassword(password.getText().toString())) {
+                                Model model = Model.getInstance();
+                                if (model.checkLogin(username, password)) {
                                     Intent myIntent = new Intent(getApplicationContext(), Logout.class);
                                     startActivity(myIntent);
                                 } else {
