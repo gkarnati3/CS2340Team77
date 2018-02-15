@@ -5,6 +5,14 @@ import java.util.HashMap;
  * Created by mattquan on 2/8/18.
  */
 
+/*
+ * Model singleton that acts as backing store for all of the data for the app
+ *
+ * To get the reference to the model call "Model model = Model.getInstance();"
+ * to add a user: "model.addUser(User user);"
+ * to check login info: "model.checkLogin(String username, String password);"
+ */
+
 public class Model {
     //the one and only instantiation of the class (making it a singleton)
     private static Model appModel = new Model();
@@ -20,6 +28,9 @@ public class Model {
 
     /**
      * Adds a user to the model, prevents duplicates with hashMap storage
+     *
+     * Only use for adding a new user, this method will not update a user
+     *
      * @param user a User object to save to the model
      * @return boolean representing whether the User was added
      */
@@ -65,4 +76,6 @@ public class Model {
         }
         return appModel;
     }
+
+
 }
