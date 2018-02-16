@@ -31,7 +31,6 @@ public class Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final View view = findViewById(R.id.content);
         setContentView(R.layout.activity_registration);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,40 +59,50 @@ public class Registration extends AppCompatActivity {
                 String confirmPass = "";
                 String username1 = "";
 
-                if (usernameEditable != null) {
+                if (usernameEditable == null || passwordEditable == null
+                        || confirmPassEditable == null || username1Editable == null) {
+                    Snackbar snackbar4 = Snackbar
+                            .make(v, "Unkown error",
+                                    Snackbar.LENGTH_LONG);
+
+                    snackbar4.show();
+                } else {
                     name = usernameEditable.toString();
-                }
-                if (passwordEditable != null) {
                     pass = passwordEditable.toString();
-                }
-                if (confirmPassEditable != null) {
                     confirmPass = confirmPassEditable.toString();
-                }
-                if (username1Editable != null) {
                     username1 = username1Editable.toString();
                 }
-                int acctType = spinner.getSelectedItemPosition();
-                if (pass.equals(confirmPass)) {
-                    User newUser = new User(name, username1, pass, acctType);
-                    if (model.addUser(newUser)) {
-                        Intent myIntent = new Intent(Registration.this, MainActivity.class);
-                        startActivity(myIntent);
-                        Snackbar snackbar1 = Snackbar
-                                .make(view, "You have successfully registered.", Snackbar.LENGTH_LONG);
+                if (name.equals("") || pass.equals("") || confirmPass.equals("") || username1.equals("")) {
+                    Snackbar snackbar5 = Snackbar
+                            .make(v, "Please fill out all fields",
+                                    Snackbar.LENGTH_LONG);
 
-                        snackbar1.show();
-                    } else {
-                        Snackbar snackbar3 = Snackbar
-                                .make(view, "Username already taken.", Snackbar.LENGTH_LONG);
-
-                        snackbar3.show();
-                    }
-
+                    snackbar5.show();
                 } else {
-                    Snackbar snackbar = Snackbar
-                            .make(view, "Your passwords do not match.", Snackbar.LENGTH_LONG);
 
-                    snackbar.show();
+                    int acctType = spinner.getSelectedItemPosition();
+                    if (pass.equals(confirmPass)) {
+                        User newUser = new User(name, username1, pass, acctType);
+                        if (model.addUser(newUser)) {
+                            Intent myIntent = new Intent(Registration.this, MainActivity.class);
+                            startActivity(myIntent);
+                            Snackbar snackbar1 = Snackbar
+                                    .make(v, "You have successfully registered.", Snackbar.LENGTH_LONG);
+
+                            snackbar1.show();
+                        } else {
+                            Snackbar snackbar3 = Snackbar
+                                    .make(v, "Username already taken.", Snackbar.LENGTH_LONG);
+
+                            snackbar3.show();
+                        }
+
+                    } else {
+                        Snackbar snackbar = Snackbar
+                                .make(v, "Your passwords do not match.", Snackbar.LENGTH_LONG);
+
+                        snackbar.show();
+                    }
                 }
             }
         });
@@ -103,7 +112,7 @@ public class Registration extends AppCompatActivity {
                 Intent myIntent = new Intent(Registration.this, MainActivity.class);
                 startActivity(myIntent);
                 Snackbar snackbar2 = Snackbar
-                        .make(view, "Registration cancelled.", Snackbar.LENGTH_LONG);
+                        .make(v, "Registration cancelled.", Snackbar.LENGTH_LONG);
 
                 snackbar2.show();
             }
