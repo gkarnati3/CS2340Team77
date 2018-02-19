@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.content.Intent;
+import android.widget.Toast;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
@@ -64,10 +65,7 @@ public class MainActivity extends AppCompatActivity {
                                     Intent myIntent = new Intent(getApplicationContext(), Logout.class);
                                     startActivity(myIntent);
                                 } else {
-                                    Snackbar snackbar = Snackbar
-                                            .make(view, "Your username or password is incorrect.", Snackbar.LENGTH_LONG);
-
-                                    snackbar.show();
+                                    Toast.makeText(getApplicationContext(), "Your username or password is incorrect", Toast.LENGTH_LONG).show();
                                 }
                             }
                         })

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.Toast;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
@@ -111,10 +112,8 @@ public class Registration extends AppCompatActivity {
             public void onClick(View v) {
                 Intent myIntent = new Intent(Registration.this, MainActivity.class);
                 startActivity(myIntent);
-                Snackbar snackbar2 = Snackbar
-                        .make(v, "Registration cancelled.", Snackbar.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "Registration cancelled", Toast.LENGTH_LONG).show();
 
-                snackbar2.show();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
