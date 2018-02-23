@@ -1,4 +1,4 @@
-package edu.gatech.cs2340.homefullshelter;
+package edu.gatech.cs2340.homefullshelter.view;
 
 import android.app.Activity;
 

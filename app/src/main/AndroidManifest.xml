@@ -19,7 +19,16 @@
         <activity
             android:name=".view.Logout"
             android:label="@string/title_activity_logout"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".view.Registration"
+            android:label="@string/title_activity_registration"
+            android:parentActivityName=".view.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.cs2340.homefullshelter.view.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

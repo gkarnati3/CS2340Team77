@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_vertical|center_horizontal"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="edu.gatech.cs2340.homefullshelter.view.Registration"
+    tools:showIn="@layout/activity_registration">
+
+    <EditText
+        android:id="@+id/editText_registration_name"
+        android:layout_width="match_parent"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/name"
+        tools:layout_editor_absoluteX="64dp"
+        tools:layout_editor_absoluteY="129dp" />
+
+    <EditText
+        android:id="@+id/editText_username1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:hint="@string/username"
+        tools:layout_editor_absoluteX="54dp"
+        tools:layout_editor_absoluteY="182dp" />
+
+    <EditText
+        android:id="@+id/editText_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:inputType="textPassword"
+        android:hint="@string/password"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="245dp" />
+    <EditText
+        android:id="@+id/editText_password_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:inputType="textPassword"
+        android:hint="@string/confirm_password"
+        tools:layout_editor_absoluteX="46dp"
+        tools:layout_editor_absoluteY="245dp" />
+
+
+    <Spinner
+        android:layout_width="match_parent"
+        android:id="@+id/spinner_registration_accountType"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="12dp"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/button_register"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:background="@color/colorAccent"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="317dp" />
+
+    <Button
+        android:id="@+id/button_cancel"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginStart="36dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/darker_gray"
+        tools:layout_editor_absoluteX="118dp"
+        tools:layout_editor_absoluteY="317dp"
+        android:text="@string/cancel" />
+
+</LinearLayout>

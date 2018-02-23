@@ -3,7 +3,14 @@
     <string name="registration">Registration</string>
     <string name="login">Login</string>
     <string name="username">Username</string>
-    <string name="password">Password</string>
     <string name="title_activity_logout">Logout</string>
     <string name="logout">Logout</string>
+    <string name="title_activity_registration">Register a new Home-Full account!</string>
+    <string name="already_have_an_account_npress_here_to_login">Already have an account?  Press here to login!</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="user_id">User ID</string>
+    <string name="cancel">Cancel</string>
 </resources>
