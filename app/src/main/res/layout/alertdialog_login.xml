@@ -5,18 +5,22 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.gatech.cs2340.homefullshelter.view.LoginController">
+    tools:context="edu.gatech.cs2340.homefullshelter.view.MainActivity">
 
     <EditText
         android:id="@+id/editText_userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:hint="@string/username" />
 
     <EditText
         android:id="@+id/editText_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:inputType="textPassword"
         android:hint="@string/password" />
 </LinearLayout>

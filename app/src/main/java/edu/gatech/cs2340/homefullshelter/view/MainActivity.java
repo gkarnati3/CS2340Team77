@@ -1,5 +1,7 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Build;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,7 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.LoginController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
 
@@ -28,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button registrationButton = (Button) findViewById(R.id.button_registration);
         Button loginButton = findViewById(R.id.button_login);
-        final View view = findViewById(R.id.content);
         registrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,44 +41,8 @@ public class MainActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder;
-                LayoutInflater mInflater = LayoutInflater.from(v.getContext());
-                builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Login")
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // continue with delete
-
-                                EditText usernameText = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
-                                EditText passwordText = ((AlertDialog) dialog).findViewById(R.id.editText_password);
-                                Editable usernameEditable = usernameText.getText();
-                                Editable passwordEditable = passwordText.getText();
-                                String username = "";
-                                String password = "";
-                                if (usernameEditable != null) {
-                                    username = usernameEditable.toString();
-                                }
-                                if (passwordEditable != null) {
-                                    password = passwordEditable.toString();
-                                }
-
-                                Model model = Model.getInstance();
-                                if (model.checkLogin(username, password)) {
-                                    Intent myIntent = new Intent(getApplicationContext(), Logout.class);
-                                    startActivity(myIntent);
-                                } else {
-                                    Toast.makeText(getApplicationContext(), "Your username or password is incorrect", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
-
-                            }
-                        })
-                        .setView(mInflater.inflate(R.layout.alertdialog_login, null))
-                        .show();
+                LoginController lc = new LoginController(v, getApplicationContext());
+                lc.makeDialog().show();
             }
         });
     }
