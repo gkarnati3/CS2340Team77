@@ -6,6 +6,7 @@
     <string name="title_activity_logout">Logout</string>
     <string name="logout">Logout</string>
     <string name="title_activity_registration">Register a new Home-Full account!</string>
+    <string name="title_activity_detail_list">DataItemDetailActivity</string>
     <string name="confirm_password">Confirm Password</string>
     <string name="register">Register</string>
     <string name="password">Password</string>

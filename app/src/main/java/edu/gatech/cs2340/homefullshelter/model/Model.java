@@ -1,6 +1,11 @@
 package edu.gatech.cs2340.homefullshelter.model;
 
+import android.util.Log;
+
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
 /**
  * Created by mattquan on 2/8/18.
  */
@@ -24,6 +29,25 @@ public class Model {
      */
     private Model() {
         users = new HashMap<>();
+        items = new ArrayList<>();
+    }
+
+    private List<DataItem> items;
+
+    public void addItem(DataItem item) {
+        items.add(item);
+    }
+
+    public List<DataItem> getItems() {
+        return items;
+    }
+
+    public DataItem findItemById(int key) {
+        for (DataItem d : items) {
+            if (d.getKey() == key) return d;
+        }
+        Log.d("MYAPP", "Warning - Failed to find id: " + key);
+        return null;
     }
 
     /**
