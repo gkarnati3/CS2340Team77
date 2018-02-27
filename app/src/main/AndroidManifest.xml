@@ -38,6 +38,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.gatech.cs2340.homefullshelter.view.MainActivity" />
         </activity>
+        <activity
+            android:name=".view.DataItemDetailActivity"
+            android:label="@string/title_activity_detail_list"
+            android:parentActivityName=".view.DataItemListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.cs2340.homefullshelter.view.DataItemListActivity" />
+        </activity>
     </application>
 
 </manifest>

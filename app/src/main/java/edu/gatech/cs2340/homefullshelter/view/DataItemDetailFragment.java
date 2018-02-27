@@ -75,8 +75,8 @@ public class DataItemDetailFragment extends Fragment {
             ((TextView) rootView.findViewById(R.id.shelter)).setText(mItem.getShelter());
             ((TextView) rootView.findViewById(R.id.capacity)).setText(mItem.getCapacity());
             ((TextView) rootView.findViewById(R.id.restrictions)).setText(mItem.getRestrictions());
-            ((TextView) rootView.findViewById(R.id.longitude)).setText((int) mItem.getLongitude());
-            ((TextView) rootView.findViewById(R.id.latitude)).setText((int) mItem.getLatitude());
+            //TODO ((TextView) rootView.findViewById(R.id.longitude)).setText((int) mItem.getLongitude());
+            //TODO((TextView) rootView.findViewById(R.id.latitude)).setText((int) mItem.getLatitude());
             ((TextView) rootView.findViewById(R.id.address)).setText(mItem.getAddress());
             ((TextView) rootView.findViewById(R.id.notes)).setText(mItem.getNotes());
             ((TextView) rootView.findViewById(R.id.numbers)).setText(mItem.getNumber());
