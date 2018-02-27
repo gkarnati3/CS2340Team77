@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/linear_layout_bottom_sheet_theme_details"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:background="@android:color/darker_gray"
+    android:orientation="vertical"
+
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="60dp"
+
+    app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:text="PEEK"
+        android:id="@+id/textview_peek_shelterdetails"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:id="@+id/textview_content_shelterdetails"
+        android:text="CONTENT HERE"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>
