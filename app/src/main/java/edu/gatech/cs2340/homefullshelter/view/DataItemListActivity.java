@@ -4,17 +4,12 @@ package edu.gatech.cs2340.homefullshelter.view;
  * Created by gkarnati3 on 2/25/18.
  */
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +19,7 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.model.DataItem;
+import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
 /**
@@ -65,9 +60,9 @@ public class DataItemListActivity extends AppCompatActivity {
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<DataItem> mValues;
+        private final List<Shelter> mValues;
 
-        public SimpleItemRecyclerViewAdapter(List<DataItem> items) {
+        public SimpleItemRecyclerViewAdapter(List<Shelter> items) {
             mValues = items;
         }
 
@@ -92,7 +87,12 @@ public class DataItemListActivity extends AppCompatActivity {
                 public void onClick(View v) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                     peekText.setText("" + mValues.get(position).getShelter());
-                    contentText.setText("ABHI DO THIS" + mValues.get(position).getKey());
+                    contentText.setText("\nCapacity: " + mValues.get(position).getCapacity() +
+                            "\nRestricitons: " + mValues.get(position).getRestrictions() +
+                            "\nLongitude: " + mValues.get(position).getLongitude() +
+                            "\nLattitude: " + mValues.get(position).getLatitude() +
+                            "\nAddress: " + mValues.get(position).getAddress() +
+                            "\nPhone Number: " + mValues.get(position).getNumber());
                 }
             });
         }
@@ -106,7 +106,7 @@ public class DataItemListActivity extends AppCompatActivity {
             public final View mView;
             public final TextView mIdView;
             public final TextView mContentView;
-            public DataItem mItem;
+            public Shelter mItem;
 
             public ViewHolder(View view) {
                 super(view);
