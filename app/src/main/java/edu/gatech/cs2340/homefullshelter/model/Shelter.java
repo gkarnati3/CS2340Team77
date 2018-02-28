@@ -4,7 +4,7 @@ package edu.gatech.cs2340.homefullshelter.model;
  * Created by gkarnati3 on 2/24/18.
  */
 
-public class DataItem {
+public class Shelter {
     private int key;
     private String shelter;
     private String capacity;
@@ -15,7 +15,7 @@ public class DataItem {
     private String notes;
     private String number;
 
-    public DataItem(int k, String s, String c, String r, double lo, double la, String a, String no, String nu) {
+    public Shelter(int k, String s, String c, String r, double lo, double la, String a, String no, String nu) {
         key = k;
         shelter = s;
         capacity = c;

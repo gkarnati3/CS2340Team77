@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.controller.LoginController;
-import edu.gatech.cs2340.homefullshelter.model.DataItem;
+import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
 public class MainActivity extends AppCompatActivity {
@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 int key = Integer.parseInt(tokens.get(0));
                 double lo = Double.parseDouble(tokens.get(4));
                 double la = Double.parseDouble(tokens.get(5));
-                model.addItem(new DataItem(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
+                model.addItem(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
             }
             br.close();
            //System.out.println("PRINT THE THINGY:"+model.getItems().size());

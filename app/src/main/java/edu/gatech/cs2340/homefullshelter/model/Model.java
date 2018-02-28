@@ -32,18 +32,18 @@ public class Model {
         items = new ArrayList<>();
     }
 
-    private List<DataItem> items;
+    private List<Shelter> items;
 
-    public void addItem(DataItem item) {
+    public void addItem(Shelter item) {
         items.add(item);
     }
 
-    public List<DataItem> getItems() {
+    public List<Shelter> getItems() {
         return items;
     }
 
-    public DataItem findItemById(int key) {
-        for (DataItem d : items) {
+    public Shelter findItemById(int key) {
+        for (Shelter d : items) {
             if (d.getKey() == key) return d;
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + key);
