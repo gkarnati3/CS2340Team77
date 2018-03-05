@@ -33,19 +33,11 @@ public class ShelterController {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
 
-                        EditText usernameText = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
-                        EditText passwordText = ((AlertDialog) dialog).findViewById(R.id.editText_password);
-                        String username = usernameText.getText().toString();
-                        String password = passwordText.getText().toString();
+
 
                         Model model = Model.getInstance();
 
-                        if (model.checkLogin(username, password)) {
-                            Intent myIntent = new Intent(context, Logout.class);
-                            context.startActivity(myIntent);
-                        } else {
-                            Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
-                        }
+                        //ALEX WRITE YOUR CODE HERE, DICK
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
@@ -54,7 +46,7 @@ public class ShelterController {
 
                     }
                 })
-                .setView(mInflater.inflate(R.layout.alertdialog_login, null));
+                .setView(mInflater.inflate(R.layout.alertdialog_search, null));
 
         return builder;
     }

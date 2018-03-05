@@ -30,7 +30,7 @@ public class Logout extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent myIntent = new Intent(Logout.this, DataItemListActivity.class);
+                Intent myIntent = new Intent(Logout.this, ShelterListActivity.class);
                 startActivity(myIntent);
             }
         });

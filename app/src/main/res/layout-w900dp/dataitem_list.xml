@@ -9,7 +9,7 @@ android:baselineAligned="false"
 android:divider="?android:attr/dividerHorizontal"
 android:orientation="horizontal"
 android:showDividers="middle"
-tools:context="edu.gatech.cs2340.homefullshelter.view.DataItemListActivity">
+tools:context="edu.gatech.cs2340.homefullshelter.view.ShelterListActivity">
 
 <!--
 This layout is a two-pane layout for the Data Items
