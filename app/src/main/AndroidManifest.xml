@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".view.Logout"
+            android:name=".view.LogoutActivity"
             android:label="@string/title_activity_logout"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

@@ -4,9 +4,11 @@ package edu.gatech.cs2340.homefullshelter.view;
  * Created by gkarnati3 on 2/25/18.
  */
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -14,13 +16,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.controller.ShelterController;
+import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
@@ -51,8 +56,36 @@ public class ShelterListActivity extends AppCompatActivity {
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ShelterController sc = new ShelterController(v, getApplicationContext());
-                sc.makeDialog().show();
+                System.out.println("finderrrr");
+                AlertDialog.Builder builder;
+                LayoutInflater mInflater = LayoutInflater.from(v.getContext());
+                builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            RadioButton male = findViewById(R.id.radiobutton_male);
+                            RadioButton female = findViewById(R.id.radiobutton_female);
+                            RadioButton AE = findViewById(R.id.radiobutton_AE);
+                            RadioButton YA = findViewById(R.id.radiobutton_YA);
+                            RadioButton FWN = findViewById(R.id.radioButton_FWN);
+                            RadioButton child = findViewById(R.id.radiobutton_child);
+
+                            EditText shelter = findViewById(R.id.editText_userName);
+                            String shelterName = shelter.getText().toString();
+
+
+                            System.out.println("dinder and stuff");
+                            // Alex, you dick, write your stuff here
+
+                        }
+                    })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+
+                                }
+                            })
+                            .setView(mInflater.inflate(R.layout.alertdialog_search, null)).show();
+
             }
         });
 
@@ -64,7 +97,8 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Model.getInstance().getItems()));
+        ShelterListController sla = new ShelterListController();
+        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(sla.getShelterData()));
     }
 
     public class SimpleItemRecyclerViewAdapter
