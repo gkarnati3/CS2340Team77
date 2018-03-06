@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -43,6 +44,10 @@ public class ShelterListActivity extends AppCompatActivity {
      * device.
      */
 
+    ShelterListController sla = new ShelterListController();
+    final SimpleItemRecyclerViewAdapter recylerviewAdapter =
+            new SimpleItemRecyclerViewAdapter(sla.getShelterData());
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,15 +67,26 @@ public class ShelterListActivity extends AppCompatActivity {
                 builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            RadioButton male = findViewById(R.id.radiobutton_male);
-                            RadioButton female = findViewById(R.id.radiobutton_female);
-                            RadioButton AE = findViewById(R.id.radiobutton_AE);
-                            RadioButton YA = findViewById(R.id.radiobutton_YA);
-                            RadioButton FWN = findViewById(R.id.radioButton_FWN);
-                            RadioButton child = findViewById(R.id.radiobutton_child);
+                            RadioButton maleButton = findViewById(R.id.radiobutton_male);
+                            boolean male = maleButton.isChecked();
+                            RadioButton femaleButton = findViewById(R.id.radiobutton_female);
+                            boolean female = femaleButton.isChecked();
+                            RadioButton fwnButton = findViewById(R.id.radioButton_FWN);
+                            boolean fwn = fwnButton.isChecked();
+                            RadioButton childButton = findViewById(R.id.radiobutton_child);
+                            boolean child = childButton.isChecked();
+                            RadioButton yaButton = findViewById(R.id.radiobutton_YA);
+                            boolean ya = yaButton.isChecked();
+                            RadioButton anyButton = findViewById(R.id.radiobutton_AE);
+                            boolean any = anyButton.isChecked();
 
                             EditText shelter = findViewById(R.id.editText_userName);
                             String shelterName = shelter.getText().toString();
+
+                            ShelterListController newSla = new ShelterListController(shelterName,
+                                    male, female, fwn, child, ya, any);
+                            recylerviewAdapter.setmValues(newSla.getShelterData());
+
 
 
                             System.out.println("dinder and stuff");
@@ -97,17 +113,22 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        ShelterListController sla = new ShelterListController();
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(sla.getShelterData()));
+        recyclerView.setAdapter(recylerviewAdapter);
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<Shelter> mValues;
+        private List<Shelter> mValues;
 
         public SimpleItemRecyclerViewAdapter(List<Shelter> items) {
             mValues = items;
+        }
+
+        public void setmValues(List<Shelter> newValues) {
+            mValues.clear();
+            mValues.addAll(newValues);
+            notifyDataSetChanged();
         }
 
         @Override
