@@ -43,32 +43,51 @@ public class ShelterListController {
             return shelters;
         }
         for (Shelter shelter : shelters) {
+            boolean add = true;
             String restrictions = shelter.getRestrictions();
             if (male) {
-                if (!restrictions.contains("Women")) {
-                    sheltersToShow.add(shelter);
+                if (restrictions.contains("Women")) {
+                    add = false;
                 }
-            } else if (female) {
-                if (!restrictions.contains("Men")) {
-                    sheltersToShow.add(shelter);
+            }
+            if (female) {
+                if (restrictions.contains("Men")) {
+                    add = false;
                 }
-            } else if (fwn) {
-                if (restrictions.contains("Families w/ newborn")
-                        || restrictions.contains("Anyone")) {
-                    sheltersToShow.add(shelter);
+            }
+            if (!any) {
+                if (fwn) {
+                    if ((restrictions.contains("Children")
+                            || restrictions.contains("Young adult"))
+                            && !(restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
                 }
-            } else if (child) {
-                if (restrictions.contains("Children")) {
-                    sheltersToShow.add(shelter);
+                if (child) {
+                    if ((restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Young adult"))
+                            && !(restrictions.contains("Children")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
                 }
-            } else if (ya) {
-                if (restrictions.contains("Young adult")) {
-                    sheltersToShow.add(shelter);
+                if (ya) {
+                    if ((restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Children"))
+                            && !(restrictions.contains("Young adult")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
                 }
-            } else if (any) {
-                if (restrictions.contains("Anyone")) {
-                    sheltersToShow.add(shelter);
+            }
+            if (!name.equals("")) {
+                if (!shelter.getShelter().contains(name)) {
+                    add = false;
                 }
+            }
+            if (add) {
+                sheltersToShow.add(shelter);
             }
         }
         return sheltersToShow;

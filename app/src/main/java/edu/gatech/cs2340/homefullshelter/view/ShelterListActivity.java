@@ -77,7 +77,7 @@ public class ShelterListActivity extends AppCompatActivity {
                             RadioButton anyButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
                             boolean any = anyButton.isChecked();
 
-                            EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_shelterName_filter);
+                            EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
                             String shelterName = shelter.getText().toString();
 
                             ShelterListController newSla = new ShelterListController(shelterName,
@@ -122,8 +122,7 @@ public class ShelterListActivity extends AppCompatActivity {
         }
 
         public void setmValues(List<Shelter> newValues) {
-            mValues.clear();
-            mValues.addAll(newValues);
+            mValues = newValues;
             notifyDataSetChanged();
         }
 
