@@ -77,7 +77,7 @@
         android:text="Name of Shelter" />
 
     <EditText
-        android:id="@+id/editText_shelterName"
+        android:id="@+id/editText_shelterName_filter"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"

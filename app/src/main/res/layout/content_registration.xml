@@ -23,7 +23,7 @@
         tools:layout_editor_absoluteY="129dp" />
 
     <EditText
-        android:id="@+id/editText_username1"
+        android:id="@+id/editText_registration_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="36dp"

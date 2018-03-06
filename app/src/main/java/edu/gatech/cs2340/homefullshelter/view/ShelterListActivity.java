@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -25,10 +24,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.ShelterController;
 import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
-import edu.gatech.cs2340.homefullshelter.model.Model;
 
 /**
  * An activity representing a list of Data Items. This activity
@@ -67,20 +64,20 @@ public class ShelterListActivity extends AppCompatActivity {
                 builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            RadioButton maleButton = findViewById(R.id.radiobutton_male);
+                            RadioButton maleButton =  (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
                             boolean male = maleButton.isChecked();
-                            RadioButton femaleButton = findViewById(R.id.radiobutton_female);
+                            RadioButton femaleButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
                             boolean female = femaleButton.isChecked();
-                            RadioButton fwnButton = findViewById(R.id.radioButton_FWN);
+                            RadioButton fwnButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
                             boolean fwn = fwnButton.isChecked();
-                            RadioButton childButton = findViewById(R.id.radiobutton_child);
+                            RadioButton childButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
                             boolean child = childButton.isChecked();
-                            RadioButton yaButton = findViewById(R.id.radiobutton_YA);
+                            RadioButton yaButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
                             boolean ya = yaButton.isChecked();
-                            RadioButton anyButton = findViewById(R.id.radiobutton_AE);
+                            RadioButton anyButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
                             boolean any = anyButton.isChecked();
 
-                            EditText shelter = findViewById(R.id.editText_userName);
+                            EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_shelterName_filter);
                             String shelterName = shelter.getText().toString();
 
                             ShelterListController newSla = new ShelterListController(shelterName,
@@ -90,7 +87,6 @@ public class ShelterListActivity extends AppCompatActivity {
 
 
                             System.out.println("dinder and stuff");
-                            // Alex, you dick, write your stuff here
 
                         }
                     })
