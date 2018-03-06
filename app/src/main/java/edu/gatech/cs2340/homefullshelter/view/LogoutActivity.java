@@ -8,7 +8,7 @@ import android.widget.Button;
 
 import edu.gatech.cs2340.homefullshelter.R;
 
-public class Logout extends AppCompatActivity {
+public class LogoutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class Logout extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent myIntent = new Intent(Logout.this, DataItemListActivity.class);
+                Intent myIntent = new Intent(LogoutActivity.this, ShelterListActivity.class);
                 startActivity(myIntent);
             }
         });

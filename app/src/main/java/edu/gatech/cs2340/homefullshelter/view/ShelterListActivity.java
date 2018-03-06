@@ -4,21 +4,29 @@ package edu.gatech.cs2340.homefullshelter.view;
  * Created by gkarnati3 on 2/25/18.
  */
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.ShelterController;
+import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
@@ -29,12 +37,16 @@ import edu.gatech.cs2340.homefullshelter.model.Model;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class DataItemListActivity extends AppCompatActivity {
+public class ShelterListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+
+    ShelterListController sla = new ShelterListController();
+    final SimpleItemRecyclerViewAdapter recylerviewAdapter =
+            new SimpleItemRecyclerViewAdapter(sla.getShelterData());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +57,53 @@ public class DataItemListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
+        final Button sortButton = findViewById(R.id.button_sort);
+        sortButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println("finderrrr");
+                AlertDialog.Builder builder;
+                LayoutInflater mInflater = LayoutInflater.from(v.getContext());
+                builder = new AlertDialog.Builder(v.getContext());
+                    builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            RadioButton maleButton = findViewById(R.id.radiobutton_male);
+                            boolean male = maleButton.isChecked();
+                            RadioButton femaleButton = findViewById(R.id.radiobutton_female);
+                            boolean female = femaleButton.isChecked();
+                            RadioButton fwnButton = findViewById(R.id.radioButton_FWN);
+                            boolean fwn = fwnButton.isChecked();
+                            RadioButton childButton = findViewById(R.id.radiobutton_child);
+                            boolean child = childButton.isChecked();
+                            RadioButton yaButton = findViewById(R.id.radiobutton_YA);
+                            boolean ya = yaButton.isChecked();
+                            RadioButton anyButton = findViewById(R.id.radiobutton_AE);
+                            boolean any = anyButton.isChecked();
+
+                            EditText shelter = findViewById(R.id.editText_userName);
+                            String shelterName = shelter.getText().toString();
+
+                            ShelterListController newSla = new ShelterListController(shelterName,
+                                    male, female, fwn, child, ya, any);
+                            recylerviewAdapter.setmValues(newSla.getShelterData());
+
+
+
+                            System.out.println("dinder and stuff");
+                            // Alex, you dick, write your stuff here
+
+                        }
+                    })
+                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // do nothing
+
+                                }
+                            })
+                            .setView(mInflater.inflate(R.layout.alertdialog_search, null)).show();
+
+            }
+        });
 
 
         View recyclerView = findViewById(R.id.dataitem_list);
@@ -54,16 +113,22 @@ public class DataItemListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(Model.getInstance().getItems()));
+        recyclerView.setAdapter(recylerviewAdapter);
     }
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
 
-        private final List<Shelter> mValues;
+        private List<Shelter> mValues;
 
         public SimpleItemRecyclerViewAdapter(List<Shelter> items) {
             mValues = items;
+        }
+
+        public void setmValues(List<Shelter> newValues) {
+            mValues.clear();
+            mValues.addAll(newValues);
+            notifyDataSetChanged();
         }
 
         @Override

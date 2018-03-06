@@ -1,18 +1,16 @@
 package edu.gatech.cs2340.homefullshelter.controller;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
-import edu.gatech.cs2340.homefullshelter.view.Logout;
+import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
 /**
  * Created by mattquan on 2/8/18.
  */
@@ -41,7 +39,7 @@ public class LoginController {
                         Model model = Model.getInstance();
 
                         if (model.checkLogin(username, password)) {
-                            Intent myIntent = new Intent(context, Logout.class);
+                            Intent myIntent = new Intent(context, LogoutActivity.class);
                             context.startActivity(myIntent);
                         } else {
                             Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();

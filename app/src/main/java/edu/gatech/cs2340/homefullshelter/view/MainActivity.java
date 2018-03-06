@@ -20,7 +20,7 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
 public class MainActivity extends AppCompatActivity {
-    public static String TAG = "MY_APP";
+    public static final String TAG = "MY_APP";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
-    public static final int NAME_POSITION = 0;
 
     private void readSDFile() {
         Model model = Model.getInstance();
