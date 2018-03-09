@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "94334744515",
+    "firebase_url": "https://homefullshelter.firebaseio.com",
+    "project_id": "homefullshelter",
+    "storage_bucket": "homefullshelter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94334744515:android:10e4695d45408cf4",
+        "android_client_info": {
+          "package_name": "edu.gatech.cs2340.homefullshelter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "94334744515-9l8lk0vc1aa9s9q6let1g9bm2jihjv0b.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiDOgcw-dT9O1UMiPVH9ENN9V4A_4BUdw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
