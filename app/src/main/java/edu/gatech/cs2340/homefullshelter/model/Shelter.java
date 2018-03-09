@@ -15,6 +15,10 @@ public class Shelter {
     private String notes;
     private String number;
 
+    public Shelter() {
+        //for the firebase stuff. FIRE. AHHHH. Scary.
+    }
+
     public Shelter(int k, String s, String c, String r, double lo, double la, String a, String no, String nu) {
         key = k;
         shelter = s;
