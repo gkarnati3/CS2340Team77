@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                         new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
 
 // Create and launch sign-in intent
+                Log.e("hello", "h");
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("he","he");
         Log.e("resquestCode", String.valueOf(requestCode));
         Log.e("resultCode", String.valueOf(resultCode));
         if (requestCode == 1) {
