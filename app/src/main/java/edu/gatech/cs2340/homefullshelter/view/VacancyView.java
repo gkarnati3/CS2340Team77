@@ -5,38 +5,64 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.DatabaseInterface;
+import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 /**
  * Created by gkarnati3 on 3/11/18.
  */
 
 public class VacancyView extends AppCompatActivity {
-
-    public int increment;
+    TextView name;
+    TextView shelterView;
+    TextView capacity;
+    Button plus;
+    int countBeds = 0;
+    Shelter curr = (Shelter) getIntent().getSerializableExtra("Shelter");
+    String capacityD = curr.getCapacity();
+    int capacityDecrease = Integer.parseInt(capacityD);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vacancy_view);
 
+        if(curr != null) {
+            shelterView.setText(curr.getName());
+            capacity.setText("Number of available beds: " + capacityD);
+        }
+
+
+        name = findViewById(R.id.name);
+        plus = findViewById(R.id.plus);
+
+        plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                countBeds++;
+                capacityDecrease--;
+                name.setText(countBeds);
+                capacity.setText(capacityD);
+            }
+        });
+
+        DatabaseInterface db = new DatabaseInterface();
+        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
         Button submit = findViewById(R.id.button2);
-        //TODO: add logout code here
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
-            }
-        });
-
-        Button add = findViewById(R.id.plus);
-        add.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-//                if (increment == 0) {
-//
-//                }
+                //setNumberOfBeds(countBeds);
             }
         });
     }
