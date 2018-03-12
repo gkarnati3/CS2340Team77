@@ -139,6 +139,7 @@ public class Model {
             User user = users.get(uID);
             return user.checkPassword(password);
         }
+
         return false;
     }
     public void checkLogin(String uID) {
