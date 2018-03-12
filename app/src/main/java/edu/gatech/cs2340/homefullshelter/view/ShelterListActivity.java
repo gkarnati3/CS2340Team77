@@ -5,6 +5,7 @@ package edu.gatech.cs2340.homefullshelter.view;
  */
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomSheetBehavior;
@@ -153,7 +154,19 @@ public class ShelterListActivity extends AppCompatActivity {
                             "\nLattitude: " + mValues.get(position).getLatitude() +
                             "\nAddress: " + mValues.get(position).getAddress() +
                             "\nPhone Number: " + mValues.get(position).getNumber());
+                    Button bedsButton = findViewById(R.id.button_beds);
+                    bedsButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            //change
+                            Intent vacancyIntent = new Intent(ShelterListActivity.this, VacancyView.class);
+                            vacancyIntent.putExtra("Shelter", mValues.get(position));
+                            startActivity(vacancyIntent);
+                            finish();
+                        }
+                    });
                 }
+
             });
         }
 

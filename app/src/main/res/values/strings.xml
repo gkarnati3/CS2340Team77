@@ -14,4 +14,5 @@
     <string name="cancel">Cancel</string>
     <string name="already_have_an_account">Already have an account?  Click HERE to login</string>
     <string name="welcome_to_home_full_shelter">Welcome to Home-Full Shelter!</string>
+    <string name="title_activity_vacancyview">VACANCYVIEWPRAT</string>
 </resources>

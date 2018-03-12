@@ -1,10 +1,13 @@
 package edu.gatech.cs2340.homefullshelter.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by gkarnati3 on 2/24/18.
  */
 
-public class Shelter {
+public class Shelter implements Parcelable {
     private int key;
     private String name;
     private String capacity;
@@ -92,5 +95,31 @@ public class Shelter {
 
         Shelter comp = (Shelter) other;
         return this.key == comp.key;
+    }
+
+    // All stuff to make it parcelable
+    private int mData;
+
+    public int describeContents() {
+        return 0;
+    }
+
+    public void writeToParcel(Parcel out, int flags) {
+        out.writeInt(mData);
+    }
+
+    public static final Parcelable.Creator<Shelter> CREATOR
+            = new Parcelable.Creator<Shelter>() {
+        public Shelter createFromParcel(Parcel in) {
+            return new Shelter(in);
+        }
+
+        public Shelter[] newArray(int size) {
+            return new Shelter[size];
+        }
+    };
+
+    private Shelter(Parcel in) {
+        mData = in.readInt();
     }
 }
