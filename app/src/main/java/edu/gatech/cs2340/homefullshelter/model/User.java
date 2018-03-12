@@ -17,6 +17,10 @@ public class User {
         this("", "", "", 0, -1, 0);
     }
 
+    public User(String name, String username, String password, int acctType) {
+        this(name, username, password, acctType, -1, 0);
+    }
+
     public User(String name, String username, String password, int acctType, int currentShelterID, int numberOfBeds) {
         this.name = name;
         this.username = username;
