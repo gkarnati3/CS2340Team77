@@ -20,22 +20,26 @@ import edu.gatech.cs2340.homefullshelter.model.User;
  * Created by AlexanderHammond on 3/11/18.
  */
 
-public class DatabaseInterface {
+public class DatabaseController {
     private DatabaseReference mDatabase;
 
-    public DatabaseInterface() {
+    public DatabaseController() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
-    //may not be used depending on how whether firebase automates this, which it should
-    public void register(User user) {
+    /**
+     * Used for adding a user to the firebase database after authentication
+     * Also sets the new user as the current user in the model if they are added to the database successfully
+     * @param user
+     */
+    public void addUserAndSetAsCurrent(User user) {
         String key = mDatabase.child("users").push().getKey();
         DatabaseReference newUser = mDatabase.child("users").child(key);
         newUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Model model = Model.getInstance();
-                model.setUserID(dataSnapshot.getKey());
+                model.setCurrentUser(dataSnapshot.getValue(User.class));
                 //TODO call some method in login controller to say they logged in successfully
             }
 
@@ -102,14 +106,14 @@ public class DatabaseInterface {
     }
 
     /**
-     * Gets data for a shelter specified with the given key from the database
+     * Gets data for a user specified with the given key from the database
      * @param uID
-     * @return the shelter object created from the information stored on the database
+     * @return the user object created from the information stored on the database
      */
     public User getUser(String uID) {
-        final User user = new User();
-        DatabaseReference shelterRef = mDatabase.child("users").child(uID);
-        shelterRef.addValueEventListener(new ValueEventListener() {
+        final User user = new User(uID);
+        DatabaseReference userRef = mDatabase.child("users").child(uID);
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User tmp = dataSnapshot.getValue(User.class);
@@ -117,7 +121,9 @@ public class DatabaseInterface {
                     user.setAccountType(tmp.getAccountType());
                     user.setName(tmp.getName());
                     user.setPassword(tmp.getPassword());
-                    user.setUsername(tmp.getUsername());
+                    user.setCurrentShelterID(tmp.getCurrentShelterID());
+                    user.setNumberOfBeds(tmp.getNumberOfBeds());
+                    user.setPassword(tmp.getPassword());
                 }
             }
 
@@ -154,7 +160,31 @@ public class DatabaseInterface {
     }
 
     /**
-     * Right now just replaces the existing shelter object, shelter object will need to store its list of occupied users
+     * Right now just replaces the existing user object
+     * this does not support concurrent use, and changes to user are not automatically
+     * reflected in any shelter object they affect
+     * @param user the updated shelter class to send to the database
+     */
+    public void updateUser(User user) {
+        DatabaseReference updateUser = mDatabase.child("users").child(user.getUID());
+        updateUser.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //TODO code to show shelter was updated
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //TODO code to show error in updating shelter
+            }
+        });
+        updateUser.setValue(user);
+    }
+
+    /**
+     * Right now just replaces the existing shelter object,
+     * shelter object will need to store its list of occupied users,
+     * changes to this do not affect any corresponding user data, that must be changed seperately
      * this does not support concurrent use
      * @param shelter the updated shelter class to send to the database
      */
@@ -174,4 +204,11 @@ public class DatabaseInterface {
         });
         newShelter.setValue(shelter);
     }
+
+
+    //below are for ensuring data safety, not required but recommended
+    //TODO make a patch request for updating number of beds taken by user and at which shelter
+
+    //TODO make a patch request for updating number of beds taken at a shelter
+
 }

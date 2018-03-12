@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "94334744515-64roblpc1mlqufv1671hl6mo7nn5duue.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.cs2340.homefullshelter",
+            "certificate_hash": "9e22ea2d45896b059c636a5ca85a4bc36d34191f"
+          }
+        },
+        {
+          "client_id": "94334744515-lubbnm1mijqfojbnrdno42m3hnld1tom.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "edu.gatech.cs2340.homefullshelter",
+            "certificate_hash": "0a586967399d4a8aed22ad2ed0486807d816db11"
+          }
+        },
+        {
           "client_id": "94334744515-9l8lk0vc1aa9s9q6let1g9bm2jihjv0b.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "94334744515-9l8lk0vc1aa9s9q6let1g9bm2jihjv0b.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

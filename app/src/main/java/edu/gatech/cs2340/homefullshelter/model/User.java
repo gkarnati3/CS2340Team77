@@ -5,8 +5,10 @@ package edu.gatech.cs2340.homefullshelter.model;
  */
 
 public class User {
+    private String uID;
+
     private String name;
-    private String username;
+    private String email;
     private String password;
     private int accountType;
     private int currentShelterID;
@@ -14,16 +16,24 @@ public class User {
 
     //exists only for firebase, do not use in local code, should never create empty user
     public User() {
-        this("", "", "", 0, -1, 0);
+        this("", "", "", "", 0, -1, 0);
     }
 
-    public User(String name, String username, String password, int acctType) {
-        this(name, username, password, acctType, -1, 0);
+    public User(String uID) {
+        this(uID, "", "", "", 0, -1, 0);
     }
 
-    public User(String name, String username, String password, int acctType, int currentShelterID, int numberOfBeds) {
+    /**
+     * deprecated, do not use
+     */
+    public User(String name, String uID, String password, int acctType) {
+        this(uID, "", name, password, acctType, -1, 0);
+    }
+
+    public User(String uID, String email, String name, String password, int acctType, int currentShelterID, int numberOfBeds) {
+        this.uID = uID;
+        this.email = email;
         this.name = name;
-        this.username = username;
         this.password = password;
         this.accountType = acctType;
         this.currentShelterID = currentShelterID;
@@ -54,19 +64,11 @@ public class User {
     }
 
     /**
-     * Gets the user's username
-     * @return the username
+     * Gets the user's id
+     * @return the user id
      */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Sets the user's username
-     * @param username the new username
-     */
-    public void setUsername(String username) {
-        this.username = username;
+    public String getUID() {
+        return uID;
     }
 
     /**
@@ -144,13 +146,26 @@ public class User {
         }
 
         User comp = (User) other;
-        return this.username.equals(comp.name);
+        return this.uID.equals(comp.uID);
 
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uID='" + uID + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", accountType=" + accountType +
+                ", currentShelterID=" + currentShelterID +
+                ", numberOfBeds=" + numberOfBeds +
+                '}';
     }
 
     //required for using hashmap to automate adding duplicates
     @Override
     public int hashCode() {
-        return (int)username.charAt(0);
+        return (int)uID.charAt(0);
     }
 }

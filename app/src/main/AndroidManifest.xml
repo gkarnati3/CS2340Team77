@@ -30,6 +30,15 @@
                 android:value="edu.gatech.cs2340.homefullshelter.view.MainActivity" />
         </activity>
         <activity
+            android:name=".view.VacancyView"
+            android:label="@string/title_activity_vacancyview"
+            android:parentActivityName=".view.ShelterListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.gatech.cs2340.homefullshelter.view.ShelterListActivity" />
+        </activity>
+        <activity
             android:name=".view.ShelterListActivity"
             android:label="@string/title_activity_detail_list"
             android:parentActivityName=".view.MainActivity"
