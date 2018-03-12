@@ -138,6 +138,7 @@ public class Model {
         if (users.containsKey(uID)) {
             User user = users.get(uID);
             return user.checkPassword(password);
+
         }
 
         return false;
