@@ -6,7 +6,7 @@ package edu.gatech.cs2340.homefullshelter.model;
 
 public class Shelter {
     private int key;
-    private String shelter;
+    private String name;
     private String capacity;
     private String restrictions;
     private double longitude;
@@ -19,9 +19,9 @@ public class Shelter {
         //for the firebase stuff. FIRE. AHHHH. Scary.
     }
 
-    public Shelter(int k, String s, String c, String r, double lo, double la, String a, String no, String nu) {
+    public Shelter(int k, String n, String c, String r, double lo, double la, String a, String no, String nu) {
         key = k;
-        shelter = s;
+        name = n;
         capacity = c;
         restrictions = r;
         longitude = lo;
@@ -32,11 +32,11 @@ public class Shelter {
     }
 
     public String toString() {
-        return shelter + " " + key;
+        return name + " " + key;
     }
 
     public int getKey() { return key; }
-    public String getShelter() { return shelter; }
+    public String getName() { return name; }
     public String getCapacity() { return capacity; }
     public String getRestrictions() { return restrictions; }
     public double getLongitude() { return longitude; }
@@ -44,4 +44,40 @@ public class Shelter {
     public String getAddress() { return address; }
     public String getNotes() { return notes; }
     public String getNumber() { return number; }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setRestrictions(String restrictions) {
+        this.restrictions = restrictions;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 }

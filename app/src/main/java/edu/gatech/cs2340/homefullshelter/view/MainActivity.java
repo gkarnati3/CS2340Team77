@@ -7,12 +7,16 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.firebase.ui.auth.AuthUI;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.controller.LoginController;
@@ -25,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(Model.getInstance().getItems().size() == 0) {
+        if(Model.getInstance().getShelters().size() == 0) {
             readSDFile();
         }
         setContentView(R.layout.activity_main);
@@ -46,6 +50,32 @@ public class MainActivity extends AppCompatActivity {
                 lc.makeDialog().show();
             }
         });
+
+        Button firebase = (Button) findViewById(R.id.button_fireThatBase);
+        firebase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<AuthUI.IdpConfig> providers = Arrays.asList(
+                        new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build());
+
+// Create and launch sign-in intent
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build(),
+                        123);
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setAvailableProviders(providers)
+                                .build(),
+                        123);
+            }
+
+        });
+
+
     }
 
     private void readSDFile() {
@@ -89,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
                 model.addItem(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
             }
             br.close();
-           //System.out.println("PRINT THE THINGY:"+model.getItems().size());
+           //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
         } catch (IOException e) {
             Log.e(MainActivity.TAG, "error reading assets", e);
         }

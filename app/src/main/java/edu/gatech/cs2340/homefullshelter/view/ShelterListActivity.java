@@ -137,7 +137,7 @@ public class ShelterListActivity extends AppCompatActivity {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             holder.mItem = mValues.get(position);
             holder.mIdView.setText("" + mValues.get(position).getKey());
-            holder.mContentView.setText(mValues.get(position).getShelter());
+            holder.mContentView.setText(mValues.get(position).getName());
             LinearLayout bottomSheet = (LinearLayout) findViewById(R.id.linear_layout_bottom_sheet_theme_details);
             final TextView peekText = (TextView) findViewById(R.id.textview_peek_shelterdetails);
             final TextView contentText = (TextView) findViewById(R.id.textview_content_shelterdetails);
@@ -146,7 +146,7 @@ public class ShelterListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     bottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                    peekText.setText("" + mValues.get(position).getShelter());
+                    peekText.setText("" + mValues.get(position).getName());
                     contentText.setText("\nCapacity: " + mValues.get(position).getCapacity() +
                             "\nRestricitons: " + mValues.get(position).getRestrictions() +
                             "\nLongitude: " + mValues.get(position).getLongitude() +
