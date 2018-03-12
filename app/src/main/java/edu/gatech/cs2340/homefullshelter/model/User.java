@@ -9,17 +9,21 @@ public class User {
     private String username;
     private String password;
     private int accountType;
+    private int currentShelterID;
+    private int numberOfBeds;
 
     //exists only for firebase, do not use in local code, should never create empty user
     public User() {
-        this("", "", "", 0);
+        this("", "", "", 0, -1, 0);
     }
 
-    public User(String name, String username, String password, int acctType) {
+    public User(String name, String username, String password, int acctType, int currentShelterID, int numberOfBeds) {
         this.name = name;
         this.username = username;
         this.password = password;
         this.accountType = acctType;
+        this.currentShelterID = currentShelterID;
+        this.numberOfBeds = numberOfBeds;
     }
 
     public boolean checkPassword(String password) {
@@ -91,6 +95,38 @@ public class User {
      */
     public void setAccountType(int accountType) {
         this.accountType = accountType;
+    }
+
+    /**
+     * Gets the ID of the shelter the user is in
+     * @return the shelter id
+     */
+    public int getCurrentShelterID() {
+        return currentShelterID;
+    }
+
+    /**
+     * Sets the current shelter id
+     * @param currentShelterID the id of the shelter they are in
+     */
+    public void setCurrentShelterID(int currentShelterID) {
+        this.currentShelterID = currentShelterID;
+    }
+
+    /**
+     * Gets the number of beds the user has checked out
+     * @return the the number of beds the user has check out
+     */
+    public int getNumberOfBeds() {
+        return numberOfBeds;
+    }
+
+    /**
+     * Sets the number of beds the user has check out
+     * @param numberOfBeds the number of beds they have check out
+     */
+    public void setNumberOfBeds(int numberOfBeds) {
+        this.numberOfBeds = numberOfBeds;
     }
 
     //required for using hashmap to automate adding duplicates
