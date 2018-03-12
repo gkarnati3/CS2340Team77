@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
-                        new AuthUI.IdpConfig.Builder(AuthUI.PHONE_VERIFICATION_PROVIDER).build());
+                        new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
 
 // Create and launch sign-in intent
                 startActivityForResult(
@@ -77,7 +78,16 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("resquestCode", String.valueOf(requestCode));
+        Log.e("resultCode", String.valueOf(resultCode));
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String result=data.getStringExtra("result");
+            }
+        }
+    }//onActivityResult
     private void readSDFile() {
         Model model = Model.getInstance();
 
