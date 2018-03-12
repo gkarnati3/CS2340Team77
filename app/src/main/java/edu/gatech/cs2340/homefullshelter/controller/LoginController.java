@@ -65,11 +65,6 @@ public class LoginController {
     }
 
     public void login(FirebaseUser user) {
-        if (Model.getInstance().checkLogin(user.getUid())) {
-            Log.e("login successful", "whee");
-        } else {
-            Log.e("ah","ha");
-            //create a new user
-        }
+        Model.getInstance().checkLogin(user.getUid());
     }
 }
