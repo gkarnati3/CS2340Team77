@@ -1,6 +1,5 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -135,14 +134,13 @@ public class MainActivity extends AppCompatActivity {
                 int key = Integer.parseInt(tokens.get(0));
                 double lo = Double.parseDouble(tokens.get(4));
                 double la = Double.parseDouble(tokens.get(5));
-                model.addItem(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
+                model.addShelter(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
             }
             br.close();
            //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
         } catch (IOException e) {
             Log.e(MainActivity.TAG, "error reading assets", e);
         }
-
     }
 
 }

@@ -80,4 +80,17 @@ public class Shelter {
     public void setNumber(String number) {
         this.number = number;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
+        if (!(other instanceof Shelter)) {
+            return false;
+        }
+
+        Shelter comp = (Shelter) other;
+        return this.key == comp.key;
+    }
 }
