@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/shelterName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -16,7 +16,7 @@
         android:layout_marginTop="8dp"
         android:text="Name of Shelter"
         android:textSize="26sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintBottom_toTopOf="@+id/capacity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -30,25 +30,25 @@
         android:text="How many beds would you like to claim?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5"
+        app:layout_constraintTop_toTopOf="@+id/capacity"
         app:layout_constraintBottom_toTopOf="@+id/plus"
         tools:layout_editor_absoluteY="200dp" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/capacity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Capacity: "
+        android:text="Number of available beds: "
         app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/name"
         android:layout_width="76dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -88,6 +88,6 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/name"
         app:layout_constraintTop_toTopOf="@+id/plus" />
 </android.support.constraint.ConstraintLayout>
