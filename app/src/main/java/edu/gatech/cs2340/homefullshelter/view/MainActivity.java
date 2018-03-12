@@ -9,6 +9,9 @@ import android.view.View;
 import android.widget.Button;
 
 import com.firebase.ui.auth.AuthUI;
+import com.firebase.ui.auth.IdpResponse;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +29,7 @@ import edu.gatech.cs2340.homefullshelter.model.Model;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MY_APP";
+    private static final int RC_SIGN_IN = 124;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,19 +64,14 @@ public class MainActivity extends AppCompatActivity {
                         new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
 
 // Create and launch sign-in intent
-                Log.e("hello", "h");
+                //Log.e("hello", "h");
+
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
                                 .setAvailableProviders(providers)
                                 .build(),
-                        123);
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setAvailableProviders(providers)
-                                .build(),
-                        123);
+                        RC_SIGN_IN);
             }
 
         });
@@ -81,12 +80,20 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.e("he","he");
-        Log.e("resquestCode", String.valueOf(requestCode));
-        Log.e("resultCode", String.valueOf(resultCode));
-        if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
-                String result=data.getStringExtra("result");
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN) {
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (resultCode == RESULT_OK) {
+                // Successfully signed in
+                Log.e("successful login", "yay");
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                //TODO Model.getInstance().
+                // ...
+            } else {
+                // Sign in failed, check response for error code
+                // ...
             }
         }
     }//onActivityResult
