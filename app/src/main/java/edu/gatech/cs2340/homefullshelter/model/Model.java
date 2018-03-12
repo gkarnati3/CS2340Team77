@@ -22,6 +22,8 @@ public class Model {
     //the one and only instantiation of the class (making it a singleton)
     private static Model appModel = new Model();
     private HashMap<String, User> users;
+    //saved whenever the user has logged in, deleted when they log out, used for database
+    private String userID;
 
     /**
      * Default constructor for model
@@ -29,21 +31,21 @@ public class Model {
      */
     private Model() {
         users = new HashMap<>();
-        items = new ArrayList<>();
+        shelters = new ArrayList<>();
     }
 
-    private List<Shelter> items;
+    private List<Shelter> shelters;
 
-    public void addItem(Shelter item) {
-        items.add(item);
+    public void addItem(Shelter shelter) {
+        shelters.add(shelter);
     }
 
-    public List<Shelter> getItems() {
-        return items;
+    public List<Shelter> getShelters() {
+        return shelters;
     }
 
-    public Shelter findItemById(int key) {
-        for (Shelter d : items) {
+    public Shelter findShelterById(int key) {
+        for (Shelter d : shelters) {
             if (d.getKey() == key) return d;
         }
         Log.d("MYAPP", "Warning - Failed to find id: " + key);
@@ -59,6 +61,7 @@ public class Model {
      * @return boolean representing whether the User was added
      */
     public boolean addUser(User user) {
+        //TODO change to support database checking
         if (users.containsKey(user.getUsername())) {
             //username already exists, cannot add user with this username
             return false;
@@ -68,6 +71,8 @@ public class Model {
         }
     }
 
+
+
     /**
      * Checks to see if a username and password match the values for a stored user
      * @param username the user's username
@@ -75,6 +80,7 @@ public class Model {
      * @return true if login valid, otherwise false
      */
     public boolean checkLogin(String username, String password) {
+        //TODO change to support database checking
         //default values passed in for empty textboxes from login
         //check is to prevent empty login (should be fine since an empty string
         //should not be valid username or password)
@@ -87,6 +93,10 @@ public class Model {
         }
         return false;
     }
+
+    public String getUserID() { return userID; }
+    public void setUserID(String userID) { this.userID = userID; }
+
 
     //method used to access the singleton
 

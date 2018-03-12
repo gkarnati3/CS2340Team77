@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(Model.getInstance().getItems().size() == 0) {
+        if(Model.getInstance().getShelters().size() == 0) {
             readSDFile();
         }
         setContentView(R.layout.activity_main);
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 model.addItem(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
             }
             br.close();
-           //System.out.println("PRINT THE THINGY:"+model.getItems().size());
+           //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
         } catch (IOException e) {
             Log.e(MainActivity.TAG, "error reading assets", e);
         }
