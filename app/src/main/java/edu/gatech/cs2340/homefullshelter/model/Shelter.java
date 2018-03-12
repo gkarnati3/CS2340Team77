@@ -98,14 +98,23 @@ public class Shelter implements Parcelable {
     }
 
     // All stuff to make it parcelable
-    private int mData;
 
     public int describeContents() {
         return 0;
     }
 
     public void writeToParcel(Parcel out, int flags) {
-        out.writeInt(mData);
+        out.writeInt(this.key);
+        out.writeString(this.name);
+        out.writeString(this.capacity);
+        out.writeString(this.restrictions);
+        out.writeDouble(this.latitude);
+        out.writeDouble(this.longitude);
+        out.writeString(this.address);
+        out.writeString(this.notes);
+        out.writeString(this.number);
+
+
     }
 
     public static final Parcelable.Creator<Shelter> CREATOR
@@ -120,6 +129,14 @@ public class Shelter implements Parcelable {
     };
 
     private Shelter(Parcel in) {
-        mData = in.readInt();
+        this.key = in.readInt();
+        this.name = in.readString();
+        this.capacity = in.readString();
+        this.restrictions = in.readString();
+        this.longitude = in.readDouble();
+        this.latitude = in.readDouble();
+        this.address = in.readString();
+        this.notes = in.readString();
+        this.number = in.readString();
     }
 }
