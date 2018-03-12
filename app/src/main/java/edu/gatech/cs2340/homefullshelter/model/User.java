@@ -10,6 +10,11 @@ public class User {
     private String password;
     private int accountType;
 
+    //exists only for firebase, do not use in local code, should never create empty user
+    public User() {
+        this("", "", "", 0);
+    }
+
     public User(String name, String username, String password, int acctType) {
         this.name = name;
         this.username = username;
@@ -54,6 +59,14 @@ public class User {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * Gets the user's password
+     * @return the password
+     */
+    public String getPassword() {
+        return this.password;
     }
 
     /**

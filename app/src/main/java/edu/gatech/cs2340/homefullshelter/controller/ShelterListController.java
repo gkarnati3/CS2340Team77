@@ -37,7 +37,7 @@ public class ShelterListController {
 
     public List<Shelter> getShelterData() {
         Model model = Model.getInstance();
-        List<Shelter> shelters = model.getItems();
+        List<Shelter> shelters = model.getShelters();
         List<Shelter> sheltersToShow = new ArrayList<>();
         if (male && female && fwn && child && ya && any && name.equals("")) {
             return shelters;
@@ -82,7 +82,7 @@ public class ShelterListController {
                 }
             }
             if (!name.equals("")) {
-                if (!shelter.getShelter().contains(name)) {
+                if (!shelter.getName().contains(name)) {
                     add = false;
                 }
             }
