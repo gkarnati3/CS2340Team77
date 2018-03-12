@@ -150,9 +150,22 @@ public class User {
 
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "uID='" + uID + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", accountType=" + accountType +
+                ", currentShelterID=" + currentShelterID +
+                ", numberOfBeds=" + numberOfBeds +
+                '}';
+    }
+
     //required for using hashmap to automate adding duplicates
     @Override
     public int hashCode() {
-        return (int)email.charAt(0);
+        return (int)uID.charAt(0);
     }
 }

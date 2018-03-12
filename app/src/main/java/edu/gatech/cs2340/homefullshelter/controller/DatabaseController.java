@@ -20,10 +20,10 @@ import edu.gatech.cs2340.homefullshelter.model.User;
  * Created by AlexanderHammond on 3/11/18.
  */
 
-public class DatabaseInterface {
+public class DatabaseController {
     private DatabaseReference mDatabase;
 
-    public DatabaseInterface() {
+    public DatabaseController() {
         mDatabase = FirebaseDatabase.getInstance().getReference();
     }
 
@@ -112,8 +112,8 @@ public class DatabaseInterface {
      */
     public User getUser(String uID) {
         final User user = new User(uID);
-        DatabaseReference shelterRef = mDatabase.child("users").child(uID);
-        shelterRef.addValueEventListener(new ValueEventListener() {
+        DatabaseReference userRef = mDatabase.child("users").child(uID);
+        userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 User tmp = dataSnapshot.getValue(User.class);

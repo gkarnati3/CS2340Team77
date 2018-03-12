@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(Model.getInstance().getShelters().size() == 0) {
+        if (Model.getInstance().getShelters().size() == 0) {
             readSDFile();
         }
         setContentView(R.layout.activity_main);
@@ -62,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 List<AuthUI.IdpConfig> providers = Arrays.asList(
                         new AuthUI.IdpConfig.Builder(AuthUI.EMAIL_PROVIDER).build());
 
-// Create and launch sign-in intent
-                //Log.e("hello", "h");
-
+                // Create and launch sign-in intent
                 startActivityForResult(
                         AuthUI.getInstance()
                                 .createSignInIntentBuilder()
@@ -77,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -88,7 +87,8 @@ public class MainActivity extends AppCompatActivity {
                 // Successfully signed in
                 Log.e("successful login", "yay");
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                //TODO Model.getInstance().
+                LoginController lc = new LoginController();
+                lc.login(user);
                 // ...
             } else {
                 // Sign in failed, check response for error code
@@ -96,6 +96,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }//onActivityResult
+
     private void readSDFile() {
         Model model = Model.getInstance();
 
@@ -113,21 +114,19 @@ public class MainActivity extends AppCompatActivity {
                 ArrayList<String> tokens = new ArrayList<String>();
 
                 String[] parse = line.split("\"");
-                for(int i = 0; i < parse.length; i++){
-                    if (i % 2 == 0){
-                    String[] tok = parse[i].split(",");
-                    boolean isFirst = true;
-                        for(String s  : tok) {
-                            if(i == 0){
+                for (int i = 0; i < parse.length; i++) {
+                    if (i % 2 == 0) {
+                        String[] tok = parse[i].split(",");
+                        boolean isFirst = true;
+                        for (String s : tok) {
+                            if (i == 0) {
                                 tokens.add(s);
-                            }
-                            else if (i != 0 && !isFirst) {
+                            } else if (i != 0 && !isFirst) {
                                 tokens.add(s);
                             }
                             isFirst = false;
                         }
-                    }
-                    else{
+                    } else {
                         tokens.add(parse[i]);
                     }
                 }
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 model.addShelter(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
             }
             br.close();
-           //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
+            //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
         } catch (IOException e) {
             Log.e(MainActivity.TAG, "error reading assets", e);
         }

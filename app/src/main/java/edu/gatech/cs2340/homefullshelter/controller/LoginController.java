@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseUser;
+
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
@@ -21,6 +25,9 @@ public class LoginController {
     public LoginController(View v, final Context c) {
         view = v;
         context = c;
+    }
+    public LoginController() {
+
     }
     public AlertDialog.Builder makeDialog() {
         AlertDialog.Builder builder;
@@ -55,5 +62,14 @@ public class LoginController {
                 .setView(mInflater.inflate(R.layout.alertdialog_login, null));
 
         return builder;
+    }
+
+    public void login(FirebaseUser user) {
+        if (Model.getInstance().checkLogin(user.getUid())) {
+            Log.e("login successful", "whee");
+        } else {
+            Log.e("ah","ha");
+            //create a new user
+        }
     }
 }

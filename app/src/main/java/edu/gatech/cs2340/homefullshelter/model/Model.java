@@ -2,15 +2,11 @@ package edu.gatech.cs2340.homefullshelter.model;
 
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import edu.gatech.cs2340.homefullshelter.controller.DatabaseInterface;
+import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 
 /**
  * Created by mattquan on 2/8/18.
@@ -53,7 +49,7 @@ public class Model {
     public void updateCurrentUser(User user) {
         //TODO change for asynchronous safety
         currentUser = user;
-        DatabaseInterface db = new DatabaseInterface();
+        DatabaseController db = new DatabaseController();
         db.updateUser(user);
     }
 
@@ -62,7 +58,7 @@ public class Model {
         int counter = 0;
         shelters.remove(shelter);
         shelters.add(shelter);
-        DatabaseInterface db = new DatabaseInterface();
+        DatabaseController db = new DatabaseController();
         db.updateShelter(shelter);
     }
 
@@ -144,6 +140,19 @@ public class Model {
             return user.checkPassword(password);
         }
         return false;
+    }
+    public void checkLogin(String uID) {
+        //THIS IS FOR THE DATABASE
+        DatabaseController dc = new DatabaseController();
+        User user = dc.getUser(uID);
+        if (user.getName().isEmpty()) {
+            //TODO ALEX THIS METHOD MIGHT NEED CHANGING
+            dc.addUserAndSetAsCurrent(new User(uID));
+        } else {
+            //TODO Also this
+            setCurrentUser(user);
+        }
+
     }
 
 }
