@@ -97,6 +97,11 @@ public class Shelter implements Parcelable {
         return this.key == comp.key;
     }
 
+    @Override
+    public int hashCode() {
+        return key;
+    }
+
     // All stuff to make it parcelable
 
     public int describeContents() {

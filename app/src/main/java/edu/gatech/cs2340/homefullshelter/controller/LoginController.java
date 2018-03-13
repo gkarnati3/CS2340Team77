@@ -4,16 +4,19 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
+import edu.gatech.cs2340.homefullshelter.model.User;
 import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
 /**
  * Created by mattquan on 2/8/18.
@@ -64,12 +67,52 @@ public class LoginController {
         return builder;
     }
 
-    public void login(FirebaseUser user) {
-        if (Model.getInstance().checkLogin(user.getUid())) {
-            Log.e("login successful", "whee");
-        } else {
-            Log.e("ah","ha");
-            //create a new user
-        }
+    public void login(final FirebaseUser user) {
+        Model.getInstance().login(user.getUid(), new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                User tmp = data.getValue(User.class);
+                if (tmp != null) {
+                    Model.getInstance().setCurrentUser(tmp);
+                } else {
+                    Model.getInstance().setCurrentUser(new User(user.getUid()));
+                }
+                onLoginSuccess();
+            }
+
+            @Override
+            public void onFailed() {
+                onLoginFail();
+            }
+        });
+    }
+
+    public void register(final User user) {
+        Model.getInstance().register(user, new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                User tmp = data.getValue(User.class);
+                if (tmp != null) {
+                    Model.getInstance().setCurrentUser(tmp);
+                } else {
+                    Model.getInstance().setCurrentUser(user);
+                }
+                Model.getInstance().setCurrentUser(tmp);
+                onLoginSuccess();
+            }
+
+            @Override
+            public void onFailed() {
+                onLoginFail();
+            }
+        });
+    }
+
+    private void onLoginSuccess() {
+        //TODO Intent to main screen from here (not MainActivity)
+    }
+
+    private void onLoginFail() {
+        //TODO Intent to MainActivity from here, so they can restart login process
     }
 }

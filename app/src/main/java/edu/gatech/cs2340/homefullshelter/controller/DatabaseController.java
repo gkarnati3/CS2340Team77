@@ -12,6 +12,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.User;
@@ -32,7 +33,7 @@ public class DatabaseController {
      * Also sets the new user as the current user in the model if they are added to the database successfully
      * @param user
      */
-    public void addUserAndSetAsCurrent(User user) {
+    public void addUser(User user, final OnGetDataInterface listener) {
         String key = mDatabase.child("users").push().getKey();
         DatabaseReference newUser = mDatabase.child("users").child(key);
         newUser.addValueEventListener(new ValueEventListener() {
@@ -40,17 +41,20 @@ public class DatabaseController {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Model model = Model.getInstance();
                 model.setCurrentUser(dataSnapshot.getValue(User.class));
+                listener.onDataRetrieved(dataSnapshot);
                 //TODO call some method in login controller to say they logged in successfully
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
+                listener.onFailed();
                 //TODO call some method in login controller that shows pop up saying failed to register
             }
         });
+        newUser.setValue(user);
     }
 
-    public void addShelter(Shelter shelter) {
+    public void addShelter(Shelter shelter, final OnGetDataInterface listener) {
         DatabaseReference newShelter;
         if (shelter.getKey() != -1) {
             newShelter = mDatabase.child("shelters").child(Integer.toString(shelter.getKey()));
@@ -60,12 +64,12 @@ public class DatabaseController {
         newShelter.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO code to show shelter was added
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO code to show error in adding shelter
+                listener.onFailed();
             }
         });
         newShelter.setValue(shelter);
@@ -76,7 +80,7 @@ public class DatabaseController {
      * @param key
      * @return the shelter object created from the information stored on the database
      */
-    public Shelter getShelter(int key) {
+    public void getShelter(int key, final OnGetDataInterface listener) {
         final Shelter shelter = new Shelter();
         DatabaseReference shelterRef = mDatabase.child("shelters").child(Integer.toString(key));
         shelterRef.addValueEventListener(new ValueEventListener() {
@@ -93,16 +97,17 @@ public class DatabaseController {
                     shelter.setNotes(tmp.getNotes());
                     shelter.setNumber(tmp.getNumber());
                     shelter.setRestrictions(tmp.getRestrictions());
+
                 }
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO show some error screen that data could not be loaded from server
+                listener.onFailed();
                 Log.d("Database:getShelter", databaseError.getMessage());
             }
         });
-        return shelter;
     }
 
     /**
@@ -110,53 +115,43 @@ public class DatabaseController {
      * @param uID
      * @return the user object created from the information stored on the database
      */
-    public User getUser(String uID) {
+    public void getUser(String uID, final OnGetDataInterface listener) {
         final User user = new User(uID);
         DatabaseReference userRef = mDatabase.child("users").child(uID);
         userRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                User tmp = dataSnapshot.getValue(User.class);
-                if (tmp != null) {
-                    user.setAccountType(tmp.getAccountType());
-                    user.setName(tmp.getName());
-                    user.setPassword(tmp.getPassword());
-                    user.setCurrentShelterID(tmp.getCurrentShelterID());
-                    user.setNumberOfBeds(tmp.getNumberOfBeds());
-                    user.setPassword(tmp.getPassword());
-                }
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO show some error screen that data could not be loaded from server
+                listener.onFailed();
                 Log.d("Database:getUser", databaseError.getMessage());
             }
         });
-        return user;
     }
 
     /**
      * Gets data for all the shelters from the database
      * @return a list of all shelters
      */
-    public List<Shelter> getShelters() {
+    public void getShelters(final OnGetDataInterface listener) {
         final List<Shelter> shelters = new ArrayList<>();
         DatabaseReference shelterRef = mDatabase.child("shelters");
         shelterRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Shelter tmp = dataSnapshot.getValue(Shelter.class);
-                shelters.add(tmp);
+                //the entire list of shelters will be in this snapshot
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO show some error screen that data could not be loaded from server
+                listener.onFailed();
                 Log.d("Database:getShelters", databaseError.getMessage());
             }
         });
-        return shelters;
     }
 
     /**
@@ -165,17 +160,17 @@ public class DatabaseController {
      * reflected in any shelter object they affect
      * @param user the updated shelter class to send to the database
      */
-    public void updateUser(User user) {
+    public void updateUser(User user, final OnGetDataInterface listener) {
         DatabaseReference updateUser = mDatabase.child("users").child(user.getUID());
         updateUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO code to show shelter was updated
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO code to show error in updating shelter
+                listener.onFailed();
             }
         });
         updateUser.setValue(user);
@@ -188,18 +183,18 @@ public class DatabaseController {
      * this does not support concurrent use
      * @param shelter the updated shelter class to send to the database
      */
-    public void updateShelter(Shelter shelter) {
+    public void updateShelter(Shelter shelter, final OnGetDataInterface listener) {
         DatabaseReference newShelter;
         newShelter = mDatabase.child("shelters").child(Integer.toString(shelter.getKey()));
         newShelter.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //TODO code to show shelter was updated
+                listener.onDataRetrieved(dataSnapshot);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO code to show error in updating shelter
+                listener.onFailed();
             }
         });
         newShelter.setValue(shelter);

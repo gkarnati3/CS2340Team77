@@ -22,9 +22,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 import edu.gatech.cs2340.homefullshelter.controller.LoginController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
+import edu.gatech.cs2340.homefullshelter.model.User;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MY_APP";
@@ -86,9 +88,19 @@ public class MainActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
                 Log.e("successful login", "yay");
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController();
-                lc.login(user);
+                //TODO MATT, need to know if login or register
+                /*
+                if login call:
+                    lc.login(fbuser)
+                if register call:
+                    User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
+                    lc.register(user);
+                */
+                //assumes register for now... will mean data about beds is overwritten
+                User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
+                lc.register(user);
                 // ...
             } else {
                 // Sign in failed, check response for error code
@@ -133,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
                 int key = Integer.parseInt(tokens.get(0));
                 double lo = Double.parseDouble(tokens.get(4));
                 double la = Double.parseDouble(tokens.get(5));
-                model.addShelter(new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8)));
+                Shelter shelter = new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8));
+                model.addShelter(shelter);
             }
             br.close();
             //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
