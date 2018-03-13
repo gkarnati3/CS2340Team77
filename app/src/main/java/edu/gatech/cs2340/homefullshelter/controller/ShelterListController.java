@@ -1,7 +1,9 @@
 package edu.gatech.cs2340.homefullshelter.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
@@ -35,10 +37,10 @@ public class ShelterListController {
         this.any = any;
     }
 
-    public List<Shelter> getShelterData() {
+    public Set<Shelter> getShelterData() {
         Model model = Model.getInstance();
-        List<Shelter> shelters = model.getShelters();
-        List<Shelter> sheltersToShow = new ArrayList<>();
+        Set<Shelter> shelters = model.getShelters();
+        Set<Shelter> sheltersToShow = new HashSet<>();
         if (male && female && fwn && child && ya && any && name.equals("")) {
             return shelters;
         }

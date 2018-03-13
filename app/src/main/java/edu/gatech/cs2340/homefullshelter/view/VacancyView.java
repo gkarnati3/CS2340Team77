@@ -22,10 +22,7 @@ public class VacancyView extends AppCompatActivity {
     TextView shelterView;
     TextView capacity;
     Button plus;
-    int countBeds = 0;
-    Shelter curr = getIntent().getExtras().getParcelable("Shelter");
-    String capacityD = curr.getCapacity();
-    int capacityDecrease = Integer.parseInt(capacityD);
+    public int countBeds = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,27 +30,32 @@ public class VacancyView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vacancy_view);
 
+        Shelter curr = getIntent().getExtras().getParcelable("Shelter");
+        String capacityD = curr.getCapacity();
+        final int capacityDecrease = Integer.parseInt(capacityD);
+
+        name = findViewById(R.id.name);
+        plus = findViewById(R.id.plus);
+        shelterView = findViewById(R.id.shelterName);
+        capacity = findViewById(R.id.capacity);
+
         if(curr != null) {
             shelterView.setText(curr.getName());
             capacity.setText("Number of available beds: " + capacityD);
         }
 
 
-        name = findViewById(R.id.name);
-        plus = findViewById(R.id.plus);
-
         plus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 countBeds++;
-                capacityDecrease--;
                 name.setText(countBeds);
-                capacity.setText(capacityD);
+                capacity.setText(capacityDecrease - countBeds);
             }
         });
 
-        DatabaseController db = new DatabaseController();
-        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//        DatabaseController db = new DatabaseController();
+//        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Button submit = findViewById(R.id.button2);
         submit.setOnClickListener(new View.OnClickListener() {

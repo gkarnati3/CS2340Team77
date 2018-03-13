@@ -100,7 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 */
                 //assumes register for now... will mean data about beds is overwritten
                 User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
-                lc.register(user);
+                Intent myIntent = new Intent(MainActivity.this, LogoutActivity.class);
+                lc.register(user, MainActivity.this);
                 // ...
             } else {
                 // Sign in failed, check response for error code
@@ -108,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }//onActivityResult
+
+    public void loginSuccess() {
+        Intent myIntent = new Intent(MainActivity.this, LogoutActivity.class);
+        startActivity(myIntent);
+    }
 
     private void readSDFile() {
         Model model = Model.getInstance();

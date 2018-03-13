@@ -18,6 +18,8 @@ import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
 import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
+import edu.gatech.cs2340.homefullshelter.view.MainActivity;
+
 /**
  * Created by mattquan on 2/8/18.
  */
@@ -67,7 +69,7 @@ public class LoginController {
         return builder;
     }
 
-    public void login(final FirebaseUser user) {
+    public void login(final FirebaseUser user, final MainActivity mainActivity) {
         Model.getInstance().login(user.getUid(), new OnGetDataInterface() {
             @Override
             public void onDataRetrieved(DataSnapshot data) {
@@ -77,7 +79,7 @@ public class LoginController {
                 } else {
                     Model.getInstance().setCurrentUser(new User(user.getUid()));
                 }
-                onLoginSuccess();
+                onLoginSuccess(mainActivity);
             }
 
             @Override
@@ -87,7 +89,7 @@ public class LoginController {
         });
     }
 
-    public void register(final User user) {
+    public void register(final User user, final MainActivity mainActivity) {
         Model.getInstance().register(user, new OnGetDataInterface() {
             @Override
             public void onDataRetrieved(DataSnapshot data) {
@@ -98,7 +100,7 @@ public class LoginController {
                     Model.getInstance().setCurrentUser(user);
                 }
                 Model.getInstance().setCurrentUser(tmp);
-                onLoginSuccess();
+                onLoginSuccess(mainActivity);
             }
 
             @Override
@@ -108,11 +110,16 @@ public class LoginController {
         });
     }
 
-    private void onLoginSuccess() {
+    private void onLoginSuccess(MainActivity mainActivity) {
         //TODO Intent to main screen from here (not MainActivity)
+        mainActivity.loginSuccess();
     }
 
     private void onLoginFail() {
         //TODO Intent to MainActivity from here, so they can restart login process
+        Intent myIntent = new Intent(context, MainActivity.class);
+        Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
+        context.startActivity(myIntent);
+
     }
 }
