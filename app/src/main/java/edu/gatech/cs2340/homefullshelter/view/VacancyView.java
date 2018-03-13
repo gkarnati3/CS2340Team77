@@ -49,8 +49,8 @@ public class VacancyView extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 countBeds++;
-                name.setText(countBeds);
-                capacity.setText(capacityDecrease - countBeds);
+                name.setText("" + countBeds);
+                capacity.setText("" + (capacityDecrease - countBeds));
             }
         });
 
