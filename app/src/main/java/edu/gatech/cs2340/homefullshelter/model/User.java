@@ -23,6 +23,10 @@ public class User {
         this(uID, "", "", "", 0, -1, 0);
     }
 
+    public User(String uID, String email, String name) {
+        this(uID, email, name, "", 0, -1, 0);
+    }
+
     /**
      * deprecated, do not use
      */

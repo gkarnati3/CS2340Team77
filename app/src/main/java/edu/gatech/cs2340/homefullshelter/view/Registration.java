@@ -22,7 +22,7 @@ import edu.gatech.cs2340.homefullshelter.model.Model;
  *
  * To get the reference to the model call "Model model = Model.getInstance();"
  * to add a user: "model.addUser(User user);"
- * to check login info: "model.checkLogin(String username, String password);"
+ * to check login info: "model.login(String username, String password);"
  */
 public class Registration extends AppCompatActivity {
 

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
+import edu.gatech.cs2340.homefullshelter.model.User;
 import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
 /**
  * Created by mattquan on 2/8/18.
@@ -65,6 +66,10 @@ public class LoginController {
     }
 
     public void login(FirebaseUser user) {
-        Model.getInstance().checkLogin(user.getUid());
+        Model.getInstance().login(user.getUid());
+    }
+
+    public void register(User user) {
+        Model.getInstance().register(user);
     }
 }

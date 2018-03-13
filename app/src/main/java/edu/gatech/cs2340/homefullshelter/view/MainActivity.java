@@ -88,6 +88,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("successful login", "yay");
                 FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController();
+                //TODO MATT, need to know if login or register
+                //if login call lc.login(user)
+                /*if register call:
+                    User user = new User(uId, email, name);
+                    lc.register(user);
+                */
                 lc.login(user);
                 // ...
             } else {

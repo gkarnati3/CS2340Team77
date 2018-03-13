@@ -137,6 +137,38 @@ public class DatabaseController {
     }
 
     /**
+     * Gets data for a user specified with the given key from the database
+     * @param uID
+     * @return the user object created from the information stored on the database
+     */
+    public User getUserAndSetCurrent(String uID) {
+        final User user = new User(uID);
+        DatabaseReference userRef = mDatabase.child("users").child(uID);
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User tmp = dataSnapshot.getValue(User.class);
+                if (tmp != null) {
+                    user.setAccountType(tmp.getAccountType());
+                    user.setName(tmp.getName());
+                    user.setPassword(tmp.getPassword());
+                    user.setCurrentShelterID(tmp.getCurrentShelterID());
+                    user.setNumberOfBeds(tmp.getNumberOfBeds());
+                    user.setPassword(tmp.getPassword());
+                }
+                Model.getInstance().setCurrentUser(user);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                //TODO show some error screen that data could not be loaded from server
+                Log.d("Database:getUser", databaseError.getMessage());
+            }
+        });
+        return user;
+    }
+
+    /**
      * Gets data for all the shelters from the database
      * @return a list of all shelters
      */

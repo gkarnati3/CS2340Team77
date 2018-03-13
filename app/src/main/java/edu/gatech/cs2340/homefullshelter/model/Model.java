@@ -17,7 +17,7 @@ import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
  *
  * To get the reference to the model call "Model model = Model.getInstance();"
  * to add a user: "model.addUser(User user);"
- * to check login info: "model.checkLogin(String username, String password);"
+ * to check login info: "model.login(String username, String password);"
  */
 
 public class Model {
@@ -143,18 +143,19 @@ public class Model {
 
         return false;
     }
-    public void checkLogin(String uID) {
+
+    public void login(String uID) {
         //THIS IS FOR THE DATABASE
         DatabaseController dc = new DatabaseController();
-        User user = dc.getUser(uID);
-        if (user.getName().isEmpty()) {
-            //TODO ALEX THIS METHOD MIGHT NEED CHANGING
-            dc.addUserAndSetAsCurrent(new User(uID));
-        } else {
-            //TODO Also this
-            setCurrentUser(user);
-        }
+        User user = dc.getUserAndSetCurrent(uID);
+        setCurrentUser(user); // redundant just in case of database error
+    }
 
+    public void register(User user) {
+        //THIS IS FOR THE DATABASE
+        setCurrentUser(user); //this line is redundant, but stays in place in case database error
+        DatabaseController db = new DatabaseController();
+        db.addUserAndSetAsCurrent(user);
     }
 
 }
