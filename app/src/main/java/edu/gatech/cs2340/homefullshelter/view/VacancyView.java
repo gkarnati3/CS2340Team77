@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.google.firebase.auth.FirebaseAuth;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.DatabaseInterface;
+import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 /**
@@ -54,7 +54,7 @@ public class VacancyView extends AppCompatActivity {
             }
         });
 
-        DatabaseInterface db = new DatabaseInterface();
+        DatabaseController db = new DatabaseController();
         String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         Button submit = findViewById(R.id.button2);

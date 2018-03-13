@@ -1,12 +1,18 @@
 package edu.gatech.cs2340.homefullshelter.model;
 
 import android.util.Log;
+import android.view.Display;
+
+import com.google.firebase.database.DataSnapshot;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
+import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 
 /**
  * Created by mattquan on 2/8/18.
@@ -23,7 +29,7 @@ import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 public class Model {
     //the one and only instantiation of the class (making it a singleton)
     private static Model appModel = new Model();
-    private List<Shelter> shelters;
+    private Set<Shelter> shelters;
     private User currentUser;
 
     /**
@@ -32,8 +38,15 @@ public class Model {
      */
     private Model() {
         users = new HashMap<>();
-        shelters = new ArrayList<>();
+        shelters = new HashSet<>();
         currentUser = null;
+    }
+
+    /**
+     * @return the current user
+     */
+    public User getCurrentUser() {
+        return currentUser;
     }
 
     /**
@@ -46,29 +59,72 @@ public class Model {
         currentUser = user;
     }
 
-    public void updateCurrentUser(User user) {
+
+    public void login(final String uID, OnGetDataInterface listener) {
+        DatabaseController dc = new DatabaseController();
+        dc.getUser(uID, listener);
+    }
+
+    public void register(User user, OnGetDataInterface listener) {
+        //THIS IS FOR THE DATABASE
+        setCurrentUser(user); //this line is redundant, but stays in place in case database error
+        DatabaseController db = new DatabaseController();
+        db.addUser(user, listener);
+    }
+
+
+    //probably do not need this w/ login and register above
+    public void updateCurrentUser(final User user) {
         //TODO change for asynchronous safety
         currentUser = user;
         DatabaseController db = new DatabaseController();
-        db.updateUser(user);
+        db.updateUser(user, new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                User tmp = data.getValue(User.class);
+                if (tmp != null) {
+                    Model.getInstance().setCurrentUser(tmp);
+                } else {
+                    Model.getInstance().setCurrentUser(user);
+                }
+                Model.getInstance().setCurrentUser(tmp);
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
     }
 
-    public void updateShelter(Shelter shelter) {
-        //TODO change for asynchronous safety
+    public void updateShelter(Shelter shelter, OnGetDataInterface listener) {
         int counter = 0;
         shelters.remove(shelter);
         shelters.add(shelter);
         DatabaseController db = new DatabaseController();
-        db.updateShelter(shelter);
+        db.updateShelter(shelter, listener);
     }
 
-        //eventually replace this with addShelter
     public void addShelter(Shelter shelter) {
         shelters.add(shelter);
     }
 
-    public List<Shelter> getShelters() {
+    public Set<Shelter> getShelters() {
         //should be changed to update the list of shelters from the database
+        DatabaseController db = new DatabaseController();
+        db.getShelters(new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                for (DataSnapshot dataSnapshot: data.getChildren()) {
+                    shelters.add(dataSnapshot.getValue(Shelter.class));
+                }
+            }
+
+            @Override
+            public void onFailed() {
+
+            }
+        });
         return shelters;
     }
 
@@ -101,6 +157,7 @@ public class Model {
     private HashMap<String, User> users;
 
     /**
+     * DEPRECATED DO NOT USE
      * Adds a user to the model, prevents duplicates with hashMap storage
      *
      * Only use for adding a new user, this method will not update a user
@@ -109,7 +166,6 @@ public class Model {
      * @return boolean representing whether the User was added
      */
     public boolean addUser(User user) {
-        //TODO change to support database checking
         if (users.containsKey(user.getUID())) {
             //username already exists, cannot add user with this username
             return false;
@@ -122,13 +178,13 @@ public class Model {
 
 
     /**
+     * **DEPRECATED DO NOT USE**
      * Checks to see if a username and password match the values for a stored user
      * @param uID the user's username
      * @param password the user's password
      * @return true if login valid, otherwise false
      */
     public boolean checkLogin(String uID, String password) {
-        //TODO change to support database checking
         //default values passed in for empty textboxes from login
         //check is to prevent empty login (should be fine since an empty string
         //should not be valid username or password)
@@ -143,19 +199,4 @@ public class Model {
 
         return false;
     }
-
-    public void login(String uID) {
-        //THIS IS FOR THE DATABASE
-        DatabaseController dc = new DatabaseController();
-        User user = dc.getUserAndSetCurrent(uID);
-        setCurrentUser(user); // redundant just in case of database error
-    }
-
-    public void register(User user) {
-        //THIS IS FOR THE DATABASE
-        setCurrentUser(user); //this line is redundant, but stays in place in case database error
-        DatabaseController db = new DatabaseController();
-        db.addUserAndSetAsCurrent(user);
-    }
-
 }
