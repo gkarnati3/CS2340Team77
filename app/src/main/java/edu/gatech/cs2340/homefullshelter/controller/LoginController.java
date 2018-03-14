@@ -113,6 +113,7 @@ public class LoginController {
     private void onLoginSuccess(MainActivity mainActivity) {
         //TODO Intent to main screen from here (not MainActivity)
         mainActivity.loginSuccess();
+
     }
 
     private void onLoginFail(MainActivity mainActivity) {
