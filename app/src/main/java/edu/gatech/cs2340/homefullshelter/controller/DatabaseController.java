@@ -34,21 +34,18 @@ public class DatabaseController {
      * @param user
      */
     public void addUser(User user, final OnGetDataInterface listener) {
-        String key = mDatabase.child("users").push().getKey();
-        DatabaseReference newUser = mDatabase.child("users").child(key);
+        DatabaseReference newUser = mDatabase.child("users").child(user.getUID());
         newUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Model model = Model.getInstance();
                 model.setCurrentUser(dataSnapshot.getValue(User.class));
                 listener.onDataRetrieved(dataSnapshot);
-                //TODO call some method in login controller to say they logged in successfully
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
                 listener.onFailed();
-                //TODO call some method in login controller that shows pop up saying failed to register
             }
         });
         newUser.setValue(user);
