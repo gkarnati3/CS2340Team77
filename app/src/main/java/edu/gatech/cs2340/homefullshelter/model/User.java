@@ -9,43 +9,41 @@ public class User {
 
     private String name;
     private String email;
-    private String password;
     private int accountType;
     private int currentShelterID;
     private int numberOfBeds;
 
     //exists only for firebase, do not use in local code, should never create empty user
     public User() {
-        this("", "", "", "", 0, -1, 0);
+        this("", "", "", 0, -1, 0);
     }
 
     public User(String uID) {
-        this(uID, "", "", "", 0, -1, 0);
+        this(uID, "", "", 0, -1, 0);
     }
 
     public User(String uID, String email, String name) {
-        this(uID, email, name, "", 0, -1, 0);
+        this(uID, email, name, 0, -1, 0);
     }
 
     /**
      * deprecated, do not use
      */
-    public User(String name, String uID, String password, int acctType) {
-        this(uID, "", name, password, acctType, -1, 0);
+    public User(String name, String uID, int acctType) {
+        this(uID, "", name, acctType, -1, 0);
     }
 
-    public User(String uID, String email, String name, String password, int acctType, int currentShelterID, int numberOfBeds) {
+    public User(String uID, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
         this.uID = uID;
         this.email = email;
         this.name = name;
-        this.password = password;
         this.accountType = acctType;
         this.currentShelterID = currentShelterID;
         this.numberOfBeds = numberOfBeds;
     }
 
     public boolean checkPassword(String password) {
-        return this.password.equals(password);
+        return false;
     }
 
 
@@ -73,22 +71,6 @@ public class User {
      */
     public String getUID() {
         return uID;
-    }
-
-    /**
-     * Gets the user's password
-     * @return the password
-     */
-    public String getPassword() {
-        return this.password;
-    }
-
-    /**
-     * Sets the user's password
-     * @param password the new password
-     */
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     /**
@@ -160,7 +142,6 @@ public class User {
                 "uID='" + uID + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
                 ", accountType=" + accountType +
                 ", currentShelterID=" + currentShelterID +
                 ", numberOfBeds=" + numberOfBeds +

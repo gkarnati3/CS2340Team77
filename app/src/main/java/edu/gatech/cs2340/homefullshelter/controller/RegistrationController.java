@@ -39,7 +39,7 @@ public class RegistrationController {
 
         } else {
             if (pass.equals(confirmPass)) {
-                User newUser = new User(name, username, pass, acctType);
+                User newUser = new User(name, username, acctType);
                 if (model.addUser(newUser)) {
                     Intent myIntent = new Intent(c, MainActivity.class);
                     c.startActivity(myIntent);

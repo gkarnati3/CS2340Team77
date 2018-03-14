@@ -69,28 +69,8 @@ public class LoginController {
         return builder;
     }
 
-    public void login(final FirebaseUser user, final MainActivity mainActivity) {
-        Model.getInstance().login(user.getUid(), new OnGetDataInterface() {
-            @Override
-            public void onDataRetrieved(DataSnapshot data) {
-                User tmp = data.getValue(User.class);
-                if (tmp != null) {
-                    Model.getInstance().setCurrentUser(tmp);
-                } else {
-                    Model.getInstance().setCurrentUser(new User(user.getUid()));
-                }
-                onLoginSuccess(mainActivity);
-            }
-
-            @Override
-            public void onFailed() {
-                onLoginFail();
-            }
-        });
-    }
-
-    public void register(final User user, final MainActivity mainActivity) {
-        Model.getInstance().register(user, new OnGetDataInterface() {
+    public void login(final User user, final MainActivity mainActivity) {
+        Model.getInstance().login(user, new OnGetDataInterface() {
             @Override
             public void onDataRetrieved(DataSnapshot data) {
                 User tmp = data.getValue(User.class);
@@ -99,7 +79,6 @@ public class LoginController {
                 } else {
                     Model.getInstance().setCurrentUser(user);
                 }
-                Model.getInstance().setCurrentUser(tmp);
                 onLoginSuccess(mainActivity);
             }
 

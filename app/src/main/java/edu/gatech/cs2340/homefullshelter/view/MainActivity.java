@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Model.getInstance().getShelters();
 
         /*if (Model.getInstance().getShelters().size() == 0) {
-
+            //also uploads the csv data to database
             readSDFile();
         }*/
         setContentView(R.layout.activity_main);
@@ -93,19 +93,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController();
+                Log.e("email", fbuser.getEmail());
+                Log.e("name", fbuser.getDisplayName());
+                Log.e("Uid", fbuser.getUid());
 
-
-                //this is a workaround b/c of a bug w/ firebase where metadata doesnt load if they aren't registering
-                //when firebase fixes this bug this needs to check instead for whether the login timestamp matches the
-                //creation timestamp
-                if(fbuser.getMetadata() == null) {
-                    lc.login(fbuser, MainActivity.this);
-                    Log.d("MainActivity:Login", "called login");
-                } else {
-                    User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
-                    lc.register(user, MainActivity.this);
-                    Log.d("MainActivity:Register", "called registration");
-                }
+                lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()), MainActivity.this);
+                Log.d("MainActivity:Login", "called login");
 
                 // ...
             } else {

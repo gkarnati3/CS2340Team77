@@ -60,9 +60,33 @@ public class Model {
     }
 
 
-    public void login(final String uID, OnGetDataInterface listener) {
-        DatabaseController dc = new DatabaseController();
-        dc.getUser(uID, listener);
+    public void login(final User user, final OnGetDataInterface listener) {
+        final DatabaseController dc = new DatabaseController();
+        dc.getUser(user.getUID(), new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                if (data.exists()) {
+                    listener.onDataRetrieved(data);
+                } else {
+                    dc.addUser(user, new OnGetDataInterface() {
+                        @Override
+                        public void onDataRetrieved(DataSnapshot data) {
+                            listener.onDataRetrieved(data);
+                        }
+
+                        @Override
+                        public void onFailed() {
+                            listener.onFailed();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailed() {
+                listener.onFailed();
+            }
+        });
     }
 
     public void register(User user, OnGetDataInterface listener) {
