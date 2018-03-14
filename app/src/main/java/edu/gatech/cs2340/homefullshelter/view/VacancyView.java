@@ -27,6 +27,7 @@ public class VacancyView extends AppCompatActivity {
     TextView capacity;
     TextView notIncrement;
     Button plus;
+    Button minus;
     public int countBeds = 0;
 
     @Override
@@ -48,6 +49,7 @@ public class VacancyView extends AppCompatActivity {
 
         name = findViewById(R.id.name);
         plus = findViewById(R.id.plus);
+        minus = findViewById(R.id.minus);
         shelterView = findViewById(R.id.shelterName);
         capacity = findViewById(R.id.capacity);
         notIncrement = findViewById(R.id.notIncrement);
@@ -67,8 +69,20 @@ public class VacancyView extends AppCompatActivity {
                     capacity.setText("" + (capacityDecrease - countBeds));
                 }
             });
+
+            minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (countBeds > 0) {
+                        countBeds--;
+                        name.setText("" + countBeds);
+                        capacity.setText("" + (capacityDecrease - countBeds));
+                    }
+                }
+            });
+
         } else {
-            notIncrement.setText("sorry! you can't add beds in the shelter you are not in");
+            notIncrement.setText("You are not located in this shelter.");
         }
 
 //        DatabaseController db = new DatabaseController();
@@ -76,6 +90,7 @@ public class VacancyView extends AppCompatActivity {
 
         //TODO RENAME SUBMIT BUTTON IDENTIFIER
         Button submit = findViewById(R.id.button2);
+        Button goback = findViewById(R.id.goback);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,6 +115,13 @@ public class VacancyView extends AppCompatActivity {
                         }
                     });
                 }
+            }
+        });
+
+        goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
             }
         });
     }
