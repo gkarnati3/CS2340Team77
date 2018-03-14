@@ -84,7 +84,7 @@ public class LoginController {
 
             @Override
             public void onFailed() {
-                onLoginFail();
+                onLoginFail(mainActivity);
             }
         });
     }
@@ -105,7 +105,7 @@ public class LoginController {
 
             @Override
             public void onFailed() {
-                onLoginFail();
+                onLoginFail(mainActivity);
             }
         });
     }
@@ -115,11 +115,8 @@ public class LoginController {
         mainActivity.loginSuccess();
     }
 
-    private void onLoginFail() {
+    private void onLoginFail(MainActivity mainActivity) {
         //TODO Intent to MainActivity from here, so they can restart login process
-        Intent myIntent = new Intent(context, MainActivity.class);
-        Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
-        context.startActivity(myIntent);
 
     }
 }
