@@ -35,9 +35,12 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Model.getInstance().getShelters();
+        /*
         if (Model.getInstance().getShelters().size() == 0) {
+
             readSDFile();
-        }
+        }*/
         setContentView(R.layout.activity_main);
         Button registrationButton = (Button) findViewById(R.id.button_registration);
         Button loginButton = findViewById(R.id.button_login);
@@ -90,18 +93,20 @@ public class MainActivity extends AppCompatActivity {
                 Log.e("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController();
-                //TODO MATT, need to know if login or register
-                /*
-                if login call:
-                    lc.login(fbuser)
-                if register call:
+
+
+                //this is a workaround b/c of a bug w/ firebase where metadata doesnt load if they aren't registering
+                //when firebase fixes this bug this needs to check instead for whether the login timestamp matches the
+                //creation timestamp
+                if(fbuser.getMetadata() == null) {
+                    lc.login(fbuser, MainActivity.this);
+                    Log.d("MainActivity:Login", "called login");
+                } else {
                     User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
-                    lc.register(user);
-                */
-                //assumes register for now... will mean data about beds is overwritten
-                User user = new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName());
-                Intent myIntent = new Intent(MainActivity.this, LogoutActivity.class);
-                lc.register(user, MainActivity.this);
+                    lc.register(user, MainActivity.this);
+                    Log.d("MainActivity:Register", "called registration");
+                }
+
                 // ...
             } else {
                 // Sign in failed, check response for error code

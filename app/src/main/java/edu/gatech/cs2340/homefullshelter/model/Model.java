@@ -107,6 +107,17 @@ public class Model {
 
     public void addShelter(Shelter shelter) {
         shelters.add(shelter);
+        new DatabaseController().addShelter(shelter, new OnGetDataInterface() {
+            @Override
+            public void onDataRetrieved(DataSnapshot data) {
+                //nothing needed
+            }
+
+            @Override
+            public void onFailed() {
+                //nothing needed
+            }
+        });
     }
 
     public Set<Shelter> getShelters() {
@@ -117,6 +128,7 @@ public class Model {
             public void onDataRetrieved(DataSnapshot data) {
                 for (DataSnapshot dataSnapshot: data.getChildren()) {
                     shelters.add(dataSnapshot.getValue(Shelter.class));
+                    Log.d("LoadedShelter", dataSnapshot.getValue(Shelter.class).toString());
                 }
             }
 
