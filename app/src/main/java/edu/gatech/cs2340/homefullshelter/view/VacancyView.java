@@ -8,9 +8,11 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
+import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.User;
 import edu.gatech.cs2340.homefullshelter.model.Model;
@@ -34,8 +36,10 @@ public class VacancyView extends AppCompatActivity {
         setContentView(R.layout.vacancy_view);
 
         final Shelter curr = getIntent().getExtras().getParcelable("Shelter");
-        String capacityD = curr.getCapacity();
-        final int capacityDecrease = Integer.parseInt(capacityD);
+        int tmp1 = Integer.parseInt(curr.getCheckedOut());
+        int tmp2 = Integer.parseInt(curr.getCapacity());
+        int capacityD = tmp2 - tmp1;
+        final int capacityDecrease = capacityD;
         final Model model = Model.getInstance();
         final User actualUser = model.getCurrentUser();
         if (actualUser.getCurrentShelterID() == -1) {
@@ -70,14 +74,32 @@ public class VacancyView extends AppCompatActivity {
 //        DatabaseController db = new DatabaseController();
 //        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        //TODO RENAME SUBMIT BUTTON IDENTIFIER
         Button submit = findViewById(R.id.button2);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
-                model.updateCurrentUser(actualUser);
-                actualUser.setNumberOfBeds(countBeds);
-                System.out.println(actualUser.getNumberOfBeds());
+                //can they only click submit if they were allowed to update beds?
+                //if not need to check here if they updated beds
+                if (countBeds != 0) {
+                    actualUser.setNumberOfBeds(countBeds + actualUser.getNumberOfBeds());
+                    actualUser.setCurrentShelterID(curr.getKey());
+                    String newCheckOut = "" + (Integer.parseInt(curr.getCheckedOut()) + countBeds);
+                    curr.setCheckedOut(newCheckOut);
+                    model.updateShelter(curr, new OnGetDataInterface() {
+                        @Override
+                        public void onDataRetrieved(DataSnapshot data) {
+                            model.updateCurrentUser(actualUser);
+                            startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
+                        }
+
+                        @Override
+                        public void onFailed() {
+                            //TODO: NEED ERROR CODE TO LET THEM KNOW THEY COULD NOT CHECK OUT
+                            startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
+                        }
+                    });
+                }
             }
         });
     }

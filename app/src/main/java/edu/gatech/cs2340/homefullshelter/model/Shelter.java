@@ -17,12 +17,18 @@ public class Shelter implements Parcelable {
     private String address;
     private String notes;
     private String number;
+    private String checkedOut;
 
     public Shelter() {
         //for the firebase stuff. FIRE. AHHHH. Scary.
+            this(-1, "", "0", "", 0, 0, "", "", "", "0");
     }
 
     public Shelter(int k, String n, String c, String r, double lo, double la, String a, String no, String nu) {
+        this(k, n, c, r, lo, la, a, no, nu, "0");
+    }
+
+    public Shelter(int k, String n, String c, String r, double lo, double la, String a, String no, String nu, String co) {
         key = k;
         name = n;
         capacity = c;
@@ -32,6 +38,7 @@ public class Shelter implements Parcelable {
         address = a;
         notes = no;
         number = nu;
+        checkedOut = co;
     }
 
     public String toString() {
@@ -47,6 +54,7 @@ public class Shelter implements Parcelable {
     public String getAddress() { return address; }
     public String getNotes() { return notes; }
     public String getNumber() { return number; }
+    public String getCheckedOut() { return checkedOut; }
 
     public void setKey(int key) {
         this.key = key;
@@ -84,6 +92,10 @@ public class Shelter implements Parcelable {
         this.number = number;
     }
 
+    public void setCheckedOut(String checkedOut) {
+        this.checkedOut = checkedOut;
+    }
+
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -118,7 +130,7 @@ public class Shelter implements Parcelable {
         out.writeString(this.address);
         out.writeString(this.notes);
         out.writeString(this.number);
-
+        out.writeString(this.checkedOut);
 
     }
 
@@ -143,5 +155,6 @@ public class Shelter implements Parcelable {
         this.address = in.readString();
         this.notes = in.readString();
         this.number = in.readString();
+        this.checkedOut = in.readString();
     }
 }

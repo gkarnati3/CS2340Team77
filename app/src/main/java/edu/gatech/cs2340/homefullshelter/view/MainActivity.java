@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Model.getInstance().getShelters();
-        /*
-        if (Model.getInstance().getShelters().size() == 0) {
+
+        /*if (Model.getInstance().getShelters().size() == 0) {
 
             readSDFile();
         }*/
