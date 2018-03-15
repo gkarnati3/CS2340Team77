@@ -1,5 +1,6 @@
 package edu.gatech.cs2340.homefullshelter.controller;
 
+import android.util.AndroidRuntimeException;
 import android.util.Log;
 
 import com.google.firebase.database.DataSnapshot;
@@ -34,12 +35,14 @@ public class DatabaseController {
      * @param user
      */
     public void addUser(User user, final OnGetDataInterface listener) {
+        changeUser(user, listener);
+    }
+
+    private void changeUser(User user, final OnGetDataInterface listener) {
         DatabaseReference newUser = mDatabase.child("users").child(user.getUID());
         newUser.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Model model = Model.getInstance();
-                model.setCurrentUser(dataSnapshot.getValue(User.class));
                 listener.onDataRetrieved(dataSnapshot);
             }
 
@@ -112,13 +115,17 @@ public class DatabaseController {
      * @param uID
      * @return the user object created from the information stored on the database
      */
-    public void getUser(String uID, final OnGetDataInterface listener) {
-        final User user = new User(uID);
+    public void getUser(final String uID, final OnGetDataInterface listener) {
+        Log.e("getUser:uID", "" + uID);
         DatabaseReference userRef = mDatabase.child("users").child(uID);
-        userRef.addValueEventListener(new ValueEventListener() {
+        ValueEventListener valueListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.d("Datasnapshot:", dataSnapshot.toString());
+                Log.d("DatasnapshotValue:", dataSnapshot.getValue().toString());
+                Log.d("DBSnapshot as user", dataSnapshot.getValue(User.class).toString());
                 listener.onDataRetrieved(dataSnapshot);
+
             }
 
             @Override
@@ -126,7 +133,8 @@ public class DatabaseController {
                 listener.onFailed();
                 Log.d("Database:getUser", databaseError.getMessage());
             }
-        });
+        };
+        userRef.addListenerForSingleValueEvent(valueListener);
     }
 
     /**
@@ -158,19 +166,7 @@ public class DatabaseController {
      * @param user the updated shelter class to send to the database
      */
     public void updateUser(User user, final OnGetDataInterface listener) {
-        DatabaseReference updateUser = mDatabase.child("users").child(user.getUID());
-        updateUser.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                listener.onDataRetrieved(dataSnapshot);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                listener.onFailed();
-            }
-        });
-        updateUser.setValue(user);
+        changeUser(user, listener);
     }
 
     /**

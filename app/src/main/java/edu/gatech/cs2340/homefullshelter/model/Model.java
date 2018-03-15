@@ -100,7 +100,6 @@ public class Model {
     //probably do not need this w/ login and register above
     public void updateCurrentUser(final User user) {
         //TODO change for asynchronous safety
-        currentUser = user;
         DatabaseController db = new DatabaseController();
         db.updateUser(user, new OnGetDataInterface() {
             @Override
@@ -108,8 +107,11 @@ public class Model {
                 User tmp = data.getValue(User.class);
                 if (tmp != null) {
                     Model.getInstance().setCurrentUser(tmp);
+                    Log.e("updateUserTmp:numBeds", "" + tmp.getNumberOfBeds());
                 } else {
                     Model.getInstance().setCurrentUser(user);
+                    Log.e("updateUserUsr:numBeds", "" + user.getNumberOfBeds());
+
                 }
                 Model.getInstance().setCurrentUser(tmp);
             }

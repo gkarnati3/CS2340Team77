@@ -5,7 +5,7 @@ package edu.gatech.cs2340.homefullshelter.model;
  */
 
 public class User {
-    private String uID;
+    private String uid;
 
     private String name;
     private String email;
@@ -15,15 +15,15 @@ public class User {
 
     //exists only for firebase, do not use in local code, should never create empty user
     public User() {
-        this("", "", "", 0, -1, 0);
+        this("");
     }
 
-    public User(String uID) {
-        this(uID, "", "", 0, -1, 0);
+    public User(String uid) {
+        this(uid, "", "");
     }
 
-    public User(String uID, String email, String name) {
-        this(uID, email, name, 0, -1, 0);
+    public User(String uid, String email, String name) {
+        this(uid, email, name, 0, -1, 0);
     }
 
     /**
@@ -33,8 +33,8 @@ public class User {
         this(uID, "", name, acctType, -1, 0);
     }
 
-    public User(String uID, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
-        this.uID = uID;
+    public User(String uid, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
+        this.uid = uid;
         this.email = email;
         this.name = name;
         this.accountType = acctType;
@@ -70,7 +70,15 @@ public class User {
      * @return the user id
      */
     public String getUID() {
-        return uID;
+        return uid;
+    }
+
+    /**
+     * Gets the user's email
+     * @return the user email
+     */
+    public String getEmail() {
+        return email;
     }
 
     /**
@@ -132,14 +140,14 @@ public class User {
         }
 
         User comp = (User) other;
-        return this.uID.equals(comp.uID);
+        return this.uid.equals(comp.uid);
 
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "uID='" + uID + '\'' +
+                "uID='" + uid + '\'' +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", accountType=" + accountType +
@@ -151,6 +159,6 @@ public class User {
     //required for using hashmap to automate adding duplicates
     @Override
     public int hashCode() {
-        return (int)uID.charAt(0);
+        return (int)uid.charAt(0);
     }
 }

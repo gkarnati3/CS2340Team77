@@ -20,11 +20,9 @@ public class LogoutActivity extends AppCompatActivity {
         //setSupportActionBar(toolbar);
 
         Button logout = findViewById(R.id.button_logout);
-        //TODO: add logout code here
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });

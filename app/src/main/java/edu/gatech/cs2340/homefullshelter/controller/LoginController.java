@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,14 +71,23 @@ public class LoginController {
     }
 
     public void login(final User user, final MainActivity mainActivity) {
+        Log.e("login:uID", "" + user.getUID());
         Model.getInstance().login(user, new OnGetDataInterface() {
             @Override
             public void onDataRetrieved(DataSnapshot data) {
                 User tmp = data.getValue(User.class);
                 if (tmp != null) {
                     Model.getInstance().setCurrentUser(tmp);
+                    Log.d("login:numBedsTmp", "" + tmp.getNumberOfBeds());
+                    Log.d("loginDB:tmpuID", "hm: " + tmp.getUID());
+                    Log.d("loginDB:usruID", "hm: " + user.getUID());
+
+
+
                 } else {
                     Model.getInstance().setCurrentUser(user);
+                    Log.d("login:numBedsUsr", "" + user.getNumberOfBeds());
+
                 }
                 onLoginSuccess(mainActivity);
             }

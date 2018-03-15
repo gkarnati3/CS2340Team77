@@ -3,6 +3,7 @@ package edu.gatech.cs2340.homefullshelter.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,15 +38,13 @@ public class VacancyView extends AppCompatActivity {
         setContentView(R.layout.vacancy_view);
 
         final Shelter curr = getIntent().getExtras().getParcelable("Shelter");
-        int tmp1 = Integer.parseInt(curr.getCheckedOut());
-        int tmp2 = Integer.parseInt(curr.getCapacity());
-        int capacityD = tmp2 - tmp1;
+        int checkedOut = Integer.parseInt(curr.getCheckedOut());
+        int shelterCapacity = Integer.parseInt(curr.getCapacity());
+        int capacityD = shelterCapacity - checkedOut;
         final int capacityDecrease = capacityD;
         final Model model = Model.getInstance();
         final User actualUser = model.getCurrentUser();
-        if (actualUser.getCurrentShelterID() == -1) {
-            actualUser.setCurrentShelterID(curr.getKey());
-        }
+        Log.e("userNumBeds", "" + actualUser.getNumberOfBeds());
 
         name = findViewById(R.id.name);
         plus = findViewById(R.id.plus);
@@ -53,6 +52,10 @@ public class VacancyView extends AppCompatActivity {
         shelterView = findViewById(R.id.shelterName);
         capacity = findViewById(R.id.capacity);
         notIncrement = findViewById(R.id.notIncrement);
+        //TODO RENAME SUBMIT BUTTON IDENTIFIER
+        Button submit = findViewById(R.id.button2);
+        Button goback = findViewById(R.id.goback);
+
 
         if(curr != null) {
             shelterView.setText(curr.getName());
@@ -60,11 +63,15 @@ public class VacancyView extends AppCompatActivity {
         }
 
 
-        if (actualUser.getCurrentShelterID() == curr.getKey()) {
+        if (actualUser.getCurrentShelterID() == curr.getKey() || actualUser.getCurrentShelterID() == -1) {
+            countBeds = actualUser.getNumberOfBeds();
+            name.setText("" + countBeds);
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    countBeds++;
+                    if (Integer.parseInt(curr.getCheckedOut()) + countBeds <= Integer.parseInt(curr.getCapacity())) {
+                        countBeds++;
+                    }
                     name.setText("" + countBeds);
                     capacity.setText("" + (capacityDecrease - countBeds));
                 }
@@ -74,37 +81,34 @@ public class VacancyView extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (countBeds > 0) {
-                        countBeds--;
+                        if (actualUser.getNumberOfBeds() + countBeds >= 0) {
+                            countBeds--;
+                        }
                         name.setText("" + countBeds);
                         capacity.setText("" + (capacityDecrease - countBeds));
                     }
                 }
             });
 
-        } else {
-            notIncrement.setText("You are not located in this shelter.");
-        }
-
-//        DatabaseController db = new DatabaseController();
-//        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
-
-        //TODO RENAME SUBMIT BUTTON IDENTIFIER
-        Button submit = findViewById(R.id.button2);
-        Button goback = findViewById(R.id.goback);
-        submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //can they only click submit if they were allowed to update beds?
-                //if not need to check here if they updated beds
-                if (countBeds != 0) {
-                    actualUser.setNumberOfBeds(countBeds + actualUser.getNumberOfBeds());
+            submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //can they only click submit if they were allowed to update beds?
+                    //if not need to check here if they updated beds
+                    int initialNumberOfBeds = actualUser.getNumberOfBeds();
+                    actualUser.setNumberOfBeds(countBeds);
                     actualUser.setCurrentShelterID(curr.getKey());
-                    String newCheckOut = "" + (Integer.parseInt(curr.getCheckedOut()) + countBeds);
+                    if (actualUser.getNumberOfBeds() == 0) {
+                        actualUser.setCurrentShelterID(-1);
+                    }
+
+                    //Takes initial checked out - user initial check out + user final checked out = final checked out
+                    String newCheckOut = "" + (Integer.parseInt(curr.getCheckedOut()) - initialNumberOfBeds + countBeds);
                     curr.setCheckedOut(newCheckOut);
+                    model.updateCurrentUser(actualUser);
                     model.updateShelter(curr, new OnGetDataInterface() {
                         @Override
                         public void onDataRetrieved(DataSnapshot data) {
-                            model.updateCurrentUser(actualUser);
                             startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
                         }
 
@@ -115,8 +119,16 @@ public class VacancyView extends AppCompatActivity {
                         }
                     });
                 }
-            }
-        });
+            });
+        } else {
+            notIncrement.setText("You are not located in this shelter.");
+        }
+
+//        DatabaseController db = new DatabaseController();
+//        String user = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+
+
 
         goback.setOnClickListener(new View.OnClickListener() {
             @Override
