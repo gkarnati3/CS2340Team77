@@ -90,12 +90,12 @@ public class MainActivity extends AppCompatActivity {
 
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
-                Log.e("successful login", "yay");
+                Log.d("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController();
-                Log.e("email", fbuser.getEmail());
-                Log.e("name", fbuser.getDisplayName());
-                Log.e("Uid", fbuser.getUid());
+                Log.d("email", fbuser.getEmail());
+                Log.d("name", fbuser.getDisplayName());
+                Log.d("Uid", fbuser.getUid());
 
                 lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()), MainActivity.this);
                 Log.d("MainActivity:Login", "called login");
