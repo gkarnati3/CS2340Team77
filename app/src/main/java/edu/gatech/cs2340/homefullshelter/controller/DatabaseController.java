@@ -122,7 +122,6 @@ public class DatabaseController {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 listener.onDataRetrieved(dataSnapshot);
-
             }
 
             @Override

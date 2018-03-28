@@ -30,6 +30,8 @@ public class VacancyView extends AppCompatActivity {
     Button plus;
     Button minus;
     public int countBeds = 0;
+    int initialCheckedOut = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,7 @@ public class VacancyView extends AppCompatActivity {
 
         if (actualUser.getCurrentShelterID() == curr.getKey() || actualUser.getCurrentShelterID() == -1) {
             countBeds = actualUser.getNumberOfBeds();
+            initialCheckedOut = actualUser.getNumberOfBeds();
             name.setText("" + countBeds);
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -73,7 +76,7 @@ public class VacancyView extends AppCompatActivity {
                         countBeds++;
                     }
                     name.setText("" + countBeds);
-                    capacity.setText("" + (capacityDecrease - countBeds));
+                    capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
                 }
             });
 
@@ -85,7 +88,7 @@ public class VacancyView extends AppCompatActivity {
                             countBeds--;
                         }
                         name.setText("" + countBeds);
-                        capacity.setText("" + (capacityDecrease - countBeds));
+                        capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
                     }
                 }
             });
