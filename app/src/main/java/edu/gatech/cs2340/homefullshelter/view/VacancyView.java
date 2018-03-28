@@ -72,7 +72,7 @@ public class VacancyView extends AppCompatActivity {
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (Integer.parseInt(curr.getCheckedOut()) + countBeds <= Integer.parseInt(curr.getCapacity())) {
+                    if (Integer.parseInt(curr.getCheckedOut()) + countBeds < Integer.parseInt(curr.getCapacity())) {
                         countBeds++;
                     }
                     name.setText("" + countBeds);
@@ -84,7 +84,7 @@ public class VacancyView extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     if (countBeds > 0) {
-                        if (actualUser.getNumberOfBeds() + countBeds >= 0) {
+                        if (actualUser.getNumberOfBeds() + countBeds > 0) {
                             countBeds--;
                         }
                         name.setText("" + countBeds);
