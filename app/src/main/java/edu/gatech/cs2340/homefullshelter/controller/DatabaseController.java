@@ -121,9 +121,6 @@ public class DatabaseController {
         ValueEventListener valueListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d("Datasnapshot:", dataSnapshot.toString());
-                Log.d("DatasnapshotValue:", dataSnapshot.getValue().toString());
-                Log.d("DBSnapshot as user", dataSnapshot.getValue(User.class).toString());
                 listener.onDataRetrieved(dataSnapshot);
 
             }
