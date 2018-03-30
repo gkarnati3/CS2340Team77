@@ -22,10 +22,23 @@ public class ShelterListController {
     boolean ya;
     boolean any;
 
+    /**
+     * no args constructor that initializes a default ShelterListController
+     */
     public ShelterListController() {
         this("", true, true, true, true, true, true);
     }
 
+    /**
+     * args constructor that initialzes a ShelterListController
+     * @param name String of name of shelter
+     * @param male boolean if shelter can hold males
+     * @param female boolean if shelter can hold females
+     * @param fwn boolean if shelter can hold families with newborns
+     * @param child boolean if shelter can hold children
+     * @param ya boolean if shelter can hold young adult
+     * @param any boolean if shelter can hold anyone
+     */
     public ShelterListController(String name, boolean male, boolean female, boolean fwn,
                                  boolean child, boolean ya, boolean any) {
         this.name = name;
@@ -37,6 +50,10 @@ public class ShelterListController {
         this.any = any;
     }
 
+    /**
+     *
+     * @return all the shelter data
+     */
     public Set<Shelter> getShelterData() {
         Model model = Model.getInstance();
         Set<Shelter> shelters = model.getShelters();

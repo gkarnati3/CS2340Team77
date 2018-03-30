@@ -5,18 +5,20 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
-import edu.gatech.cs2340.homefullshelter.view.ButtonActivity;
+import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
 import edu.gatech.cs2340.homefullshelter.view.MainActivity;
 
 /**
@@ -32,6 +34,12 @@ public class LoginController {
     }
     public LoginController() {
 
+    /**
+     * Creates a login controller object
+     * @param context the view that created the controller (for an intent on failure to login)
+     */
+    public LoginController(Context context) {
+        this.context = context;
     }
     public AlertDialog.Builder makeDialog() {
         AlertDialog.Builder builder;
@@ -42,32 +50,11 @@ public class LoginController {
                     public void onClick(DialogInterface dialog, int which) {
                         // continue with delete
 
-                        EditText usernameText = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
-                        EditText passwordText = ((AlertDialog) dialog).findViewById(R.id.editText_password);
-                        String username = usernameText.getText().toString();
-                        String password = passwordText.getText().toString();
-
-                        Model model = Model.getInstance();
-
-                        if (model.checkLogin(username, password)) {
-                            Intent myIntent = new Intent(context, ButtonActivity.class);
-                            context.startActivity(myIntent);
-                        } else {
-                            Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-
-                    }
-                })
-                .setView(mInflater.inflate(R.layout.alertdialog_login, null));
-
-        return builder;
-    }
-
+    /**
+     * Logs a user into the application
+     * @param user the user to login
+     * @param mainActivity the MainActivity view that creates the controller
+     */
     public void login(final User user, final MainActivity mainActivity) {
         Log.e("login:uID", "" + user.getUID());
         Model.getInstance().login(user, new OnGetDataInterface() {
@@ -97,11 +84,18 @@ public class LoginController {
         });
     }
 
+    /**
+     * Method to run on successful login
+     * @param mainActivity
+     */
     private void onLoginSuccess(MainActivity mainActivity) {
         //TODO Intent to main screen from here (not MainActivity)
         mainActivity.loginSuccess();
     }
 
+    /**
+     * Method to run on login failure
+     */
     private void onLoginFail() {
         //TODO Intent to MainActivity from here, so they can restart login process
         Intent myIntent = new Intent(context, MainActivity.class);
