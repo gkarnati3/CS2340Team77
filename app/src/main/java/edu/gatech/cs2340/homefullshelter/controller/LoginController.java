@@ -26,50 +26,21 @@ import edu.gatech.cs2340.homefullshelter.view.MainActivity;
  */
 
 public class LoginController {
-    private View view;
-    private Context context;
-    public LoginController(View v, final Context c) {
-        view = v;
-        context = c;
-    }
-    public LoginController() {
+    Context context;
 
-    }
-    public AlertDialog.Builder makeDialog() {
-        AlertDialog.Builder builder;
-        LayoutInflater mInflater = LayoutInflater.from(view.getContext());
-        builder = new AlertDialog.Builder(view.getContext());
-        builder.setTitle("Login")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
-
-                        EditText usernameText = ((AlertDialog) dialog).findViewById(R.id.editText_userName);
-                        EditText passwordText = ((AlertDialog) dialog).findViewById(R.id.editText_password);
-                        String username = usernameText.getText().toString();
-                        String password = passwordText.getText().toString();
-
-                        Model model = Model.getInstance();
-
-                        if (model.checkLogin(username, password)) {
-                            Intent myIntent = new Intent(context, LogoutActivity.class);
-                            context.startActivity(myIntent);
-                        } else {
-                            Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // do nothing
-
-                    }
-                })
-                .setView(mInflater.inflate(R.layout.alertdialog_login, null));
-
-        return builder;
+    /**
+     * Creates a login controller object
+     * @param context the view that created the controller (for an intent on failure to login)
+     */
+    public LoginController(Context context) {
+        this.context = context;
     }
 
+    /**
+     * Logs a user into the application
+     * @param user the user to login
+     * @param mainActivity the MainActivity view that creates the controller
+     */
     public void login(final User user, final MainActivity mainActivity) {
         Log.e("login:uID", "" + user.getUID());
         Model.getInstance().login(user, new OnGetDataInterface() {
@@ -99,11 +70,18 @@ public class LoginController {
         });
     }
 
+    /**
+     * Method to run on successful login
+     * @param mainActivity
+     */
     private void onLoginSuccess(MainActivity mainActivity) {
         //TODO Intent to main screen from here (not MainActivity)
         mainActivity.loginSuccess();
     }
 
+    /**
+     * Method to run on login failure
+     */
     private void onLoginFail() {
         //TODO Intent to MainActivity from here, so they can restart login process
         Intent myIntent = new Intent(context, MainActivity.class);

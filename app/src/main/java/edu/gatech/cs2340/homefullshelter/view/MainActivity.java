@@ -47,16 +47,16 @@ public class MainActivity extends AppCompatActivity {
         registrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(MainActivity.this, Registration.class);
-                startActivity(myIntent);
+                //Intent myIntent = new Intent(MainActivity.this, Registration.class);
+                //startActivity(myIntent);
             }
         });
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginController lc = new LoginController(v, getApplicationContext());
-                lc.makeDialog().show();
+                //LoginController lc = new LoginController(v, getApplicationContext());
+                //lc.makeDialog().show();
             }
         });
 
@@ -92,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
                 // Successfully signed in
                 Log.d("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-                LoginController lc = new LoginController();
+                LoginController lc = new LoginController(MainActivity.this);
                 Log.d("email", fbuser.getEmail());
                 Log.d("name", fbuser.getDisplayName());
                 Log.d("Uid", fbuser.getUid());

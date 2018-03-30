@@ -58,11 +58,11 @@ public class Registration extends AppCompatActivity {
                 String username = usernameText.getText().toString();
                 int acctType = spinner.getSelectedItemPosition();
 
-                RegistrationController rc = new RegistrationController(name, pass, confirmPass, username, acctType);
-                Snackbar bar = rc.register(v, getApplicationContext());
-                if (bar != null) {
-                    bar.show();
-                }
+                //RegistrationController rc = new RegistrationController(name, pass, confirmPass, username, acctType);
+                //Snackbar bar = rc.register(v, getApplicationContext());
+                //if (bar != null) {
+                    //bar.show();
+                //}
             }
         });
         cancel.setOnClickListener(new View.OnClickListener() {
