@@ -34,11 +34,11 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
      * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
+     * we just add shelter markers.
+     * @param googleMap an instance of Google Maps
+
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -50,7 +50,7 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
 
         for (Shelter shelter: Model.getInstance().getShelters()) {
             LatLng marker = new LatLng(shelter.getLatitude(), shelter.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()));
+            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName() + "\n" + "Phone: " + shelter.getNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
         }
 
