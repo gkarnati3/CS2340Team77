@@ -41,23 +41,7 @@ public class LoginActivity extends AppCompatActivity {
             readSDFile();
         }*/
         setContentView(R.layout.activity_login);
-        Button registrationButton = (Button) findViewById(R.id.button_registration);
-        Button loginButton = findViewById(R.id.button_login);
-        registrationButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Intent myIntent = new Intent(LoginActivity.this, Registration.class);
-                //startActivity(myIntent);
-            }
-        });
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //LoginController lc = new LoginController(v, getApplicationContext());
-                //lc.makeDialog().show();
-            }
-        });
 
         Button firebase = (Button) findViewById(R.id.button_fireThatBase);
         firebase.setOnClickListener(new View.OnClickListener() {

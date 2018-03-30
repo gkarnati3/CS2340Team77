@@ -50,7 +50,7 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
 
         for (Shelter shelter: Model.getInstance().getShelters()) {
             LatLng marker = new LatLng(shelter.getLatitude(), shelter.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName() + "\n" + "Phone: " + shelter.getNumber()));
+            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()).snippet("Phone: " +shelter.getNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
         }
 
