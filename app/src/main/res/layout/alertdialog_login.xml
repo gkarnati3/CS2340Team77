@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.gatech.cs2340.homefullshelter.view.MainActivity">
+    tools:context="edu.gatech.cs2340.homefullshelter.view.LoginActivity">
 
     <EditText
         android:id="@+id/editText_userName"

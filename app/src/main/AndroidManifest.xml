@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.MainActivity">
+        <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,11 +30,11 @@
         <activity
             android:name=".view.Registration"
             android:label="@string/title_activity_registration"
-            android:parentActivityName=".view.MainActivity"
+            android:parentActivityName=".view.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.gatech.cs2340.homefullshelter.view.MainActivity" />
+                android:value="edu.gatech.cs2340.homefullshelter.view.LoginActivity" />
         </activity>
         <activity
             android:name=".view.VacancyView"
@@ -48,11 +48,11 @@
         <activity
             android:name=".view.ShelterListActivity"
             android:label="@string/title_activity_detail_list"
-            android:parentActivityName=".view.MainActivity"
+            android:parentActivityName=".view.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.gatech.cs2340.homefullshelter.view.MainActivity" />
+                android:value="edu.gatech.cs2340.homefullshelter.view.LoginActivity" />
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

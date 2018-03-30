@@ -27,7 +27,7 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "MY_APP";
     private static final int RC_SIGN_IN = 124;
 
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         registrationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent myIntent = new Intent(MainActivity.this, Registration.class);
+                //Intent myIntent = new Intent(LoginActivity.this, Registration.class);
                 //startActivity(myIntent);
             }
         });
@@ -91,13 +91,13 @@ public class MainActivity extends AppCompatActivity {
                 // Successfully signed in
                 Log.d("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
-                LoginController lc = new LoginController(MainActivity.this);
+                LoginController lc = new LoginController(LoginActivity.this);
                 Log.d("email", fbuser.getEmail());
                 Log.d("name", fbuser.getDisplayName());
                 Log.d("Uid", fbuser.getUid());
 
-                lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()), MainActivity.this);
-                Log.d("MainActivity:Login", "called login");
+                lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()), LoginActivity.this);
+                Log.d("LoginActivity:Login", "called login");
 
                 // ...
             } else {
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }//onActivityResult
 
     public void loginSuccess() {
-        Intent myIntent = new Intent(MainActivity.this, ButtonActivity.class);
+        Intent myIntent = new Intent(LoginActivity.this, ButtonActivity.class);
         startActivity(myIntent);
     }
 
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             String line;
             br.readLine(); //get rid of header line
             while ((line = br.readLine()) != null) {
-                Log.d(MainActivity.TAG, line);
+                Log.d(LoginActivity.TAG, line);
                 ArrayList<String> tokens = new ArrayList<String>();
 
                 String[] parse = line.split("\"");
@@ -154,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
             br.close();
             //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
         } catch (IOException e) {
-            Log.e(MainActivity.TAG, "error reading assets", e);
+            Log.e(LoginActivity.TAG, "error reading assets", e);
         }
     }
 

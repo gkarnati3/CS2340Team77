@@ -2,7 +2,6 @@ package edu.gatech.cs2340.homefullshelter.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -66,7 +65,7 @@ public class Registration extends AppCompatActivity {
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(Registration.this, MainActivity.class);
+                Intent myIntent = new Intent(Registration.this, LoginActivity.class);
                 startActivity(myIntent);
                 Toast.makeText(getApplicationContext(), "Registration cancelled", Toast.LENGTH_LONG).show();
 

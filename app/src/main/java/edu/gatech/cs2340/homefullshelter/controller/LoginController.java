@@ -1,25 +1,17 @@
 package edu.gatech.cs2340.homefullshelter.controller;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
-import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
-import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
-import edu.gatech.cs2340.homefullshelter.view.MainActivity;
+import edu.gatech.cs2340.homefullshelter.view.LoginActivity;
 
 /**
  * Created by mattquan on 2/8/18.
@@ -34,6 +26,8 @@ public class LoginController {
     }
     public LoginController() {
 
+    }
+
     /**
      * Creates a login controller object
      * @param context the view that created the controller (for an intent on failure to login)
@@ -41,21 +35,13 @@ public class LoginController {
     public LoginController(Context context) {
         this.context = context;
     }
-    public AlertDialog.Builder makeDialog() {
-        AlertDialog.Builder builder;
-        LayoutInflater mInflater = LayoutInflater.from(view.getContext());
-        builder = new AlertDialog.Builder(view.getContext());
-        builder.setTitle("Login")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        // continue with delete
 
     /**
      * Logs a user into the application
      * @param user the user to login
-     * @param mainActivity the MainActivity view that creates the controller
+     * @param loginActivity the LoginActivity view that creates the controller
      */
-    public void login(final User user, final MainActivity mainActivity) {
+    public void login(final User user, final LoginActivity loginActivity) {
         Log.e("login:uID", "" + user.getUID());
         Model.getInstance().login(user, new OnGetDataInterface() {
             @Override
@@ -74,7 +60,7 @@ public class LoginController {
                     Log.d("login:numBedsUsr", "" + user.getNumberOfBeds());
 
                 }
-                onLoginSuccess(mainActivity);
+                onLoginSuccess(loginActivity);
             }
 
             @Override
@@ -86,19 +72,19 @@ public class LoginController {
 
     /**
      * Method to run on successful login
-     * @param mainActivity
+     * @param loginActivity
      */
-    private void onLoginSuccess(MainActivity mainActivity) {
-        //TODO Intent to main screen from here (not MainActivity)
-        mainActivity.loginSuccess();
+    private void onLoginSuccess(LoginActivity loginActivity) {
+        //TODO Intent to main screen from here (not LoginActivity)
+        loginActivity.loginSuccess();
     }
 
     /**
      * Method to run on login failure
      */
     private void onLoginFail() {
-        //TODO Intent to MainActivity from here, so they can restart login process
-        Intent myIntent = new Intent(context, MainActivity.class);
+        //TODO Intent to LoginActivity from here, so they can restart login process
+        Intent myIntent = new Intent(context, LoginActivity.class);
         Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
         context.startActivity(myIntent);
 
