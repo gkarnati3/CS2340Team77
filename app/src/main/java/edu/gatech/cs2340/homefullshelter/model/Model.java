@@ -89,15 +89,11 @@ public class Model {
         });
     }
 
-    public void register(User user, OnGetDataInterface listener) {
-        //THIS IS FOR THE DATABASE
-        setCurrentUser(user); //this line is redundant, but stays in place in case database error
-        DatabaseController db = new DatabaseController();
-        db.addUser(user, listener);
-    }
 
-
-    //probably do not need this w/ login and register above
+    /**
+     * Updates current user (who is logged in)
+     * @param user the new current user
+     */
     public void updateCurrentUser(final User user) {
         //TODO change for asynchronous safety
         DatabaseController db = new DatabaseController();
@@ -123,6 +119,11 @@ public class Model {
         });
     }
 
+    /**
+     * Updates a shelter in the model and database
+     * @param shelter the updated shelter (identifies by key)
+     * @param listener an interface to handle the response from the database
+     */
     public void updateShelter(Shelter shelter, OnGetDataInterface listener) {
         int counter = 0;
         shelters.remove(shelter);
@@ -131,6 +132,10 @@ public class Model {
         db.updateShelter(shelter, listener);
     }
 
+    /**
+     * Shelter to add to the model and database
+     * @param shelter to add
+     */
     public void addShelter(Shelter shelter) {
         shelters.add(shelter);
         new DatabaseController().addShelter(shelter, new OnGetDataInterface() {
@@ -146,6 +151,11 @@ public class Model {
         });
     }
 
+    /**
+     * Retrieves a set of all the shelters
+     * @return a set of all the shelters stored in the model, and refreshes the list in the model
+     * to match the database
+     */
     public Set<Shelter> getShelters() {
         //should be changed to update the list of shelters from the database
         DatabaseController db = new DatabaseController();
@@ -165,15 +175,6 @@ public class Model {
         });
         return shelters;
     }
-
-    public Shelter findShelterById(int key) {
-        for (Shelter d : shelters) {
-            if (d.getKey() == key) return d;
-        }
-        Log.d("MYAPP", "Warning - Failed to find id: " + key);
-        return null;
-    }
-
 
     //method used to access the singleton
 
