@@ -8,13 +8,14 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
-public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -52,5 +53,14 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
             mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
         }
+
+        mMap.setOnMarkerClickListener(this);
+    }
+
+
+    @Override
+    public boolean onMarkerClick(Marker marker) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+        return false;
     }
 }

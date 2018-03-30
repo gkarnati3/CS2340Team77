@@ -28,15 +28,6 @@
             android:label="@string/title_activity_logout"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".view.Registration"
-            android:label="@string/title_activity_registration"
-            android:parentActivityName=".view.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.gatech.cs2340.homefullshelter.view.LoginActivity" />
-        </activity>
-        <activity
             android:name=".view.VacancyView"
             android:label="@string/title_activity_vacancyview"
             android:parentActivityName=".view.ShelterListActivity"
