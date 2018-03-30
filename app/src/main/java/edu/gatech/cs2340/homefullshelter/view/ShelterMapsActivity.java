@@ -11,6 +11,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.model.Model;
+import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,8 +43,14 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+//        LatLng sydney = new LatLng(-34, 151);
+//        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+//        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+
+        for (Shelter shelter: Model.getInstance().getShelters()) {
+            LatLng marker = new LatLng(shelter.getLatitude(), shelter.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
+        }
     }
 }
