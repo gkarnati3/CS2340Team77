@@ -32,12 +32,18 @@ public class DatabaseController {
     /**
      * Used for adding a user to the firebase database after authentication
      * Also sets the new user as the current user in the model if they are added to the database successfully
-     * @param user
+     * @param user the user to add
+     * @param listener an interface with the correct response
      */
     public void addUser(User user, final OnGetDataInterface listener) {
         changeUser(user, listener);
     }
 
+    /**
+     * Updates
+     * @param user the user to change
+     * @param listener an interface with methods to run based on response
+     */
     private void changeUser(User user, final OnGetDataInterface listener) {
         DatabaseReference newUser = mDatabase.child("users").child(user.getUID());
         newUser.addValueEventListener(new ValueEventListener() {
@@ -54,6 +60,11 @@ public class DatabaseController {
         newUser.setValue(user);
     }
 
+    /**
+     * Adds a shelter to the database
+     * @param shelter to add
+     * @param listener interface with methods to handle the response from database
+     */
     public void addShelter(Shelter shelter, final OnGetDataInterface listener) {
         DatabaseReference newShelter;
         if (shelter.getKey() != -1) {
@@ -77,8 +88,8 @@ public class DatabaseController {
 
     /**
      * Gets data for a shelter specified with the given key from the database
-     * @param key
-     * @return the shelter object created from the information stored on the database
+     * @param key the database key for the desired shelter
+     * @param listener an interface to handle the response from the database
      */
     public void getShelter(int key, final OnGetDataInterface listener) {
         final Shelter shelter = new Shelter();
@@ -112,8 +123,8 @@ public class DatabaseController {
 
     /**
      * Gets data for a user specified with the given key from the database
-     * @param uID
-     * @return the user object created from the information stored on the database
+     * @param uID the userID of the user whose information should be retrieved
+     * @param listener an interface to handle the response from the database
      */
     public void getUser(final String uID, final OnGetDataInterface listener) {
         Log.e("getUser:uID", "" + uID);
@@ -135,7 +146,7 @@ public class DatabaseController {
 
     /**
      * Gets data for all the shelters from the database
-     * @return a list of all shelters
+     * @param listener an interface to handle the response from the database
      */
     public void getShelters(final OnGetDataInterface listener) {
         final List<Shelter> shelters = new ArrayList<>();
@@ -160,6 +171,7 @@ public class DatabaseController {
      * this does not support concurrent use, and changes to user are not automatically
      * reflected in any shelter object they affect
      * @param user the updated shelter class to send to the database
+     * @param listener an interface to handle the response from the database
      */
     public void updateUser(User user, final OnGetDataInterface listener) {
         changeUser(user, listener);
@@ -171,6 +183,7 @@ public class DatabaseController {
      * changes to this do not affect any corresponding user data, that must be changed seperately
      * this does not support concurrent use
      * @param shelter the updated shelter class to send to the database
+     * @param listener an interface to handle the response from the database
      */
     public void updateShelter(Shelter shelter, final OnGetDataInterface listener) {
         DatabaseReference newShelter;
