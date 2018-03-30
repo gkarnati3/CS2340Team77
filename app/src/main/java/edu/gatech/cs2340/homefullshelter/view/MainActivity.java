@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 import edu.gatech.cs2340.homefullshelter.controller.LoginController;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.Model;
@@ -41,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             //also uploads the csv data to database
             readSDFile();
         }*/
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         Button registrationButton = (Button) findViewById(R.id.button_registration);
         Button loginButton = findViewById(R.id.button_login);
         registrationButton.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
     }//onActivityResult
 
     public void loginSuccess() {
-        Intent myIntent = new Intent(MainActivity.this, LogoutActivity.class);
+        Intent myIntent = new Intent(MainActivity.this, ButtonActivity.class);
         startActivity(myIntent);
     }
 

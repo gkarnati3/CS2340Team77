@@ -6,16 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.firebase.auth.FirebaseAuth;
-
 import edu.gatech.cs2340.homefullshelter.R;
 
-public class LogoutActivity extends AppCompatActivity {
+public class ButtonActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shelterview);
+        setContentView(R.layout.activity_buttons);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
 
@@ -31,8 +29,16 @@ public class LogoutActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                Intent myIntent = new Intent(LogoutActivity.this, ShelterListActivity.class);
+                Intent myIntent = new Intent(ButtonActivity.this, ShelterListActivity.class);
                 startActivity(myIntent);
+            }
+        });
+
+        Button mapsButton = findViewById(R.id.mapButton);
+        mapsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), ShelterMapsActivity.class));
             }
         });
     }

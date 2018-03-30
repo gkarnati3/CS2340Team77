@@ -5,20 +5,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
-import edu.gatech.cs2340.homefullshelter.view.LogoutActivity;
+import edu.gatech.cs2340.homefullshelter.view.ButtonActivity;
 import edu.gatech.cs2340.homefullshelter.view.MainActivity;
 
 /**
@@ -52,7 +50,7 @@ public class LoginController {
                         Model model = Model.getInstance();
 
                         if (model.checkLogin(username, password)) {
-                            Intent myIntent = new Intent(context, LogoutActivity.class);
+                            Intent myIntent = new Intent(context, ButtonActivity.class);
                             context.startActivity(myIntent);
                         } else {
                             Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();

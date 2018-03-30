@@ -15,7 +15,7 @@
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
 
-    <include layout="@layout/content_logout" />
+    <include layout="@layout/content_button" />
 
 
 
