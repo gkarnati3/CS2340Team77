@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.RegistrationController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 
 /*
@@ -58,7 +57,6 @@ public class Registration extends AppCompatActivity {
                 String username = usernameText.getText().toString();
                 int acctType = spinner.getSelectedItemPosition();
 
-                //RegistrationController rc = new RegistrationController(name, pass, confirmPass, username, acctType);
                 //Snackbar bar = rc.register(v, getApplicationContext());
                 //if (bar != null) {
                     //bar.show();
