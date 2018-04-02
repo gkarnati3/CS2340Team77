@@ -23,7 +23,7 @@ public class Shelter implements Parcelable {
      * A non-arg constructor that will initialize a null (empty) shelter
      */
     public Shelter() {
-        //for the firebase stuff. FIRE. AHHHH. Scary.
+        //for the firebase stuff.
             this(-1, "", "0", "", 0, 0, "", "", "", "0");
     }
 

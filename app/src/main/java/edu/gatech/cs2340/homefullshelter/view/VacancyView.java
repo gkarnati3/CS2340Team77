@@ -56,7 +56,7 @@ public class VacancyView extends AppCompatActivity {
         notIncrement = findViewById(R.id.notIncrement);
         //TODO RENAME SUBMIT BUTTON IDENTIFIER
         Button submit = findViewById(R.id.button2);
-        Button goback = findViewById(R.id.goback);
+        Button back = findViewById(R.id.goback);
 
 
         if(curr != null) {
@@ -133,7 +133,7 @@ public class VacancyView extends AppCompatActivity {
 
 
 
-        goback.setOnClickListener(new View.OnClickListener() {
+        back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));

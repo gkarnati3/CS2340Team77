@@ -122,7 +122,6 @@ public class Model {
      * @param listener an interface to handle the response from the database
      */
     public void updateShelter(Shelter shelter, OnGetDataInterface listener) {
-        int counter = 0;
         shelters.remove(shelter);
         shelters.add(shelter);
         DatabaseController db = new DatabaseController();
