@@ -1,9 +1,15 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
+import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.RadioButton;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -13,13 +19,25 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+
+    String name = "";
+    boolean male;
+    boolean female;
+    boolean fwn;
+    boolean child;
+    boolean ya;
+    boolean any;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +52,47 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
             @Override
             public void onClick(View v) {
                 //TODO ABHI FILTER THIS
+
+                Log.d("finderrrr", "find");
+                AlertDialog.Builder builder;
+                LayoutInflater mInflater = LayoutInflater.from(v.getContext());
+                builder = new AlertDialog.Builder(v.getContext());
+                builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        RadioButton maleButton =  (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
+                        male = maleButton.isChecked();
+                        RadioButton femaleButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
+                        female = femaleButton.isChecked();
+                        RadioButton fwnButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
+                        fwn = fwnButton.isChecked();
+                        RadioButton childButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
+                        child = childButton.isChecked();
+                        RadioButton yaButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
+                        ya = yaButton.isChecked();
+                        RadioButton anyButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
+                        any = anyButton.isChecked();
+
+                        EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
+                        name = shelter.getText().toString();
+
+//                        ShelterListController newSla = new ShelterListController(shelterName,
+//                                male, female, fwn, child, ya, any);
+
+                        System.out.println("dinder and stuff");
+
+                        reloadMarkers();
+
+                    }
+                })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+
+                            }
+                        })
+                        .setView(mInflater.inflate(R.layout.alertdialog_search, null)).show();
+
+
             }
         });
     }
@@ -57,7 +116,70 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-        for (Shelter shelter: Model.getInstance().getShelters()) {
+        reloadMarkers();
+    }
+
+    public void reloadMarkers() {
+
+        Model model = Model.getInstance();
+        Set<Shelter> shelters = model.getShelters();
+        Set<Shelter> sheltersToShow = new HashSet<>();
+        Log.d("finderrrr", "" + male);
+        Log.d("finderrrr", "" + female);
+
+        if (male && female && fwn && child && ya && any && name.equals("")) {
+            sheltersToShow = shelters;
+        }
+        for (Shelter shelter : shelters) {
+            boolean add = true;
+            String restrictions = shelter.getRestrictions();
+            if (male) {
+                if (restrictions.contains("Women")) {
+                    add = false;
+                }
+            }
+            if (female) {
+                if (restrictions.contains("Men")) {
+                    add = false;
+                }
+            }
+            if (!any) {
+                if (fwn) {
+                    if ((restrictions.contains("Children")
+                            || restrictions.contains("Young adult"))
+                            && !(restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
+                }
+                if (child) {
+                    if ((restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Young adult"))
+                            && !(restrictions.contains("Children")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
+                }
+                if (ya) {
+                    if ((restrictions.contains("Families w/ newborn")
+                            || restrictions.contains("Children"))
+                            && !(restrictions.contains("Young adult")
+                            || restrictions.contains("Anyone"))) {
+                        add = false;
+                    }
+                }
+            }
+            if (!name.equals("")) {
+                if (!shelter.getName().contains(name)) {
+                    add = false;
+                }
+            }
+            if (add) {
+                sheltersToShow.add(shelter);
+            }
+        }
+        mMap.clear();
+        for (Shelter shelter: sheltersToShow) {
             LatLng marker = new LatLng(shelter.getLatitude(), shelter.getLongitude());
             mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()).snippet("Phone: " +shelter.getNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
@@ -69,7 +191,7 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
 
     @Override
     public boolean onMarkerClick(Marker marker) {
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 15));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(marker.getPosition(), 11));
         return false;
     }
 }
