@@ -30,7 +30,7 @@ public class ShelterListController {
     }
 
     /**
-     * args constructor that initialzes a ShelterListController
+     * args constructor that initializes a ShelterListController
      * @param name String of name of shelter
      * @param male boolean if shelter can hold males
      * @param female boolean if shelter can hold females
