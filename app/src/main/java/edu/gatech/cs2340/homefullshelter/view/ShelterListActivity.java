@@ -82,23 +82,17 @@ public class ShelterListActivity extends AppCompatActivity {
                             RadioButton anyButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
                             boolean any = anyButton.isChecked();
 
-                            EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
+                            EditText shelter = ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
                             String shelterName = shelter.getText().toString();
 
                             ShelterListController newSla = new ShelterListController(shelterName,
                                     male, female, fwn, child, ya, any);
                             recyclerViewAdapter.setmValues(newSla.getShelterData());
-
-
-
-                            System.out.println("stuff");
-
                         }
                     })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
                                     // do nothing
-
                                 }
                             })
                             .setView(mInflater.inflate(R.layout.alertdialog_search, null)).show();
@@ -166,7 +160,6 @@ public class ShelterListActivity extends AppCompatActivity {
                     bedsButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //change
                             Intent vacancyIntent = new Intent(ShelterListActivity.this, VacancyView.class);
                             vacancyIntent.putExtra("Shelter", mValues.get(position));
                             startActivity(vacancyIntent);

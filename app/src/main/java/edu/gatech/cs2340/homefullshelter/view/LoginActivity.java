@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 // ...
             } else {
+                Log.e("Login failed", "" + response.getErrorCode());
                 // Sign in failed, check response for error code
                 // ...
             }

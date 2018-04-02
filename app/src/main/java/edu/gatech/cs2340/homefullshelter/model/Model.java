@@ -90,7 +90,6 @@ public class Model {
      * @param user the new current user
      */
     public void updateCurrentUser(final User user) {
-        //TODO change for asynchronous safety
         DatabaseController db = new DatabaseController();
         db.updateUser(user, new OnGetDataInterface() {
             @Override

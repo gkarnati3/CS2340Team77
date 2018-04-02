@@ -146,7 +146,6 @@ public class DatabaseController {
      * @param listener an interface to handle the response from the database
      */
     public void getShelters(final OnGetDataInterface listener) {
-        final List<Shelter> shelters = new ArrayList<>();
         DatabaseReference shelterRef = mDatabase.child("shelters");
         shelterRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -198,11 +197,4 @@ public class DatabaseController {
         });
         newShelter.setValue(shelter);
     }
-
-
-    //below are for ensuring data safety, not required but recommended
-    //TODO make a patch request for updating number of beds taken by user and at which shelter
-
-    //TODO make a patch request for updating number of beds taken at a shelter
-
 }

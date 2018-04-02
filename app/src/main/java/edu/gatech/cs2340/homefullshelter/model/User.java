@@ -143,7 +143,7 @@ public class User {
         this.numberOfBeds = numberOfBeds;
     }
 
-    //required for using hashmap to automate adding duplicates
+    //required for using hash data structures to automate adding duplicates
     @Override
     public boolean equals(Object other) {
         if (this == other) {
@@ -170,7 +170,7 @@ public class User {
                 '}';
     }
 
-    //required for using hashmap to automate adding duplicates
+    //required for using hash data structures to automate adding duplicates
     @Override
     public int hashCode() {
         return (int)uid.charAt(0);

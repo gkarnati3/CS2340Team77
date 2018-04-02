@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.R;
+import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
@@ -50,34 +51,27 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
         filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO ABHI FILTER THIS
 
-                Log.d("finderrrr", "find");
                 AlertDialog.Builder builder;
                 LayoutInflater mInflater = LayoutInflater.from(v.getContext());
                 builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        RadioButton maleButton =  (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
+                        RadioButton maleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
                         male = maleButton.isChecked();
-                        RadioButton femaleButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
+                        RadioButton femaleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
                         female = femaleButton.isChecked();
-                        RadioButton fwnButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
+                        RadioButton fwnButton = ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
                         fwn = fwnButton.isChecked();
-                        RadioButton childButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
+                        RadioButton childButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
                         child = childButton.isChecked();
-                        RadioButton yaButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
+                        RadioButton yaButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
                         ya = yaButton.isChecked();
-                        RadioButton anyButton = (RadioButton) ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
+                        RadioButton anyButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
                         any = anyButton.isChecked();
 
-                        EditText shelter = (EditText) ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
+                        EditText shelter = ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
                         name = shelter.getText().toString();
-
-//                        ShelterListController newSla = new ShelterListController(shelterName,
-//                                male, female, fwn, child, ya, any);
-
-                        System.out.println("dinder and stuff");
 
                         reloadMarkers();
 
@@ -127,8 +121,6 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
         Model model = Model.getInstance();
         Set<Shelter> shelters = model.getShelters();
         Set<Shelter> sheltersToShow = new HashSet<>();
-        Log.d("finderrrr", "" + male);
-        Log.d("finderrrr", "" + female);
 
         if (male && female && fwn && child && ya && any && name.equals("")) {
             sheltersToShow = shelters;
