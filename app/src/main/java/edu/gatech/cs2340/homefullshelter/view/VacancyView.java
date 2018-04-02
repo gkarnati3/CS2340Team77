@@ -8,15 +8,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
 import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
+import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.User;
-import edu.gatech.cs2340.homefullshelter.model.Model;
 
 /**
  * Created by gkarnati3 on 3/11/18.

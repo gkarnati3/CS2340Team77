@@ -12,10 +12,10 @@ public interface OnGetDataInterface {
      * Method for successful data retrieval, parameter data will hold all retrieved data
      * @param data all the data retrieved
      */
-    public void onDataRetrieved(DataSnapshot data);
+    void onDataRetrieved(DataSnapshot data);
 
     /**
      * Method to run on database failure
      */
-    public void onFailed();
+    void onFailed();
 }
