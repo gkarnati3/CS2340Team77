@@ -34,7 +34,6 @@ public class Model {
      * Initializes empty hashMap for the list of users
      */
     private Model() {
-        users = new HashMap<>();
         shelters = new HashSet<>();
         currentUser = null;
     }
@@ -185,53 +184,4 @@ public class Model {
         return appModel;
     }
 
-
-
-    //Everything below here is deprecated user handling. Remove eventually
-
-    private HashMap<String, User> users;
-
-    /**
-     * DEPRECATED DO NOT USE
-     * Adds a user to the model, prevents duplicates with hashMap storage
-     *
-     * Only use for adding a new user, this method will not update a user
-     *
-     * @param user a User object to save to the model
-     * @return boolean representing whether the User was added
-     */
-    public boolean addUser(User user) {
-        if (users.containsKey(user.getUID())) {
-            //username already exists, cannot add user with this username
-            return false;
-        } else {
-            users.put(user.getUID(), user);
-            return true;
-        }
-    }
-
-
-
-    /**
-     * **DEPRECATED DO NOT USE**
-     * Checks to see if a username and password match the values for a stored user
-     * @param uID the user's username
-     * @param password the user's password
-     * @return true if login valid, otherwise false
-     */
-    public boolean checkLogin(String uID, String password) {
-        //default values passed in for empty text boxes from login
-        //check is to prevent empty login (should be fine since an empty string
-        //should not be valid username or password)
-        if (uID.equals("") || password.equals("")) {
-            return false;
-        }
-        if (users.containsKey(uID)) {
-            User user = users.get(uID);
-            return user.checkPassword(password);
-
-        }
-
-        return false;
-    }
 }

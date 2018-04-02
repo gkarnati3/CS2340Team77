@@ -13,12 +13,16 @@ public class User {
     private int currentShelterID;
     private int numberOfBeds;
 
-    //exists only for firebase, do not use in local code, should never create empty user
+
+    /**
+     * this is a constructor for firebase. it is ncessary only for firebase.
+     * do not use in local code.
+     */
     public User() {
         this("");
     }
 
-    public User(String uid) {
+    private User(String uid) {
         this(uid, "", "");
     }
 
@@ -26,14 +30,7 @@ public class User {
         this(uid, email, name, 0, -1, 0);
     }
 
-    /**
-     * deprecated, do not use
-     */
-    public User(String name, String uID, int acctType) {
-        this(uID, "", name, acctType, -1, 0);
-    }
-
-    public User(String uid, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
+    private User(String uid, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
         this.uid = uid;
         this.email = email;
         this.name = name;
@@ -42,9 +39,6 @@ public class User {
         this.numberOfBeds = numberOfBeds;
     }
 
-    public boolean checkPassword(String password) {
-        return false;
-    }
 
 
     //Below are all the getters/setters, equals and hashcode methods
