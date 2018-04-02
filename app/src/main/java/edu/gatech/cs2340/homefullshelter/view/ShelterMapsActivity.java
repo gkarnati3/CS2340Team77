@@ -119,6 +119,10 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
         reloadMarkers();
     }
 
+    /**
+     * Clears the markers currently on the map and replaces them with the correct markers based
+     * on the search
+     */
     public void reloadMarkers() {
 
         Model model = Model.getInstance();
