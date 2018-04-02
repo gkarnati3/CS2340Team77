@@ -180,7 +180,7 @@ public class DatabaseController {
     /**
      * Right now just replaces the existing shelter object,
      * shelter object will need to store its list of occupied users,
-     * changes to this do not affect any corresponding user data, that must be changed seperately
+     * changes to this do not affect any corresponding user data, that must be changed separately
      * this does not support concurrent use
      * @param shelter the updated shelter class to send to the database
      * @param listener an interface to handle the response from the database
