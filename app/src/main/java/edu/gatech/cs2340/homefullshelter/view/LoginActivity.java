@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        Button firebase = (Button) findViewById(R.id.button_fireThatBase);
+        Button firebase = findViewById(R.id.button_fireThatBase);
         firebase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
