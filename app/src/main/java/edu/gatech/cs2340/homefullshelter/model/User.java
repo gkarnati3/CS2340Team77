@@ -22,14 +22,34 @@ public class User {
         this("");
     }
 
+    /**
+     * Create a user with just the uid, use when creating an user just for a database call
+     * @param uid
+     */
     private User(String uid) {
         this(uid, "", "");
     }
 
+    /**
+     * Create a user with uid, email, and name, use when creating a user after firebase login
+     * Ensures we have as much information as possible stored in model in case database call fails
+     * @param uid
+     * @param email
+     * @param name
+     */
     public User(String uid, String email, String name) {
         this(uid, email, name, 0, -1, 0);
     }
 
+    /**
+     * Create a user with all user data, used when data retrieved from database
+     * @param uid
+     * @param email
+     * @param name
+     * @param acctType
+     * @param currentShelterID
+     * @param numberOfBeds
+     */
     private User(String uid, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
         this.uid = uid;
         this.email = email;
