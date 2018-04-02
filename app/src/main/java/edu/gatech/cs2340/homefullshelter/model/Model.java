@@ -1,14 +1,11 @@
 package edu.gatech.cs2340.homefullshelter.model;
 
 import android.util.Log;
-import android.view.Display;
 
 import com.google.firebase.database.DataSnapshot;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.controller.DatabaseController;
@@ -224,7 +221,7 @@ public class Model {
      * @return true if login valid, otherwise false
      */
     public boolean checkLogin(String uID, String password) {
-        //default values passed in for empty textboxes from login
+        //default values passed in for empty text boxes from login
         //check is to prevent empty login (should be fine since an empty string
         //should not be valid username or password)
         if (uID.equals("") || password.equals("")) {
