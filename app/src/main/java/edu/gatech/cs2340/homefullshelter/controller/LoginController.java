@@ -3,7 +3,6 @@ package edu.gatech.cs2340.homefullshelter.controller;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -18,15 +17,7 @@ import edu.gatech.cs2340.homefullshelter.view.LoginActivity;
  */
 
 public class LoginController {
-    private View view;
     private Context context;
-    public LoginController(View v, final Context c) {
-        view = v;
-        context = c;
-    }
-    public LoginController() {
-
-    }
 
     /**
      * Creates a login controller object
@@ -75,7 +66,6 @@ public class LoginController {
      * @param loginActivity
      */
     private void onLoginSuccess(LoginActivity loginActivity) {
-        //TODO Intent to main screen from here (not LoginActivity)
         loginActivity.loginSuccess();
     }
 
@@ -83,7 +73,6 @@ public class LoginController {
      * Method to run on login failure
      */
     private void onLoginFail() {
-        //TODO Intent to LoginActivity from here, so they can restart login process
         Intent myIntent = new Intent(context, LoginActivity.class);
         Toast.makeText(context, "Your username or password is incorrect", Toast.LENGTH_LONG).show();
         context.startActivity(myIntent);
