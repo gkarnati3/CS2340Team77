@@ -91,55 +91,16 @@ public class LoginActivity extends AppCompatActivity {
         }
     }//onActivityResult
 
+    /**
+     * this is the method that is called when the login was successful.
+     * it is called by the login controller, as the login controller will alter the view to switch activities
+     * the method simply switches activities from the login activity to the activity that contains all the buttons
+     */
     public void loginSuccess() {
         Intent myIntent = new Intent(LoginActivity.this, ButtonActivity.class);
         startActivity(myIntent);
     }
 
-    private void readSDFile() {
-        Model model = Model.getInstance();
 
-        try {
-            //Open a stream on the raw file
-            InputStream is = getResources().openRawResource(R.raw.homelessshelterdatabase);
-            //From here we probably should call a model method and pass the InputStream
-            //Wrap it in a BufferedReader so that we get the readLine() method
-            BufferedReader br = new BufferedReader(new InputStreamReader(is, StandardCharsets.UTF_8));
-
-            String line;
-            br.readLine(); //get rid of header line
-            while ((line = br.readLine()) != null) {
-                Log.d(LoginActivity.TAG, line);
-                ArrayList<String> tokens = new ArrayList<String>();
-
-                String[] parse = line.split("\"");
-                for (int i = 0; i < parse.length; i++) {
-                    if (i % 2 == 0) {
-                        String[] tok = parse[i].split(",");
-                        boolean isFirst = true;
-                        for (String s : tok) {
-                            if (i == 0) {
-                                tokens.add(s);
-                            } else if (i != 0 && !isFirst) {
-                                tokens.add(s);
-                            }
-                            isFirst = false;
-                        }
-                    } else {
-                        tokens.add(parse[i]);
-                    }
-                }
-                int key = Integer.parseInt(tokens.get(0));
-                double lo = Double.parseDouble(tokens.get(4));
-                double la = Double.parseDouble(tokens.get(5));
-                Shelter shelter = new Shelter(key, tokens.get(1), tokens.get(2), tokens.get(3), lo, la, tokens.get(6), tokens.get(7), tokens.get(8));
-                model.addShelter(shelter);
-            }
-            br.close();
-            //System.out.println("PRINT THE THINGY:"+model.getShelters().size());
-        } catch (IOException e) {
-            Log.e(LoginActivity.TAG, "error reading assets", e);
-        }
-    }
 
 }
