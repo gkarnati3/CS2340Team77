@@ -42,7 +42,7 @@ public class LoginController {
                     Model.getInstance().setCurrentUser(tmp);
                     Log.d("login:numBedsTmp", "" + tmp.getNumberOfBeds());
                     Log.d("loginDB:tmpuID", "hm: " + tmp.getUID());
-                    Log.d("loginDB:usruID", "hm: " + user.getUID());
+                    Log.d("loginDB:userID", "hm: " + user.getUID());
 
 
 

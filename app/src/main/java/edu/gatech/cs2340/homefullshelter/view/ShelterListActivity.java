@@ -47,7 +47,7 @@ public class ShelterListActivity extends AppCompatActivity {
      */
 
     ShelterListController sla = new ShelterListController();
-    final SimpleItemRecyclerViewAdapter recylerviewAdapter =
+    final SimpleItemRecyclerViewAdapter recyclerViewAdapter =
             new SimpleItemRecyclerViewAdapter(sla.getShelterData());
 
     @Override
@@ -63,7 +63,7 @@ public class ShelterListActivity extends AppCompatActivity {
         sortButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                System.out.println("finderrrr");
+                System.out.println("finder");
                 AlertDialog.Builder builder;
                 LayoutInflater mInflater = LayoutInflater.from(v.getContext());
                 builder = new AlertDialog.Builder(v.getContext());
@@ -87,11 +87,11 @@ public class ShelterListActivity extends AppCompatActivity {
 
                             ShelterListController newSla = new ShelterListController(shelterName,
                                     male, female, fwn, child, ya, any);
-                            recylerviewAdapter.setmValues(newSla.getShelterData());
+                            recyclerViewAdapter.setmValues(newSla.getShelterData());
 
 
 
-                            System.out.println("dinder and stuff");
+                            System.out.println("stuff");
 
                         }
                     })
@@ -114,7 +114,7 @@ public class ShelterListActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(recylerviewAdapter);
+        recyclerView.setAdapter(recyclerViewAdapter);
     }
 
     public class SimpleItemRecyclerViewAdapter
