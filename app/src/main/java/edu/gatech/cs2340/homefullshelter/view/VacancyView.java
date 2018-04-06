@@ -57,24 +57,24 @@ public class VacancyView extends AppCompatActivity {
         Button back = findViewById(R.id.goback);
 
 
-        if(curr != null) {
-            shelterView.setText(curr.getName());
-            capacity.setText("Number of available beds: " + capacityD);
-        }
+        shelterView.setText(curr.getName());
+        capacity.setText("Number of available beds: " + capacityD);
 
 
-        if (actualUser.getCurrentShelterID() == curr.getKey() || actualUser.getCurrentShelterID() == -1) {
+        if (actualUser.getCurrentShelterID() == curr.getKey()
+                || actualUser.getCurrentShelterID() == -1) {
             countBeds = actualUser.getNumberOfBeds();
             initialCheckedOut = actualUser.getNumberOfBeds();
-            name.setText("" + countBeds);
+            name.setText(countBeds);
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (Integer.parseInt(curr.getCheckedOut()) + countBeds < Integer.parseInt(curr.getCapacity())) {
+                    if (Integer.parseInt(curr.getCheckedOut()) + countBeds < Integer.parseInt(
+                            curr.getCapacity())) {
                         countBeds++;
                     }
-                    name.setText("" + countBeds);
-                    capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
+                    name.setText(countBeds);
+                    capacity.setText(capacityDecrease + initialCheckedOut - countBeds);
                 }
             });
 
@@ -85,8 +85,8 @@ public class VacancyView extends AppCompatActivity {
                         if (actualUser.getNumberOfBeds() + countBeds > 0) {
                             countBeds--;
                         }
-                        name.setText("" + countBeds);
-                        capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
+                        name.setText(countBeds);
+                        capacity.setText(capacityDecrease + initialCheckedOut - countBeds);
                     }
                 }
             });
@@ -103,20 +103,24 @@ public class VacancyView extends AppCompatActivity {
                         actualUser.setCurrentShelterID(-1);
                     }
 
-                    //Takes initial checked out - user initial check out + user final checked out = final checked out
-                    String newCheckOut = "" + (Integer.parseInt(curr.getCheckedOut()) - initialNumberOfBeds + countBeds);
+                    //Takes initial checked out - user initial check out + user
+                    // final checked out = final checked out
+                    String newCheckOut = "" + (Integer.parseInt(curr.getCheckedOut())
+                            - initialNumberOfBeds + countBeds);
                     curr.setCheckedOut(newCheckOut);
                     model.updateCurrentUser(actualUser);
                     model.updateShelter(curr, new OnGetDataInterface() {
                         @Override
                         public void onDataRetrieved(DataSnapshot data) {
-                            startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
+                            startActivity(new Intent(getApplicationContext(),
+                                    ShelterListActivity.class));
                         }
 
                         @Override
                         public void onFailed() {
                             //TODO: NEED ERROR CODE TO LET THEM KNOW THEY COULD NOT CHECK OUT
-                            startActivity(new Intent(getApplicationContext(), ShelterListActivity.class));
+                            startActivity(new Intent(getApplicationContext(),
+                                    ShelterListActivity.class));
                         }
                     });
                 }

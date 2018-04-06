@@ -73,7 +73,8 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("name", fbuser.getDisplayName());
                 Log.d("Uid", fbuser.getUid());
 
-                lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()), LoginActivity.this);
+                lc.login(new User(fbuser.getUid(), fbuser.getEmail(), fbuser.getDisplayName()),
+                        LoginActivity.this);
                 Log.d("LoginActivity:Login", "called login");
 
                 // ...
@@ -87,8 +88,10 @@ public class LoginActivity extends AppCompatActivity {
 
     /**
      * this is the method that is called when the login was successful.
-     * it is called by the login controller, as the login controller will alter the view to switch activities
-     * the method simply switches activities from the login activity to the activity that contains all the buttons
+     * it is called by the login controller, as the login controller will alter the view to switch
+     * activities
+     * the method simply switches activities from the login activity to the activity that contains
+     * all the buttons
      */
     public void loginSuccess() {
         Intent myIntent = new Intent(LoginActivity.this, ButtonActivity.class);

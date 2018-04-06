@@ -25,7 +25,8 @@ public class DatabaseController {
 
     /**
      * Used for adding a user to the firebase database after authentication
-     * Also sets the new user as the current user in the model if they are added to the database successfully
+     * Also sets the new user as the current user in the model if they are added to the database
+     * successfully
      * @param user the user to add
      * @param listener an interface with the correct response
      */
