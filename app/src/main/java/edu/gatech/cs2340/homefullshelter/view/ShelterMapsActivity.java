@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,7 +22,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
