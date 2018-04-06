@@ -23,6 +23,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Set;
 
 
@@ -116,14 +117,14 @@ public class ShelterListActivity extends AppCompatActivity {
 
         private List<Shelter> mValues;
 
-        public SimpleItemRecyclerViewAdapter(Set<Shelter> items) {
-            ArrayList<Shelter> arr = new ArrayList<>();
+        public SimpleItemRecyclerViewAdapter(Collection<Shelter> items) {
+            List<Shelter> arr = new ArrayList<>();
             arr.addAll(items);
             mValues = arr;
         }
 
-        public void setmValues(Set<Shelter> newValues) {
-            ArrayList<Shelter> arr = new ArrayList<>();
+        public void setmValues(Collection<Shelter> newValues) {
+            List<Shelter> arr = new ArrayList<>();
             arr.addAll(newValues);
             mValues = arr;
             notifyDataSetChanged();
