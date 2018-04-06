@@ -12,13 +12,13 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
  */
 
 public class ShelterListController {
-    String name;
-    boolean male;
-    boolean female;
-    boolean fwn;
-    boolean child;
-    boolean ya;
-    boolean any;
+    private String name;
+    private boolean male;
+    private boolean female;
+    private boolean fwn;
+    private boolean child;
+    private boolean ya;
+    private boolean any;
 
     /**
      * no args constructor that initializes a default ShelterListController

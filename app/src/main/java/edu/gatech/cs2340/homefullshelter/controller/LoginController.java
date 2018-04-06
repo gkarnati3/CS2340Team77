@@ -63,7 +63,7 @@ public class LoginController {
 
     /**
      * Method to run on successful login
-     * @param loginActivity
+     * @param loginActivity the loginActivity that you log into.
      */
     private void onLoginSuccess(LoginActivity loginActivity) {
         loginActivity.loginSuccess();
