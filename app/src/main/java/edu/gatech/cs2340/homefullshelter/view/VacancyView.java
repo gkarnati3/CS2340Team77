@@ -57,17 +57,15 @@ public class VacancyView extends AppCompatActivity {
         Button back = findViewById(R.id.goback);
 
 
-        if(curr != null) {
-            shelterView.setText(curr.getName());
-            capacity.setText("Number of available beds: " + capacityD);
-        }
+        shelterView.setText(curr.getName());
+        capacity.setText("Number of available beds: " + capacityD);
 
 
         if (actualUser.getCurrentShelterID() == curr.getKey()
                 || actualUser.getCurrentShelterID() == -1) {
             countBeds = actualUser.getNumberOfBeds();
             initialCheckedOut = actualUser.getNumberOfBeds();
-            name.setText("" + countBeds);
+            name.setText(countBeds);
             plus.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -75,8 +73,8 @@ public class VacancyView extends AppCompatActivity {
                             curr.getCapacity())) {
                         countBeds++;
                     }
-                    name.setText("" + countBeds);
-                    capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
+                    name.setText(countBeds);
+                    capacity.setText(capacityDecrease + initialCheckedOut - countBeds);
                 }
             });
 
@@ -87,8 +85,8 @@ public class VacancyView extends AppCompatActivity {
                         if (actualUser.getNumberOfBeds() + countBeds > 0) {
                             countBeds--;
                         }
-                        name.setText("" + countBeds);
-                        capacity.setText("" + (capacityDecrease + initialCheckedOut - countBeds));
+                        name.setText(countBeds);
+                        capacity.setText(capacityDecrease + initialCheckedOut - countBeds);
                     }
                 }
             });
