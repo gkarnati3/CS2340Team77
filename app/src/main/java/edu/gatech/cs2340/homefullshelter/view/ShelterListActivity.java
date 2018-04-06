@@ -22,7 +22,6 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Set;
 
 
 import java.util.List;
@@ -40,7 +39,7 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
  *
  * Created by gkarnati3 on 2/25/18.
  */
- */
+
 public class ShelterListActivity extends AppCompatActivity {
 
     /**
@@ -57,7 +56,7 @@ public class ShelterListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_list);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
@@ -74,26 +73,47 @@ public class ShelterListActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                             RadioButton maleButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_male);
-                            boolean male = maleButton.isChecked();
+                            boolean male = false;
+                            if (maleButton != null) {
+                                male = maleButton.isChecked();
+                            }
                             RadioButton femaleButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_female);
-                            boolean female = femaleButton.isChecked();
+                            boolean female = false;
+                            if (femaleButton != null) {
+                                female = femaleButton.isChecked();
+                            }
                             RadioButton fwnButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radioButton_FWN);
-                            boolean fwn = fwnButton.isChecked();
+                            boolean fwn = false;
+                            if (fwnButton != null) {
+                                fwn = fwnButton.isChecked();
+                            }
                             RadioButton childButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_child);
-                            boolean child = childButton.isChecked();
+                            boolean child = false;
+                            if (childButton != null) {
+                                child = childButton.isChecked();
+                            }
                             RadioButton yaButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_YA);
-                            boolean ya = yaButton.isChecked();
+                            boolean ya = false;
+                            if (yaButton != null) {
+                                ya = yaButton.isChecked();
+                            }
                             RadioButton anyButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_AE);
-                            boolean any = anyButton.isChecked();
+                            boolean any = false;
+                            if (anyButton != null) {
+                                any = anyButton.isChecked();
+                            }
 
                             EditText shelter = ((AlertDialog) dialog)
                                     .findViewById(R.id.editText_filterName);
-                            String shelterName = shelter.getText().toString();
+                            String shelterName = "";
+                            if (shelter != null) {
+                                shelterName = shelter.getText().toString();
+                            }
 
                             ShelterListController newSla = new ShelterListController(shelterName,
                                     male, female, fwn, child, ya, any);
@@ -127,13 +147,13 @@ public class ShelterListActivity extends AppCompatActivity {
 
         private List<Shelter> mValues;
 
-        public SimpleItemRecyclerViewAdapter(Collection<Shelter> items) {
+        private SimpleItemRecyclerViewAdapter(Collection<Shelter> items) {
             List<Shelter> arr = new ArrayList<>();
             arr.addAll(items);
             mValues = arr;
         }
 
-        public void setmValues(Collection<Shelter> newValues) {
+        private void setmValues(Collection<Shelter> newValues) {
             List<Shelter> arr = new ArrayList<>();
             arr.addAll(newValues);
             mValues = arr;
@@ -188,12 +208,12 @@ public class ShelterListActivity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public Shelter mItem;
+            private final View mView;
+            private final TextView mIdView;
+            private final TextView mContentView;
+            private Shelter mItem;
 
-            public ViewHolder(View view) {
+            private ViewHolder(View view) {
                 super(view);
                 mView = view;
                 mIdView = view.findViewById(R.id.id);

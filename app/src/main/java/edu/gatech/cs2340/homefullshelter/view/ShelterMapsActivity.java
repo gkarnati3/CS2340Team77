@@ -58,27 +58,40 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
                     public void onClick(DialogInterface dialog, int which) {
                         RadioButton maleButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_male);
-                        male = maleButton.isChecked();
+                        if (maleButton != null) {
+                            male = maleButton.isChecked();
+                        }
                         RadioButton femaleButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_female);
-                        female = femaleButton.isChecked();
+                        if (femaleButton != null) {
+                            female = femaleButton.isChecked();
+                        }
                         RadioButton fwnButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radioButton_FWN);
-                        fwn = fwnButton.isChecked();
+                        if (fwnButton != null) {
+                            fwn = fwnButton.isChecked();
+                        }
                         RadioButton childButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_child);
-                        child = childButton.isChecked();
+                        if (childButton != null) {
+                            child = childButton.isChecked();
+                        }
                         RadioButton yaButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_YA);
-                        ya = yaButton.isChecked();
+                        if (yaButton != null) {
+                            ya = yaButton.isChecked();
+                        }
                         RadioButton anyButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_AE);
-                        any = anyButton.isChecked();
+                        if (anyButton != null) {
+                            any = anyButton.isChecked();
+                        }
 
                         EditText shelter = ((AlertDialog) dialog)
                                 .findViewById(R.id.editText_filterName);
-                        name = shelter.getText().toString();
-
+                        if (shelter != null) {
+                            name = shelter.getText().toString();
+                        }
                         reloadMarkers();
 
                     }
