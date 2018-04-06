@@ -1,8 +1,6 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
-/**
- * Created by gkarnati3 on 2/25/18.
- */
+
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,6 +36,9 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
  * handsets, the activity presents a list of items, which when touched,
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
+ *
+ * Created by gkarnati3 on 2/25/18.
+ */
  */
 public class ShelterListActivity extends AppCompatActivity {
 
