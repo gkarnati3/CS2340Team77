@@ -4,7 +4,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -23,11 +22,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import edu.gatech.cs2340.homefullshelter.R;
-import edu.gatech.cs2340.homefullshelter.controller.ShelterListController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
-public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback,
+        GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
 
@@ -57,20 +56,27 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
                 builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        RadioButton maleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
+                        RadioButton maleButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radiobutton_male);
                         male = maleButton.isChecked();
-                        RadioButton femaleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
+                        RadioButton femaleButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radiobutton_female);
                         female = femaleButton.isChecked();
-                        RadioButton fwnButton = ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
+                        RadioButton fwnButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radioButton_FWN);
                         fwn = fwnButton.isChecked();
-                        RadioButton childButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
+                        RadioButton childButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radiobutton_child);
                         child = childButton.isChecked();
-                        RadioButton yaButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
+                        RadioButton yaButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radiobutton_YA);
                         ya = yaButton.isChecked();
-                        RadioButton anyButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
+                        RadioButton anyButton = ((AlertDialog) dialog)
+                                .findViewById(R.id.radiobutton_AE);
                         any = anyButton.isChecked();
 
-                        EditText shelter = ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
+                        EditText shelter = ((AlertDialog) dialog)
+                                .findViewById(R.id.editText_filterName);
                         name = shelter.getText().toString();
 
                         reloadMarkers();
@@ -176,7 +182,8 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
         mMap.clear();
         for (Shelter shelter: sheltersToShow) {
             LatLng marker = new LatLng(shelter.getLatitude(), shelter.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName()).snippet("Phone: " +shelter.getNumber()));
+            mMap.addMarker(new MarkerOptions().position(marker).title(shelter.getName())
+                    .snippet("Phone: " +shelter.getNumber()));
             mMap.moveCamera(CameraUpdateFactory.newLatLng(marker));
         }
 

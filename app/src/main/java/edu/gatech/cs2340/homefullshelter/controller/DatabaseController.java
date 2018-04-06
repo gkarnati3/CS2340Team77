@@ -8,9 +8,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 import edu.gatech.cs2340.homefullshelter.model.User;
@@ -28,7 +25,8 @@ public class DatabaseController {
 
     /**
      * Used for adding a user to the firebase database after authentication
-     * Also sets the new user as the current user in the model if they are added to the database successfully
+     * Also sets the new user as the current user in the model if they are added to the database
+     * successfully
      * @param user the user to add
      * @param listener an interface with the correct response
      */

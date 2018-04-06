@@ -50,7 +50,8 @@ public class User {
      * @param currentShelterID
      * @param numberOfBeds
      */
-    private User(String uid, String email, String name, int acctType, int currentShelterID, int numberOfBeds) {
+    private User(String uid, String email, String name, int acctType, int currentShelterID,
+                 int numberOfBeds) {
         this.uid = uid;
         this.email = email;
         this.name = name;

@@ -1,8 +1,6 @@
 package edu.gatech.cs2340.homefullshelter.view;
 
-/**
- * Created by gkarnati3 on 2/25/18.
- */
+
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -39,6 +37,9 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
  * handsets, the activity presents a list of items, which when touched,
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
+ *
+ * Created by gkarnati3 on 2/25/18.
+ */
  */
 public class ShelterListActivity extends AppCompatActivity {
 
@@ -68,22 +69,30 @@ public class ShelterListActivity extends AppCompatActivity {
                 AlertDialog.Builder builder;
                 LayoutInflater mInflater = LayoutInflater.from(v.getContext());
                 builder = new AlertDialog.Builder(v.getContext());
-                    builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes,
+                            new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            RadioButton maleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_male);
+                            RadioButton maleButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radiobutton_male);
                             boolean male = maleButton.isChecked();
-                            RadioButton femaleButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_female);
+                            RadioButton femaleButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radiobutton_female);
                             boolean female = femaleButton.isChecked();
-                            RadioButton fwnButton = ((AlertDialog) dialog).findViewById(R.id.radioButton_FWN);
+                            RadioButton fwnButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radioButton_FWN);
                             boolean fwn = fwnButton.isChecked();
-                            RadioButton childButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_child);
+                            RadioButton childButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radiobutton_child);
                             boolean child = childButton.isChecked();
-                            RadioButton yaButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_YA);
+                            RadioButton yaButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radiobutton_YA);
                             boolean ya = yaButton.isChecked();
-                            RadioButton anyButton = ((AlertDialog) dialog).findViewById(R.id.radiobutton_AE);
+                            RadioButton anyButton = ((AlertDialog) dialog)
+                                    .findViewById(R.id.radiobutton_AE);
                             boolean any = anyButton.isChecked();
 
-                            EditText shelter = ((AlertDialog) dialog).findViewById(R.id.editText_filterName);
+                            EditText shelter = ((AlertDialog) dialog)
+                                    .findViewById(R.id.editText_filterName);
                             String shelterName = shelter.getText().toString();
 
                             ShelterListController newSla = new ShelterListController(shelterName,
@@ -96,7 +105,8 @@ public class ShelterListActivity extends AppCompatActivity {
                                     // do nothing
                                 }
                             })
-                            .setView(mInflater.inflate(R.layout.alertdialog_search, null)).show();
+                            .setView(mInflater.inflate(R.layout.alertdialog_search,
+                                    null)).show();
 
             }
         });
