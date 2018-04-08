@@ -55,6 +55,11 @@ public class Model {
     }
 
 
+    /**
+     * Logs a user into the app, handles both registering new users and logging in existing users
+     * @param user the user to login
+     * @param listener contains methods to run when data retrieved
+     */
     public void login(final User user, final OnGetDataInterface listener) {
         final DatabaseController dc = new DatabaseController();
         dc.getUser(user.getUID(), new OnGetDataInterface() {

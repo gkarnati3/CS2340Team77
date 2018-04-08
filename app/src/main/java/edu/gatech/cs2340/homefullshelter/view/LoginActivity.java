@@ -22,6 +22,7 @@ import edu.gatech.cs2340.homefullshelter.model.User;
 
 /**
  * Class to handle the view for login
+ * @author Matt Quan
  */
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "MY_APP";

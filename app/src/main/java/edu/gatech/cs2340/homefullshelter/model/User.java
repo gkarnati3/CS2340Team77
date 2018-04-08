@@ -3,7 +3,6 @@ package edu.gatech.cs2340.homefullshelter.model;
 /**
  * Created by Alexander Hammond on 2/8/18.
  */
-
 public class User {
     private String uid;
 
