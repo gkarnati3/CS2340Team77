@@ -20,6 +20,9 @@ import edu.gatech.cs2340.homefullshelter.controller.LoginController;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.User;
 
+/**
+ * Class to handle the view for login
+ */
 public class LoginActivity extends AppCompatActivity {
     public static final String TAG = "MY_APP";
     private static final int RC_SIGN_IN = 124;

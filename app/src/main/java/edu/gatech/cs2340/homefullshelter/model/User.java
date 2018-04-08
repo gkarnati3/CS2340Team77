@@ -26,7 +26,7 @@ public class User {
      * Create a user with just the uid, use when creating an user just for a database call
      * @param uid id of user
      */
-    private User(String uid) {
+    public User(String uid) {
         this(uid, "", "");
     }
 
@@ -50,7 +50,7 @@ public class User {
      * @param currentShelterID current shelter ID of user
      * @param numberOfBeds number of beds of user
      */
-    private User(String uid, String email, String name, int acctType, int currentShelterID,
+    public User(String uid, String email, String name, int acctType, int currentShelterID,
                  int numberOfBeds) {
         this.uid = uid;
         this.email = email;
@@ -141,7 +141,7 @@ public class User {
      * @param numberOfBeds the number of beds they have check out
      */
     public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
+            this.numberOfBeds = numberOfBeds;
     }
 
     //required for using hash data structures to automate adding duplicates
