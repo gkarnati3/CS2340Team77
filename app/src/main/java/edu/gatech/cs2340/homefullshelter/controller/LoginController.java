@@ -17,7 +17,7 @@ import edu.gatech.cs2340.homefullshelter.view.LoginActivity;
  */
 
 public class LoginController {
-    private Context context;
+    private final Context context;
 
     /**
      * Creates a login controller object

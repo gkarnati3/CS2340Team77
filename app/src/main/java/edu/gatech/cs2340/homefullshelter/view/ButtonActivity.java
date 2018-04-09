@@ -8,6 +8,9 @@ import android.widget.Button;
 
 import edu.gatech.cs2340.homefullshelter.R;
 
+/**
+ * Manages the button view
+ */
 public class ButtonActivity extends AppCompatActivity {
 
     @Override

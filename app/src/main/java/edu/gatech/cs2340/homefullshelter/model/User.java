@@ -3,12 +3,11 @@ package edu.gatech.cs2340.homefullshelter.model;
 /**
  * Created by Alexander Hammond on 2/8/18.
  */
-
 public class User {
-    private String uid;
+    private final String uid;
 
     private String name;
-    private String email;
+    private final String email;
     private int accountType;
     private int currentShelterID;
     private int numberOfBeds;
@@ -26,7 +25,7 @@ public class User {
      * Create a user with just the uid, use when creating an user just for a database call
      * @param uid id of user
      */
-    private User(String uid) {
+    public User(String uid) {
         this(uid, "", "");
     }
 
@@ -51,7 +50,7 @@ public class User {
      * @param numberOfBeds number of beds of user
      */
     public User(String uid, String email, String name, int acctType, int currentShelterID,
-                int numberOfBeds) {
+                 int numberOfBeds) {
         this.uid = uid;
         this.email = email;
         this.name = name;
@@ -141,7 +140,7 @@ public class User {
      * @param numberOfBeds the number of beds they have check out
      */
     public void setNumberOfBeds(int numberOfBeds) {
-        this.numberOfBeds = numberOfBeds;
+            this.numberOfBeds = numberOfBeds;
     }
 
     //required for using hash data structures to automate adding duplicates

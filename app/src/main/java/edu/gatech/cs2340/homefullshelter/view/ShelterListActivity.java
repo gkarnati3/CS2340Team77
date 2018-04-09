@@ -70,6 +70,7 @@ public class ShelterListActivity extends AppCompatActivity {
                 builder = new AlertDialog.Builder(v.getContext());
                     builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes,
                             new DialogInterface.OnClickListener() {
+                        @Override
                         public void onClick(DialogInterface dialog, int which) {
                             RadioButton maleButton = ((AlertDialog) dialog)
                                     .findViewById(R.id.radiobutton_male);
@@ -121,6 +122,7 @@ public class ShelterListActivity extends AppCompatActivity {
                         }
                     })
                             .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                                @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // do nothing
                                 }

@@ -25,6 +25,9 @@ import edu.gatech.cs2340.homefullshelter.R;
 import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
+/**
+ * Manages the maps activity
+ */
 public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyCallback,
         GoogleMap.OnMarkerClickListener {
 
@@ -55,6 +58,7 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
                 LayoutInflater mInflater = LayoutInflater.from(v.getContext());
                 builder = new AlertDialog.Builder(v.getContext());
                 builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
                     public void onClick(DialogInterface dialog, int which) {
                         RadioButton maleButton = ((AlertDialog) dialog)
                                 .findViewById(R.id.radiobutton_male);
@@ -97,6 +101,7 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
                     }
                 })
                         .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing
 
