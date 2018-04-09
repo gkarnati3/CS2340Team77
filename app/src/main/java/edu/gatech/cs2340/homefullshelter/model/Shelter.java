@@ -181,7 +181,9 @@ public class Shelter implements Parcelable {
      * @param restrictions the new restrictions
      */
     public void setRestrictions(String restrictions) {
-        this.restrictions = restrictions;
+        if (restrictions != null) {
+            this.restrictions = restrictions;
+        }
     }
 
     /**
