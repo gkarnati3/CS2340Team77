@@ -57,7 +57,8 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
                 AlertDialog.Builder builder;
                 LayoutInflater mInflater = LayoutInflater.from(v.getContext());
                 builder = new AlertDialog.Builder(v.getContext());
-                builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                builder.setTitle("Sort Shelters").setPositiveButton(android.R.string.yes,
+                        new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         RadioButton maleButton = ((AlertDialog) dialog)
@@ -100,7 +101,8 @@ public class ShelterMapsActivity extends FragmentActivity implements OnMapReadyC
 
                     }
                 })
-                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                        .setNegativeButton(android.R.string.no,
+                                new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 // do nothing

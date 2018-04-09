@@ -73,7 +73,9 @@ public class LoginActivity extends AppCompatActivity {
                 Log.d("successful login", "yay");
                 FirebaseUser fbuser = FirebaseAuth.getInstance().getCurrentUser();
                 LoginController lc = new LoginController(LoginActivity.this);
-                Log.d("email", fbuser.getEmail());
+                if (fbuser != null) {
+                    Log.d("email", fbuser.getEmail());
+                }
                 Log.d("name", fbuser.getDisplayName());
                 Log.d("Uid", fbuser.getUid());
 
@@ -83,7 +85,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 // ...
             } else {
-                Log.e("Login failed", "" + response.getErrorCode());
+                if (response != null) {
+                    Log.e("Login failed", "" + response.getErrorCode());
+                }
                 // Sign in failed, check response for error code
                 // ...
             }

@@ -47,8 +47,8 @@ public class ShelterListActivity extends AppCompatActivity {
      * device.
      */
 
-    ShelterListController sla = new ShelterListController();
-    final SimpleItemRecyclerViewAdapter recyclerViewAdapter =
+    private ShelterListController sla = new ShelterListController();
+    final private SimpleItemRecyclerViewAdapter recyclerViewAdapter =
             new SimpleItemRecyclerViewAdapter(sla.getShelterData());
 
     @Override
@@ -121,7 +121,8 @@ public class ShelterListActivity extends AppCompatActivity {
                             recyclerViewAdapter.setmValues(newSla.getShelterData());
                         }
                     })
-                            .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            .setNegativeButton(android.R.string.no,
+                                    new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
                                     // do nothing
@@ -193,7 +194,8 @@ public class ShelterListActivity extends AppCompatActivity {
                     bedsButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            Intent vacancyIntent = new Intent(ShelterListActivity.this, VacancyView.class);
+                            Intent vacancyIntent = new Intent(ShelterListActivity.
+                                    this, VacancyView.class);
                             vacancyIntent.putExtra("Shelter", mValues.get(position));
                             startActivity(vacancyIntent);
                             finish();
