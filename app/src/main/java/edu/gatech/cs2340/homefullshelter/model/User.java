@@ -4,10 +4,10 @@ package edu.gatech.cs2340.homefullshelter.model;
  * Created by Alexander Hammond on 2/8/18.
  */
 public class User {
-    private String uid;
+    private final String uid;
 
     private String name;
-    private String email;
+    private final String email;
     private int accountType;
     private int currentShelterID;
     private int numberOfBeds;

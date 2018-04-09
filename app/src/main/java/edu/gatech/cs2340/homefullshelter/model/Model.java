@@ -25,7 +25,7 @@ import edu.gatech.cs2340.homefullshelter.interfaces.OnGetDataInterface;
 public class Model {
     //the one and only instantiation of the class (making it a singleton)
     private static Model appModel = new Model();
-    private Set<Shelter> shelters;
+    private final Set<Shelter> shelters;
     private User currentUser;
 
     /**

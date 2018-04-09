@@ -16,7 +16,7 @@ import edu.gatech.cs2340.homefullshelter.model.User;
  * Created by AlexanderHammond on 3/11/18.
  */
 public class DatabaseController {
-    private DatabaseReference mDatabase;
+    private final DatabaseReference mDatabase;
 
     /**
      * Default constructor for database controller object

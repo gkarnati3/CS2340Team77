@@ -38,6 +38,9 @@ public class VacancyView extends AppCompatActivity {
         setContentView(R.layout.vacancy_view);
 
         final Shelter curr = getIntent().getExtras().getParcelable("Shelter");
+        if (curr == null) {
+            throw new NullPointerException("The current shelter is empty.");
+        }
         int checkedOut = Integer.parseInt(curr.getCheckedOut());
         int shelterCapacity = Integer.parseInt(curr.getCapacity());
         int capacityD = shelterCapacity - checkedOut;
@@ -52,7 +55,6 @@ public class VacancyView extends AppCompatActivity {
         shelterView = findViewById(R.id.shelterName);
         capacity = findViewById(R.id.capacity);
         notIncrement = findViewById(R.id.notIncrement);
-        //TODO RENAME SUBMIT BUTTON IDENTIFIER
         Button submit = findViewById(R.id.button2);
         Button back = findViewById(R.id.goback);
 
@@ -118,7 +120,6 @@ public class VacancyView extends AppCompatActivity {
 
                         @Override
                         public void onFailed() {
-                            //TODO: NEED ERROR CODE TO LET THEM KNOW THEY COULD NOT CHECK OUT
                             startActivity(new Intent(getApplicationContext(),
                                     ShelterListActivity.class));
                         }
