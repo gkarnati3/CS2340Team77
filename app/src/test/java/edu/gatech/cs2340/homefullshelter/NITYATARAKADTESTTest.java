@@ -2,9 +2,6 @@ package edu.gatech.cs2340.homefullshelter;
 
 import org.junit.Test;
 
-import java.util.Set;
-
-import edu.gatech.cs2340.homefullshelter.model.Model;
 import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 import static org.junit.Assert.*;
@@ -13,12 +10,19 @@ import static org.junit.Assert.*;
  * Created by nitarakad on 4/8/18.
  */
 public class NITYATARAKADTESTTest {
-    Model model = Model.getInstance();
 
     @Test
-    public void testGetShelters {
-        Set<Shelter> shelters = model.getShelters();
-        assertEquals(shelters, shelters);
+    public void testIfSetNameIsNotNull() {
+        Shelter shelter = new Shelter(0, "My Sister's House" ,"264" ,"Women/Children",
+                -84.410142,33.780174,"921 Howell Mill Road, Atlanta, Georgia 30318",
+                "Temporary, Emergency, Residential Recovery","(404) 367-2465");
+        shelter.setName(null);
+        assertNotNull(shelter.getName());
+        assertEquals(shelter.getName(), "My Sister's House");
+        shelter.setName("My Aunt's House");
+        assertNotNull(shelter.getName());
+        assertEquals(shelter.getName(), "My Aunt's House");
     }
+
 
 }
