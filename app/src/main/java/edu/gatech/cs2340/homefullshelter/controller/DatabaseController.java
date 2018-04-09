@@ -62,25 +62,28 @@ public class DatabaseController {
      * @param shelter to add
      * @param listener interface with methods to handle the response from database
      */
-    public void addShelter(Shelter shelter, final OnGetDataInterface listener) {
+    public boolean addShelter(Shelter shelter, final OnGetDataInterface listener) {
         DatabaseReference newShelter;
         if (shelter.getKey() != -1) {
             newShelter = mDatabase.child("shelters").child(Integer.toString(shelter.getKey()));
-        } else {
-            newShelter = mDatabase.child("shelters").child(Integer.toString(shelter.getKey()));
-        }
-        newShelter.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                listener.onDataRetrieved(dataSnapshot);
-            }
+            newShelter.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    listener.onDataRetrieved(dataSnapshot);
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                listener.onFailed();
-            }
-        });
-        newShelter.setValue(shelter);
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    listener.onFailed();
+                }
+            });
+            newShelter.setValue(shelter);
+            return true;
+        } else {
+            //do nothing
+            return false;
+        }
+
     }
 
     /**
