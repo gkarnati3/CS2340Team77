@@ -11,44 +11,36 @@ import edu.gatech.cs2340.homefullshelter.model.Shelter;
 
 /**
  * Created by abhinavtirath on 4/8/18.
- * Testing the addShelter method in DatabaseController
+ * Testing the setCapacity method in Shelter
  */
 
 public class ABHINAVTIRATHTEST {
 
-    @Test
-    public void testFalse() {
+    @Test(expected = NumberFormatException.class)
+    public void testThrowNumberFormatException() {
         Shelter shelter = new Shelter();
-        DatabaseController dbc = new DatabaseController();
+        shelter.setCapacity("hello");
+    }
 
-        assertTrue(dbc.addShelter(shelter, new OnGetDataInterface() {
-            @Override
-            public void onDataRetrieved(DataSnapshot data) {
-
-            }
-
-            @Override
-            public void onFailed() {
-
-            }
-        }));
+    @Test(expected = IllegalArgumentException.class)
+    public void testThrowIllegalArgumentException() {
+        Shelter shelter = new Shelter();
+        shelter.setCapacity("-1");
     }
 
     @Test
-    public void testTrue() {
-        Shelter shelter = new Shelter(10, "a", "a", "a", 2, 2, "a", "a", "a");
-        DatabaseController dbc = new DatabaseController();
-        assertFalse(dbc.addShelter(shelter, new OnGetDataInterface() {
-            @Override
-            public void onDataRetrieved(DataSnapshot data) {
+    public void testNameChangedCorrectlyTrue() {
+        Shelter shelter = new Shelter();
+        shelter.setCapacity("32");
+        System.out.println(shelter.getCapacity());
+        assertTrue(shelter.getCapacity().equals("32"));
+    }
 
-            }
-
-            @Override
-            public void onFailed() {
-
-            }
-        }));
+    @Test
+    public void testNameChangedCorrectlyFalse() {
+        Shelter shelter = new Shelter();
+        shelter.setCapacity("32");
+        assertFalse(shelter.getCapacity().equals("27"));
     }
 
 }

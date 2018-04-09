@@ -161,7 +161,17 @@ public class Shelter implements Parcelable {
      * @param capacity the new capacity
      */
     public void setCapacity(String capacity) {
-        this.capacity = capacity;
+        try {
+            int newCapacity = Integer.parseInt(capacity);
+            if (newCapacity >= 0) {
+                this.capacity =  Integer.toString(newCapacity);
+            } else {
+                throw new IllegalArgumentException("capacity must be nonnegative");
+            }
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("capacity must contain a number");
+        }
+
     }
 
     /**
