@@ -50,8 +50,8 @@ public class User {
      * @param currentShelterID current shelter ID of user
      * @param numberOfBeds number of beds of user
      */
-    private User(String uid, String email, String name, int acctType, int currentShelterID,
-                 int numberOfBeds) {
+    public User(String uid, String email, String name, int acctType, int currentShelterID,
+                int numberOfBeds) {
         this.uid = uid;
         this.email = email;
         this.name = name;
